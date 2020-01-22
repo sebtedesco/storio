@@ -113,5 +113,15 @@
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.10.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebtedesco/storio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebtedesco/storio/issues"
+  },
+  "homepage": "https://github.com/sebtedesco/storio#readme"
 }
