@@ -29,12 +29,14 @@ ALTER TABLE ONLY public.addresses DROP CONSTRAINT addresses_pk;
 ALTER TABLE public.users ALTER COLUMN "userId" DROP DEFAULT;
 ALTER TABLE public.storages ALTER COLUMN "storageId" DROP DEFAULT;
 ALTER TABLE public.messages ALTER COLUMN "messageId" DROP DEFAULT;
+ALTER TABLE public.addresses ALTER COLUMN "addressId" DROP DEFAULT;
 DROP SEQUENCE public."users_userId_seq";
 DROP TABLE public.users;
 DROP SEQUENCE public."storages_storageId_seq";
 DROP TABLE public.storages;
 DROP SEQUENCE public."messages_messageId_seq";
 DROP TABLE public.messages;
+DROP SEQUENCE public."addresses_addressId_seq";
 DROP TABLE public.addresses;
 DROP EXTENSION plpgsql;
 DROP SCHEMA public;
@@ -87,6 +89,26 @@ CREATE TABLE public.addresses (
 
 
 --
+-- Name: addresses_addressId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."addresses_addressId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: addresses_addressId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."addresses_addressId_seq" OWNED BY public.addresses."addressId";
+
+
+--
 -- Name: messages; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -95,7 +117,7 @@ CREATE TABLE public.messages (
     "fromId" integer NOT NULL,
     "toId" integer NOT NULL,
     message text NOT NULL,
-    "messagedAt" timestamp without time zone DEFAULT '2020-01-22 20:24:24.107006'::timestamp without time zone NOT NULL
+    "messagedAt" timestamp without time zone DEFAULT '2020-01-22 22:45:31.059072'::timestamp without time zone NOT NULL
 );
 
 
@@ -197,6 +219,13 @@ ALTER SEQUENCE public."users_userId_seq" OWNED BY public.users."userId";
 
 
 --
+-- Name: addresses addressId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.addresses ALTER COLUMN "addressId" SET DEFAULT nextval('public."addresses_addressId_seq"'::regclass);
+
+
+--
 -- Name: messages messageId; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -222,6 +251,8 @@ ALTER TABLE ONLY public.users ALTER COLUMN "userId" SET DEFAULT nextval('public.
 --
 
 COPY public.addresses ("addressId", street1, street2, city, state, zip, longitude, latitude) FROM stdin;
+1	2424 Mapleton Ave	\N	Boulder	CO	80304	-105.264590999999996	40.0239449999999977
+2	2324 19th St	\N	Boulder	CO	80304	-105.271807999999993	40.0234909999999999
 \.
 
 
@@ -238,6 +269,8 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 --
 
 COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable") FROM stdin;
+3	4	6	8	./images/storages/car-garage.jpg	300	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	1	1	t
+4	4	6	7	./images/storages/closet.jpg	200	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	2	2	t
 \.
 
 
@@ -246,7 +279,16 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 --
 
 COPY public.users ("userId", "userName", password, "firstName", "lastName", email, "aboutMe", "profilePicturePath", "addressId") FROM stdin;
+1	psmith	abbie123	Patrick	Smith	psmith@gmail.com	This is the about me section for Patrick Smith. Patrick Smith has a dog named Abbie and lives in Boulder, CO. He is 29 years olf	./images/users/patrick-smith.jpg	1
+2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	./images/users/brian-wilson.jpg	2
 \.
+
+
+--
+-- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 2, true);
 
 
 --
@@ -260,14 +302,14 @@ SELECT pg_catalog.setval('public."messages_messageId_seq"', 1, false);
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 1, false);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 4, true);
 
 
 --
 -- Name: users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."users_userId_seq"', 1, false);
+SELECT pg_catalog.setval('public."users_userId_seq"', 2, true);
 
 
 --
