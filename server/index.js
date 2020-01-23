@@ -19,6 +19,25 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/storages/', (req, res, next) => {
+  if (!req.body.city || !req.body.state) {
+    throw new ClientError('Missing city and/or state', 400);
+  }
+  const sql =
+ `SELECT *
+  FROM storages AS "s"
+  JOIN addresses AS "a"
+  ON s."addressId" = a."addressId"
+  WHERE a.city = $1
+  AND a.state = $2`;
+  const values = [req.body.city, req.body.state];
+  db.query(sql, values)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 // app.post('/api/listings/', (req, res, next) => {
 //   const sql = `
 //   insert into`;
