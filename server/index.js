@@ -19,6 +19,11 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// app.post('/api/listings/', (req, res, next) => {
+//   const sql = `
+//   insert into`;
+// });
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
