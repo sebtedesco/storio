@@ -33,7 +33,7 @@ app.get('/api/storages/', (req, res, next) => {
   const values = [req.body.city, req.body.state];
   db.query(sql, values)
     .then(result => {
-      res.json(result.rows);
+      res.status(200).json(result.rows);
     })
     .catch(err => next(err));
 });
