@@ -2,7 +2,21 @@ import React from 'react';
 
 export default class ListingDetail extends React.Component {
   render() {
-    const data = this.props.data;
+    // const data = this.props.data;
+    const hardCodedData01 = {
+      userId: 1,
+      firstName: 'Brian',
+      lastName: 'Wilson',
+      profilePicturePath: './images/users/brian-wilson.jpg',
+      storagePicturePath: './images/storages/car-garage.jpg',
+      city: 'Laguna Beach',
+      state: 'CA',
+      title: 'Clean space in lodge of garage',
+      longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.',
+      maxValue: 1000000,
+      pricePerDay: 300
+    };
+    const data = hardCodedData01;
     return (
       <div className='col-12 list-detail my-auto'>
         <div className='col-12 storage-image-container'>
