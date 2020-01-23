@@ -1,3 +1,4 @@
+
 .list-detail {
   height: 85vh;
   display: flex;
@@ -92,4 +93,8 @@
 
 .long-description {
   margin-top: 5px;
+}
+
+small {
+  color: red;
 }

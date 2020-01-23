@@ -1,4 +1,5 @@
 import React from 'react';
+// import Search from './Search';
 
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
@@ -11,20 +12,21 @@ export default class App extends React.Component {
       message: null,
       isLoading: true
     };
+    // this.searchForListings = this.searchForListings.bind(this);
   }
 
+  // searchForListings(searchParams) {
+  //   console.log('searchForListings called', searchParams);
+  // }
+
   componentDidMount() {
-    fetch('/api/health-check')
-      .then(res => res.json())
-      .then(data => this.setState({ message: data.message || data.error }))
-      .catch(err => this.setState({ message: err.message }))
-      .finally(() => this.setState({ isLoading: false }));
+
   }
 
   render() {
-    return this.state.isLoading
-      ? <h1>Testing connections...</h1>
-      : <h1>{this.state.message}</h1>;
+    return null;
+    //   // <Search listingSearch={this.searchForListings} />
+    // );
   }
 
   // render() {
