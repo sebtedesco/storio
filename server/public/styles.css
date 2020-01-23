@@ -1,0 +1,95 @@
+.list-detail {
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-flow: row wrap;
+}
+.storage-image-container {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 30vh;
+  padding: 0;
+}
+
+.list-detail-storage-image {
+  width: 100%;
+  height: 100%;
+}
+
+.list-detail-title,
+.long-description-title,
+.list-detail-max-coverage-title,
+.list-detail-address,
+.list-detail-price,
+.list-detail-host-full-name {
+  font-weight: bold;
+}
+.list-detail-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 24px;
+}
+
+.list-detail-host-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.host-image-container {
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+.list-detail-host-picture {
+  width: 100px;
+  object-fit: fill;
+}
+.list-detail-host-full-name {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.price-container,
+.max-coverage {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.location-and-user-profile {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.list-detail-address {
+  color: grey;
+}
+.max-coverage,
+.price-container {
+  font-size: 21px;
+  margin-top: 5px;
+}
+
+.long-description-title,
+.list-detail-max-coverage-title,
+.list-detail-price {
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.list-detail-address {
+  font-size: 20px;
+}
+
+.long-description {
+  margin-top: 5px;
+}
