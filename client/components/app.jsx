@@ -19,6 +19,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true
     };
+    this.listingSearch = this.listingSearch.bind(this);
   }
 
   componentDidMount() {
@@ -29,21 +30,28 @@ export default class App extends React.Component {
       .finally(() => this.setState({ isLoading: false }));
   }
 
+  listingSearch(searchParams) {
+    // console.log(`listingSearch called. city: ${searchParams.city}, state: ${searchParams.state}`);
+    return null;
+  }
+
   render() {
     return (
       <Router>
-        <Route exact={true} path='/' render={() => (<h1>{this.state.message}</h1>)} />
+        <Route exact={true} path='/'>
+          <LandingPage listingSearch={this.listingSearch} />
+        </Route>
         <Route exact={true} path='/conversations' component={Conversations} />
         <Route exact={true} path='/create-account' component={CreateAccount} />
         <Route exact={true} path='/explore-list' component={ExploreList} />
         <Route exact={true} path='/explore-map' component={ExploreMap} />
         <Route exact={true} path='/host-listings' component={HostListings} />
-        <Route exact={true} path='/landing-page' component={LandingPage} />
         <Route exact={true} path='/listing-detail' component={ListingDetail}/>
         <Route exact={true} path='/log-in' component={LogInPage} />
         <Route exact={true} path='/message' component={Message} />
-        <Route exact={true} path='/search' component={Search} />
+        <Route exact={true} path='/search' render={props => <Search listingSearch={this.listingSearch} />} />
       </Router>
+
     );
   }
 }
