@@ -19,24 +19,78 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/storages/', (req, res, next) => {
-  if (!req.body.city || !req.body.state) {
+app.get('/api/storages-map/city/:city/state/:state', (req, res, next) => {
+  const city = req.params.city;
+  const state = req.params.state;
+  if (!city || !state) {
     throw new ClientError('Missing city and/or state', 400);
   }
-  const sql =
- `SELECT *
+  const sql = `
+    SELECT title, "pricePerDay", latitude, longitude
   FROM storages AS "s"
   JOIN addresses AS "a"
   ON s."addressId" = a."addressId"
   WHERE a.city = $1
   AND a.state = $2`;
-  const values = [req.body.city, req.body.state];
+  const values = [city, state];
   db.query(sql, values)
     .then(result => {
       res.status(200).json(result.rows);
     })
     .catch(err => next(err));
 });
+
+app.get(
+  '/api/storages-list/city/:city/state/:state',
+  (req, res, next) => {
+    const city = req.params.city;
+    const state = req.params.state;
+    if (!city || !state) {
+      throw new ClientError('Missing city and/or state', 400);
+    }
+    const sql = `
+    SELECT "storagePicturePath", title, "pricePerDay", width, height, depth
+    FROM storages AS "s"
+    JOIN addresses AS "a"
+    ON s."addressId" = a."addressId"
+    WHERE a.city = $1
+    AND a.state = $2`;
+    const values = [city, state];
+    db.query(sql, values)
+      .then(result => {
+        res.status(200).json(result.rows);
+      })
+      .catch(err => next(err));
+  }
+);
+
+app.get('/api/storage-details/:storageId', (req, res, next) => {
+  const storageId = req.params.storageId;
+  if (isNaN(storageId)) {
+    throw new ClientError('Please enter a valid storageId', 400);
+  }
+  const sql = `
+  SELECT "storagePicturePath", title, "pricePerDay", width, height, depth, "maxValue"
+  FROM storages AS "s"
+  JOIN users AS "u"
+  ON s."hostId" = u."userId"
+  WHERE s."storageId" = $1`;
+  const values = [storageId];
+  db.query(sql, values)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(`No storage with storageId ${storageId}`, 404);
+      }
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+// app.post(`/api/new-listing/`, (req, res, send) => {
+//   const sql = `
+//   INSERT into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
+//   values (default, )`
+// })
 
 // app.get('/api/message/:userId', (req, res, next) => {
 //   if (!req.params.userId) {
