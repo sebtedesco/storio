@@ -55,9 +55,6 @@ app.get('/api/messages/:signedInUserId/:correspondentUserId', (req, res, next) =
   const paramValues = [req.params.signedInUserId, req.params.correspondentUserId];
   db.query(sql, paramValues)
     .then(result => {
-      if (!result.rows[0]) {
-        throw (new ClientError('No messages between users', 404));
-      }
       res.status(200).json(result.rows);
     })
     .catch(err => next(err));
