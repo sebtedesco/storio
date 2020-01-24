@@ -41,9 +41,7 @@ app.get('/api/storages/', (req, res, next) => {
 app.get('/api/messages/:signedInUserId/:correspondentUserId', (req, res, next) => {
   const signedInUserId = req.params.signedInUserId;
   const correspondentUserId = req.params.correspondentUserId;
-  if (!correspondentUserId || !signedInUserId) {
-    throw (new ClientError('Both IDs are needed to retrieve messages', 400));
-  } else if (isNaN(signedInUserId) || isNaN(correspondentUserId)) {
+  if (isNaN(signedInUserId) || isNaN(correspondentUserId)) {
     throw (new ClientError('User IDs must be numbers', 400));
   }
   const sql = `
