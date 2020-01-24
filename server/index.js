@@ -38,6 +38,28 @@ app.get('/api/storages/', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// app.get('/api/message/:userId', (req, res, next) => {
+//   if (!req.params.userId) {
+//     throw (new ClientError('User ID is needed to retrieve messages', 400));
+//   } else if (isNaN(req.params.userId)) {
+//     throw (new ClientError('User ID must be a number', 400));
+//   }
+//   const sql = `
+//   select *
+//   from messages
+
+//   `;
+//   const values = [req.body.city, req.body.state];
+//   db.query(sql, values)
+//     .then(result => {
+//       if (!result.rows[0].userId) {
+//         throw (new ClientError('User not found', 404));
+//       }
+//       res.status(200).json(result.rows);
+//     })
+//     .catch(err => next(err));
+// });
+
 // app.post('/api/listings/', (req, res, next) => {
 //   const sql = `
 //   insert into`;
