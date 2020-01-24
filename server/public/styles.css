@@ -117,3 +117,16 @@ small {
 small {
   text-align: left;
 }
+
+.message-by-logged-in-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.message-by-other {
+  display: flex;
+  justify-content: flex-start;
+}
+.message {
+  border-radius: 5px;
+  background-color: #ddab36;
+}
