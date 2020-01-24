@@ -49,12 +49,12 @@ class Search extends React.Component {
             <div className="col-6 form-group pl-1">
               <label className="sr-only">City</label>
               <input className="form-control" onChange={this.handleCityChange} type="text" value={this.state.city} placeholder="City Name" />
-              <small>{this.state.cityError}</small>
+              <small className="validation-error-message">{this.state.cityError}</small>
             </div>
             <div className="col-4 form-group p-0">
               <label className="sr-only">State</label>
               <input className="form-control" onChange={this.handleStateChange} type="text" placeholder="State" maxLength="2" value={this.state.state} />
-              <small>{this.state.stateError}</small>
+              <small className="validation-error-message">{this.state.stateError}</small>
             </div>
             <div className="col-2 form-group">
               <button className="btn btn-outline-light"><i className="fas fa-search" /></button>

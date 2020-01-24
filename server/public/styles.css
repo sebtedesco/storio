@@ -95,10 +95,6 @@
   margin-top: 5px;
 }
 
-small {
-  color: red;
-}
-
 .landing {
   background-color: #DDAB36;
   color: #fff;
@@ -116,4 +112,29 @@ small {
 
 small {
   text-align: left;
+}
+
+.new-listing-heading {
+  text-align: center;
+}
+
+.validation-error-message {
+  color: red;
+}
+
+.listing-button {
+  background-color: #DDAB36;
+  color: white;
+}
+.message-by-logged-in-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.message-by-other {
+  display: flex;
+  justify-content: flex-start;
+}
+.message {
+  border-radius: 5px;
+  background-color: #ddab36;
 }
