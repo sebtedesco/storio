@@ -95,10 +95,6 @@
   margin-top: 5px;
 }
 
-small {
-  color: red;
-}
-
 .landing {
   background-color: #DDAB36;
   color: #fff;
@@ -116,4 +112,17 @@ small {
 
 small {
   text-align: left;
+}
+
+.newListingHeading {
+  text-align: center;
+}
+
+.validationErrorMessage {
+  color: red;
+}
+
+.listingButton {
+  background-color: #DDAB36;
+  color: white;
 }
