@@ -1,6 +1,5 @@
 import React from 'react';
-// import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import Conversations from './Conversations';
 import CreateAccount from './CreateAccount';
 import ExploreList from './ExploreList';
@@ -30,6 +29,23 @@ export default class App extends React.Component {
       .finally(() => this.setState({ isLoading: false }));
   }
 
+  allLinks() {
+    return (
+      <div className='d-flex flex-column col-11 mx-2 align-items-center'>
+        <Link to='/'>To Home Page</Link>
+        <Link to='/conversations'>To Conversations</Link>
+        <Link to='/create-account'>To CreateAccount</Link>
+        <Link to='/explore-list'>To ExploreList</Link>
+        <Link to='/explore-map'>To ExploreMap</Link>
+        <Link to='/host-listings'>To HostListings</Link>
+        <Link to='/listing-detail'>To Listing Detail</Link>
+        <Link to='/log-in'>To LogInPage</Link>
+        <Link to='/message'>To Message</Link>
+        <Link to='/search'>To Search</Link>
+      </div>
+    );
+  }
+
   listingSearch(searchParams) {
     // console.log(`listingSearch called. city: ${searchParams.city}, state: ${searchParams.state}`);
     return null;
@@ -41,15 +57,36 @@ export default class App extends React.Component {
         <Route exact={true} path='/'>
           <LandingPage listingSearch={this.listingSearch} />
         </Route>
-        <Route exact={true} path='/conversations' component={Conversations} />
-        <Route exact={true} path='/create-account' component={CreateAccount} />
-        <Route exact={true} path='/explore-list' component={ExploreList} />
-        <Route exact={true} path='/explore-map' component={ExploreMap} />
-        <Route exact={true} path='/host-listings' component={HostListings} />
-        <Route exact={true} path='/listing-detail' component={ListingDetail}/>
-        <Route exact={true} path='/log-in' component={LogInPage} />
-        <Route exact={true} path='/message' component={Message} />
-        <Route exact={true} path='/search' render={props => <Search listingSearch={this.listingSearch} />} />
+        <Route exact={true} path='/conversations'>
+          <Conversations />
+        </Route>
+        <Route exact={true} path='/create-account'>
+          <CreateAccount />
+        </Route>
+        <Route exact={true} path='/explore-list'>
+          <ExploreList />
+        </Route>
+        <Route exact={true} path='/explore-map'>
+          <ExploreMap />
+        </Route>
+        <Route exact={true} path='/host-listings'>
+          <HostListings />
+        </Route>
+        <Route exact={true} path='/listing-detail'>
+          <ListingDetail />
+        </Route>
+        <Route exact={true} path='/log-in'>
+          <LogInPage />
+        </Route>
+        <Route exact={true} path='/message' >
+          <Message />
+        </Route>
+        <Route exact={true} path='/search'>
+          <Search searchLocation={this.searchLocation}/>
+        </Route>
+        <Route path='/' >
+          {this.allLinks}
+        </Route>
       </Router>
 
     );

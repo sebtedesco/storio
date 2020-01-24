@@ -2,7 +2,6 @@ import React from 'react';
 
 export default class ListingDetail extends React.Component {
   render() {
-    // const data = this.props.data;
     const hardCodedData01 = {
       userId: 1,
       firstName: 'Brian',
@@ -17,6 +16,11 @@ export default class ListingDetail extends React.Component {
       pricePerDay: 300
     };
     const data = hardCodedData01;
+    if (!data) {
+      return (
+        <div>Error</div>
+      );
+    }
     return (
       <div className='col-12 list-detail my-auto'>
         <div className='col-12 storage-image-container'>
