@@ -114,15 +114,15 @@ small {
   text-align: left;
 }
 
-.newListingHeading {
+.new-listing-heading {
   text-align: center;
 }
 
-.validationErrorMessage {
+.validation-error-message {
   color: red;
 }
 
-.listingButton {
+.listing-button {
   background-color: #DDAB36;
   color: white;
 }

@@ -89,9 +89,9 @@ class HostNewListing extends React.Component {
 
   render() {
     return (
-      <div className="container newListing">
+      <div className="container">
         <div className="row">
-          <h1 className="newListingHeading">New Listing</h1>
+          <h1 className="new-listing-heading">New Listing</h1>
         </div>
         <div className="row">
           <form className='col' onSubmit={this.handleFormSubmit}>
@@ -164,7 +164,7 @@ class HostNewListing extends React.Component {
               </div>
             </div>
             <div className="form-row">
-              <button className="btn listingButton">Create Listing</button> <button className="btn btn-secondary" onClick={this.clearFormValues}>Cancel</button>
+              <button className="btn listing-button">Create Listing</button> <button className="btn btn-secondary" onClick={this.clearFormValues}>Cancel</button>
             </div>
           </form>
         </div>
