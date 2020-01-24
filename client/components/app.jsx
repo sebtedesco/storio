@@ -47,8 +47,8 @@ export default class App extends React.Component {
   }
 
   listingSearch(searchParams) {
-    // console.log(`listingSearch called. city: ${searchParams.city}, state: ${searchParams.state}`);
-    return null;
+    // eslint-disable-next-line no-console
+    console.log(`listingSearch called. city: ${searchParams.city}, state: ${searchParams.state}`);
   }
 
   render() {

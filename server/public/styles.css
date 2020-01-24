@@ -117,3 +117,17 @@ small {
 small {
   text-align: left;
 }
+
+.message-by-logged-in-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.message-by-other {
+  display: flex;
+  justify-content: flex-start;
+}
+.message {
+  border: 2px solid rebeccapurple;
+  border-radius: 5px;
+  background-color: #c4c4c4;
+}
