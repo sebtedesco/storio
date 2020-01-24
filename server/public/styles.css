@@ -98,3 +98,22 @@
 small {
   color: red;
 }
+
+.landing {
+  background-color: #DDAB36;
+  color: #fff;
+  font-family: 'Nunito';
+  text-align: center;
+}
+
+.storio-logo {
+  height: 100px;
+}
+
+.storio-heading {
+  font-weight: bold;
+}
+
+small {
+  text-align: left;
+}

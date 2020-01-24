@@ -57,7 +57,7 @@ class Search extends React.Component {
               <small>{this.state.stateError}</small>
             </div>
             <div className="col-2 form-group">
-              <button className="btn btn-secondary"><i className="fas fa-search" /></button>
+              <button className="btn btn-outline-light"><i className="fas fa-search" /></button>
             </div>
           </form>
 
