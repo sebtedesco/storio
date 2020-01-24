@@ -18,8 +18,7 @@ export default class App extends React.Component {
       message: null,
       isLoading: true
     };
-    this.allLinks = this.allLinks.bind(this);
-    this.searchLocation = this.searchLocation.bind(this);
+    this.listingSearch = this.listingSearch.bind(this);
   }
 
   componentDidMount() {
@@ -47,16 +46,16 @@ export default class App extends React.Component {
     );
   }
 
-  searchLocation(some) {
-    // eslint-disable-next-line no-console
-    console.log(some);
+  listingSearch(searchParams) {
+    // console.log(`listingSearch called. city: ${searchParams.city}, state: ${searchParams.state}`);
+    return null;
   }
 
   render() {
     return (
       <Router>
-        <Route exact={true} path='/' >
-          <LandingPage searchLocation={this.searchLocation} />
+        <Route exact={true} path='/'>
+          <LandingPage listingSearch={this.listingSearch} />
         </Route>
         <Route exact={true} path='/conversations'>
           <Conversations />
@@ -89,6 +88,7 @@ export default class App extends React.Component {
           {this.allLinks}
         </Route>
       </Router>
+
     );
   }
 }
