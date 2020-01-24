@@ -10,6 +10,7 @@ import ListingDetail from './ListingDetail';
 import LogInPage from './LogInPage';
 import Message from './Message';
 import Search from './Search';
+import HostNewListing from './HostNewListing';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class App extends React.Component {
       isLoading: true
     };
     this.listingSearch = this.listingSearch.bind(this);
+    this.postListing = this.postListing.bind(this);
   }
 
   componentDidMount() {
@@ -42,13 +44,18 @@ export default class App extends React.Component {
         <Link to='/log-in'>To LogInPage</Link>
         <Link to='/message'>To Message</Link>
         <Link to='/search'>To Search</Link>
+        <Link to='/host-new-listing'>Host New Listing</Link>
       </div>
     );
   }
 
   listingSearch(searchParams) {
-    // eslint-disable-next-line no-console
+    // es-disable no-console
     console.log(`listingSearch called. city: ${searchParams.city}, state: ${searchParams.state}`);
+  }
+
+  postListing(formFields) {
+    console.log('postListing called: ', formFields);
   }
 
   render() {
@@ -83,6 +90,9 @@ export default class App extends React.Component {
         </Route>
         <Route exact={true} path='/search'>
           <Search searchLocation={this.searchLocation}/>
+        </Route>
+        <Route exact={true} path='/host-new-listing'>
+          <HostNewListing postListing={this.postListing} />
         </Route>
         <Route path='/' >
           {this.allLinks}
