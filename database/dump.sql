@@ -253,6 +253,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN "userId" SET DEFAULT nextval('public.
 COPY public.addresses ("addressId", street1, street2, city, state, zip, longitude, latitude) FROM stdin;
 1	2424 Mapleton Ave	\N	Boulder	CO	80304	-105.264590999999996	40.0239449999999977
 2	2324 19th St	\N	Boulder	CO	80304	-105.271807999999993	40.0234909999999999
+3	855 Newport Beach	Apt A204	Newport Beach	CA	92663	33.6376205999999982	-117.878363199999995
 \.
 
 
@@ -261,6 +262,10 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 --
 
 COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM stdin;
+1	1	2	Como se llamas?	2020-01-22 22:45:31.059072
+2	2	1	Me llamo Pedro	2020-01-22 22:45:31.059072
+3	1	2	Callate!	2020-01-22 22:45:31.059072
+5	3	1	I like your storio	2020-01-22 22:45:31.059072
 \.
 
 
@@ -281,6 +286,7 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 COPY public.users ("userId", "userName", password, "firstName", "lastName", email, "aboutMe", "profilePicturePath", "addressId") FROM stdin;
 1	psmith	abbie123	Patrick	Smith	psmith@gmail.com	This is the about me section for Patrick Smith. Patrick Smith has a dog named Abbie and lives in Boulder, CO. He is 29 years olf	./images/users/patrick-smith.jpg	1
 2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	./images/users/brian-wilson.jpg	2
+3	wardOfCode	beepbeep	Chris	Ward	cjrs@gam.com	sup dudes	/images/users/brian-wilson.jpg	3
 \.
 
 
@@ -288,14 +294,14 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 2, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 3, true);
 
 
 --
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 1, false);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 5, true);
 
 
 --
@@ -309,7 +315,7 @@ SELECT pg_catalog.setval('public."storages_storageId_seq"', 4, true);
 -- Name: users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."users_userId_seq"', 2, true);
+SELECT pg_catalog.setval('public."users_userId_seq"', 3, true);
 
 
 --
@@ -402,4 +408,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-

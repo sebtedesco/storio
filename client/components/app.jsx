@@ -50,15 +50,18 @@ export default class App extends React.Component {
   }
 
   listingSearch(searchParams) {
-    // es-disable no-console
+    // eslint-disable-next-line no-console
     console.log(`listingSearch called. city: ${searchParams.city}, state: ${searchParams.state}`);
   }
 
   postListing(formFields) {
+    // eslint-disable-next-line no-console
     console.log('postListing called: ', formFields);
   }
 
   render() {
+    const loggedInUserId = 1;
+    const correspondentId = 2;
     return (
       <Router>
         <Route exact={true} path='/'>
@@ -80,13 +83,13 @@ export default class App extends React.Component {
           <HostListings />
         </Route>
         <Route exact={true} path='/listing-detail'>
-          <ListingDetail />
+          <ListingDetail loggedInUserId={loggedInUserId}/>
         </Route>
         <Route exact={true} path='/log-in'>
           <LogInPage />
         </Route>
         <Route exact={true} path='/message' >
-          <Message />
+          <Message loggedInUserId={loggedInUserId} correspondentId={correspondentId}/>
         </Route>
         <Route exact={true} path='/search'>
           <Search searchLocation={this.searchLocation}/>

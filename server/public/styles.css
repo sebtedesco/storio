@@ -126,15 +126,51 @@ small {
   background-color: #DDAB36;
   color: white;
 }
-.message-by-logged-in-user {
+.message-by-logged-in-user,
+.message-by-other {
+  position: relative;
   display: flex;
+}
+.message-by-logged-in-user{
   justify-content: flex-end;
 }
 .message-by-other {
-  display: flex;
   justify-content: flex-start;
 }
 .message {
   border-radius: 5px;
   background-color: #ddab36;
+}
+
+.send-message-button {
+  font-size: 35px;
+  color: #DDAB36;
+}
+
+.right-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 17px solid #DDAB36;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  right: 1%;
+  bottom: 12%;
+}
+
+.left-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-right: 17px solid #DDAB36;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  left: 1%;
+  bottom: 12%;
+}
+
+.message-form {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
 }
