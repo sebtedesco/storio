@@ -271,6 +271,7 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable") FROM stdin;
 3	4	6	8	./images/storages/car-garage.jpg	300	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	1	1	t
 4	4	6	7	./images/storages/closet.jpg	200	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	2	2	t
+11	10	13	2	./images/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	2	2	t
 \.
 
 
@@ -302,7 +303,7 @@ SELECT pg_catalog.setval('public."messages_messageId_seq"', 1, false);
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 4, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 11, true);
 
 
 --
