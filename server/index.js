@@ -133,6 +133,27 @@ app.post('/api/messages/', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// app.post('/api/listing/', (req, res, next) => {
+//   const newListing = req.body;
+//   if(!newListing.addressId){
+//     const newAddress = req.body.newAddress;
+//     const sql = `
+//     insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
+//     values (default, $1, $2, $3, $4, $5, $6, $7)`
+//     const values = [newAddress.street1, newAddress.street2, newAddress.city, newAddress.state, newAddress.zip, newAddress.longitude, newAddress.latitude];
+//     return db.query(sql, values)
+//   }
+//   const sql = `
+//   insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
+//   values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
+//   const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, newListing.longDescription, newListing.addressId, newListing.hostId, true];
+//   db.query(sql, values)
+//     .then(response => {
+//       res.status(202).json(response);
+//     })
+//     .catch(err => next(err))
+// });
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
