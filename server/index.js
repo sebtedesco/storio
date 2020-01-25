@@ -133,24 +133,48 @@ app.post('/api/messages/', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// app.post('/api/listing/', (req, res, next) => {
-//   const newListing = req.body;
-//   if(!newListing.addressId){
-//     const newAddress = req.body.newAddress;
-//     const sql = `
-//     insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
-//     values (default, $1, $2, $3, $4, $5, $6, $7)`
-//     const values = [newAddress.street1, newAddress.street2, newAddress.city, newAddress.state, newAddress.zip, newAddress.longitude, newAddress.latitude];
-//     return db.query(sql, values)
-//   }
+app.post('/api/listing/', (req, res, next) => {
+  const address = req.body;
+  const addressSql = `
+        insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
+        values (default, $1, $2, $3, $4, $5, $6, $7)
+        returning "addressId"`;
+  const values = [address.street1, address.street2, address.city, address.state, address.zip, address.longitude, address.latitude];
+  db.query(addressSql, values)
+    .then(response => {
+      const addressId = response.rows[0].addressId;
+      const newListing = req.body;
+      const storageSql = `
+      insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
+      values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      returning *`;
+      const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, addressId, newListing.longDescription, newListing.hostId, true];
+      return db.query(storageSql, values);
+    })
+    .then(response => {
+      res.status(201).json(response);
+    })
+    .catch(err => next(err));
+});
+
+//   address = req.body;
 //   const sql = `
-//   insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
-//   values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
-//   const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, newListing.longDescription, newListing.addressId, newListing.hostId, true];
+//         insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
+//         values (default, $1, $2, $3, $4, $5, $6, $7)`
+//   const values = [address.street1, address.street2, address.city, address.state, address.zip, address.longitude, address.latitude];
 //   db.query(sql, values)
 //     .then(response => {
-//       res.status(202).json(response);
+//       console.log('response.rows: ', response.rows)
+//       const newListing = req.body;
+//       const sql = `
+//       insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
+//       values (default, $1, $2, $3, $4, $5, $6, $7, $8, default, $9, $10)`;
+//       const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, newListing.longDescription, newListing.hostId, true];
+//       db.query(sql, values)
 //     })
+//   .then(response => {
+//     res.status(202).json(response);
+//       })
 //     .catch(err => next(err))
 // });
 
