@@ -108,6 +108,31 @@ app.get('/api/messages/:signedInUserId/:correspondentUserId', (req, res, next) =
     .catch(err => next(err));
 });
 
+app.post('/api/messages/', (req, res, next) => {
+  const signedInUserId = req.body.signedInUserId;
+  const correspondentUserId = req.body.correspondentUserId;
+  const message = req.body.message;
+  if (!signedInUserId || !correspondentUserId || !message) {
+    throw new ClientError('sender ID, receiver ID, and message required', 400);
+  } else if (isNaN(signedInUserId) || isNaN(correspondentUserId)) {
+    throw new ClientError('ID must be an integer', 400);
+  } else if (signedInUserId === correspondentUserId) {
+    throw new ClientError('sender ID and receiver ID must be different', 400);
+  }
+  const sql = `
+  insert into "messages"
+         ("messageId", "fromId", "toId", "message", "messagedAt")
+  values (default, $1, $2, $3, default)
+  returning *
+  `;
+  const valuesArray = [signedInUserId, correspondentUserId, message];
+  db.query(sql, valuesArray)
+    .then(result => {
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 // app.post('/api/listing/', (req, res, next) => {
 //   const newListing = req.body;
 //   if(!newListing.addressId){
