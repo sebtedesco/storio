@@ -128,7 +128,7 @@ app.post('/api/messages/', (req, res, next) => {
   const valuesArray = [signedInUserId, correspondentUserId, message];
   db.query(sql, valuesArray)
     .then(result => {
-      res.status(200).json(result.rows[0]);
+      res.status(201).json(result.rows[0]);
     })
     .catch(err => next(err));
 });
