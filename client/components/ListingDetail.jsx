@@ -1,9 +1,16 @@
 import React from 'react';
 
 export default class ListingDetail extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      storageDetail: null
+    };
+  }
+
+  componentDidMount() {
     const hardCodedData01 = {
-      userId: 1,
+      userId: this.props.loggedInUserId,
       firstName: 'Brian',
       lastName: 'Wilson',
       profilePicturePath: './images/users/brian-wilson.jpg',
@@ -15,10 +22,14 @@ export default class ListingDetail extends React.Component {
       maxValue: 1000000,
       pricePerDay: 300
     };
-    const data = hardCodedData01;
+    this.setState({ storageDetail: hardCodedData01 });
+  }
+
+  render() {
+    const data = this.state.storageDetail;
     if (!data) {
       return (
-        <div>Error</div>
+        <div>Loading...........</div>
       );
     }
     return (
