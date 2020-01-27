@@ -26,7 +26,7 @@ app.get('/api/storages-map/city/:city/state/:state', (req, res, next) => {
     throw new ClientError('Missing city and/or state', 400);
   }
   const sql = `
-    SELECT title, "pricePerDay", latitude, longitude
+    SELECT "storageId", title, "pricePerDay", latitude, longitude
   FROM storages AS "s"
   JOIN addresses AS "a"
   ON s."addressId" = a."addressId"
@@ -49,7 +49,7 @@ app.get(
       throw new ClientError('Missing city and/or state', 400);
     }
     const sql = `
-    SELECT "storagePicturePath", title, "pricePerDay", width, height, depth
+    SELECT "storageId", "storagePicturePath", title, "pricePerDay", width, height, depth
     FROM storages AS "s"
     JOIN addresses AS "a"
     ON s."addressId" = a."addressId"
@@ -134,16 +134,29 @@ app.post('/api/messages/', (req, res, next) => {
 });
 
 app.post('/api/listing/', (req, res, next) => {
-  const address = req.body;
+  const address = req.body.address;
+  const latitude = address.latitude;
+  const longitude = address.longitude;
+  const zip = address.zip;
+  if (!req.body.address.street1 || !req.body.address.city || !req.body.address.state || !zip || !latitude || !longitude) {
+    throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
+  } else if (isNaN(parseInt(zip))) {
+    throw new ClientError('Zip Code must be a positive integer', 400);
+  } else if (isNaN(parseFloat(latitude)) || isNaN(parseFloat(longitude))) {
+    throw new ClientError('You must enter an addressId', 400);
+  }
   const addressSql = `
         insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
         values (default, $1, $2, $3, $4, $5, $6, $7)
         returning "addressId"`;
-  const values = [address.street1, address.street2, address.city, address.state, address.zip, address.longitude, address.latitude];
+  const values = [address.street1, address.street2, address.city, address.state, zip, longitude, latitude];
   db.query(addressSql, values)
     .then(response => {
       const addressId = response.rows[0].addressId;
-      const newListing = req.body;
+      const newListing = req.body.newListing;
+      if (isNaN(parseInt(newListing.width)) || isNaN(parseInt(newListing.depth)) || isNaN(parseInt(newListing.height)) || isNaN(parseInt(newListing.pricePerDay)) || isNaN(parseInt(newListing.maxValue))) {
+        throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
+      }
       const storageSql = `
       insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
       values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
