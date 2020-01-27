@@ -214,3 +214,7 @@ small {
   height: 80vh;
   background-color: #c4c4c4;
 }
+
+.message-textarea {
+  overflow: auto;
+}
