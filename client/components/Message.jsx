@@ -4,11 +4,12 @@ class Message extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: null,
+      messages: [],
       messageToSend: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getMessages = this.getMessages.bind(this);
   }
 
   handleSubmit(event) {
@@ -19,14 +20,16 @@ class Message extends React.Component {
       console.log('Cannot send empty string');
       return;
     }
-    messageObject.fromId = this.props.loggedInUserId;
-    messageObject.toId = this.props.correspondentId;
-    const headers = {
+    messageObject.signedInUserId = this.props.user.loggedInUserId;
+    messageObject.correspondentUserId = this.props.correspondentId;
+    const headersToSend = {
       method: 'POST',
-      'Content-Type': 'application/JSON',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(messageObject)
     };
-    fetch('/api/message/', headers)
+    fetch('/api/messages/', headersToSend)
       .then(result => result.json())
       .then(jsonData => {
         this.setState(previousState => {
@@ -46,8 +49,8 @@ class Message extends React.Component {
     this.setState({ messageToSend: userInput });
   }
 
-  componentDidMount() {
-    fetch(`/api/messages/${this.props.loggedInUserId}/${this.props.correspondentId}`)
+  getMessages() {
+    fetch(`/api/messages/${this.props.user.loggedInUserId}/${this.props.correspondentId}`)
       .then(result => result.json())
       .then(jsonData => {
         this.setState({
@@ -57,12 +60,27 @@ class Message extends React.Component {
       .catch(err => console.error(err));
   }
 
+  componentDidMount() {
+    this.getMessages();
+  }
+
   render() {
     const allMessages = !this.state.messages
-      ? <div>No messages to display</div>
+      ? (
+        <div>
+          <div>No messages to display</div>
+          <div onClick={this.getMessages} className='sync-button'>
+            <i className="fas fa-poo my-3 sync-button-icon"></i>
+          </div>
+        </div>
+      )
       : this.state.messages.map(messageObject => {
         return (
-          <SingleMessage message={messageObject.message} key={messageObject.messageId} fromId={messageObject.fromId} loggedInUserId={this.props.loggedInUserId}/>
+          <SingleMessage
+            message={messageObject.message}
+            key={messageObject.messageId}
+            fromId={messageObject.fromId}
+            loggedInUserId={this.props.user.loggedInUserId}/>
         );
       });
 
@@ -71,15 +89,26 @@ class Message extends React.Component {
         {
           !allMessages
             ? allMessages
-            : <div>{allMessages}</div>
+            : (
+              <>
+                <div>{allMessages}</div>
+                <div onClick={this.getMessages} className='sync-button'>
+                  <i className="fas fa-poo my-3 sync-button-icon"></i>
+                </div>
+              </>
+            )
+
         }
         <form onSubmit={this.handleSubmit} className="col-12 message-form">
-          <input
+          <textarea
             type="text"
             placeholder="Type message here"
             value={this.state.messageToSend}
             onChange={this.handleChange}
-            className='col-10 mr-4'/>
+            className='col-10 mr-4 message-textarea'
+            cols="32"
+          >
+          </textarea>
           <div onClick={this.handleSubmit}><i className="fas fa-arrow-alt-circle-right send-message-button"></i></div>
         </form>
       </>
@@ -97,5 +126,4 @@ function SingleMessage(props) {
     </div>
   );
 }
-
 export default Message;
