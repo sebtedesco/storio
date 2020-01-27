@@ -108,6 +108,34 @@ app.get('/api/messages/:signedInUserId/:correspondentUserId', (req, res, next) =
     .catch(err => next(err));
 });
 
+app.get('/api/conversations/signedInUserId/:userId', (req, res, next) => {
+  const signedInUserId = req.params.userId;
+  if (isNaN(signedInUserId)) {
+    throw (new ClientError('User IDs must be numbers', 400));
+  }
+  const sql = `
+  select
+    distinct on
+    (u."profilePicturePath") u."profilePicturePath",
+    u."userId",
+    u."firstName",
+    u."lastName",
+    m."fromId",
+    m."toId"
+  from users as u
+  inner join messages as m on m."fromId" = u."userId"
+                          or m."toId"   = u."userId"
+    where u."userId" != $1
+    and   (m."fromId"  = $1 or m."toId" = $1)
+  `;
+  const values = [signedInUserId];
+  db.query(sql, values)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/messages/', (req, res, next) => {
   const signedInUserId = req.body.signedInUserId;
   const correspondentUserId = req.body.correspondentUserId;
