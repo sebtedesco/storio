@@ -17,7 +17,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       message: null,
-      isLoading: true
+      isLoading: true,
+      searchResults: []
     };
     this.listingSearch = this.listingSearch.bind(this);
     this.postListing = this.postListing.bind(this);
@@ -50,8 +51,16 @@ export default class App extends React.Component {
   }
 
   listingSearch(searchParams) {
-    // eslint-disable-next-line no-console
-    console.log(`listingSearch called. city: ${searchParams.city}, state: ${searchParams.state}`);
+    fetch(`/api/storages-list/city/${searchParams.city}/state/${searchParams.state}`)
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        this.setState({ searchResults: data });
+      })
+      .catch(err => {
+        return err;
+      });
   }
 
   postListing(formFields) {
@@ -74,7 +83,7 @@ export default class App extends React.Component {
           <CreateAccount />
         </Route>
         <Route exact={true} path='/explore-list'>
-          <ExploreList />
+          <ExploreList listings={this.state.searchResults}/>
         </Route>
         <Route exact={true} path='/explore-map'>
           <ExploreMap />
@@ -92,7 +101,7 @@ export default class App extends React.Component {
           <Message loggedInUserId={loggedInUserId} correspondentId={correspondentId}/>
         </Route>
         <Route exact={true} path='/search'>
-          <Search searchLocation={this.searchLocation}/>
+          <Search listingSearch={this.listingSearch}/>
         </Route>
         <Route exact={true} path='/host-new-listing'>
           <HostNewListing postListing={this.postListing} />
