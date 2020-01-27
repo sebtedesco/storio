@@ -2,6 +2,7 @@ import React from 'react';
 
 function ListItem(props) {
   return (
+
     <div className="card list-item">
       <img src={props.imageUrl} className="card-img-top list-item-image" alt="photo for listing" />
       <div className="card-body">
