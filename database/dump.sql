@@ -251,6 +251,10 @@ ALTER TABLE ONLY public.users ALTER COLUMN "userId" SET DEFAULT nextval('public.
 COPY public.addresses ("addressId", street1, street2, city, state, zip, longitude, latitude) FROM stdin;
 1	2424 Mapleton Ave	\N	Boulder	CO	80304	-105.264590999999996	40.0239449999999977
 2	2324 19th St	\N	Boulder	CO	80304	-105.271807999999993	40.0234909999999999
+5	2244 Bob Moses Ave	null	Carpinteria	California	92244	111234234	44444444
+6	13444 Henry Moses Ave	null	Carpinteria	California	92244	111234234	44444444
+7	13444 Henry Moses Ave	null	Carpinteria	California	92244	111234234	44444444
+8	13444 Henry Moses Ave	null	Carpinteria	California	92244	111234234	44444444
 3	141 Pineview	\N	Irvine	CA	92620	-117.757458999999997	33.7162089999999992
 4	14252 Culver Dr	#A-632	Irvine	CA	92604	-117.784261999999998	33.7072640000000021
 \.
@@ -302,7 +306,7 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 4, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 8, true);
 
 
 --

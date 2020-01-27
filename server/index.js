@@ -26,7 +26,7 @@ app.get('/api/storages-map/city/:city/state/:state', (req, res, next) => {
     throw new ClientError('Missing city and/or state', 400);
   }
   const sql = `
-    SELECT title, "pricePerDay", latitude, longitude
+    SELECT "storageId", title, "pricePerDay", latitude, longitude
   FROM storages AS "s"
   JOIN addresses AS "a"
   ON s."addressId" = a."addressId"
@@ -49,7 +49,7 @@ app.get(
       throw new ClientError('Missing city and/or state', 400);
     }
     const sql = `
-    SELECT "storagePicturePath", title, "pricePerDay", width, height, depth
+    SELECT "storageId", "storagePicturePath", title, "pricePerDay", width, height, depth
     FROM storages AS "s"
     JOIN addresses AS "a"
     ON s."addressId" = a."addressId"
@@ -185,26 +185,42 @@ app.post('/api/messages/', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// app.post('/api/listing/', (req, res, next) => {
-//   const newListing = req.body;
-//   if(!newListing.addressId){
-//     const newAddress = req.body.newAddress;
-//     const sql = `
-//     insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
-//     values (default, $1, $2, $3, $4, $5, $6, $7)`
-//     const values = [newAddress.street1, newAddress.street2, newAddress.city, newAddress.state, newAddress.zip, newAddress.longitude, newAddress.latitude];
-//     return db.query(sql, values)
-//   }
-//   const sql = `
-//   insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
-//   values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
-//   const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, newListing.longDescription, newListing.addressId, newListing.hostId, true];
-//   db.query(sql, values)
-//     .then(response => {
-//       res.status(202).json(response);
-//     })
-//     .catch(err => next(err))
-// });
+app.post('/api/listing/', (req, res, next) => {
+  const address = req.body.address;
+  const latitude = address.latitude;
+  const longitude = address.longitude;
+  const zip = address.zip;
+  if (!req.body.address.street1 || !req.body.address.city || !req.body.address.state || !zip || !latitude || !longitude) {
+    throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
+  } else if (isNaN(parseInt(zip))) {
+    throw new ClientError('Zip Code must be a positive integer', 400);
+  } else if (isNaN(parseFloat(latitude)) || isNaN(parseFloat(longitude))) {
+    throw new ClientError('You must enter an addressId', 400);
+  }
+  const addressSql = `
+        insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
+        values (default, $1, $2, $3, $4, $5, $6, $7)
+        returning "addressId"`;
+  const values = [address.street1, address.street2, address.city, address.state, zip, longitude, latitude];
+  db.query(addressSql, values)
+    .then(response => {
+      const addressId = response.rows[0].addressId;
+      const newListing = req.body.newListing;
+      if (isNaN(parseInt(newListing.width)) || isNaN(parseInt(newListing.depth)) || isNaN(parseInt(newListing.height)) || isNaN(parseInt(newListing.pricePerDay)) || isNaN(parseInt(newListing.maxValue))) {
+        throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
+      }
+      const storageSql = `
+      insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
+      values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      returning *`;
+      const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, addressId, newListing.longDescription, newListing.hostId, true];
+      return db.query(storageSql, values);
+    })
+    .then(response => {
+      res.status(201).json(response);
+    })
+    .catch(err => next(err));
+});
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
