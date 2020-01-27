@@ -110,10 +110,6 @@
   font-weight: bold;
 }
 
-small {
-  text-align: left;
-}
-
 .new-listing-heading {
   text-align: center;
 }
@@ -217,4 +213,12 @@ small {
 
 .message-textarea {
   overflow: auto;
+}
+
+.list-item-image {
+  max-width: 200px;
+}
+
+.card-title {
+  font-weight: bold;
 }

@@ -1,10 +1,50 @@
 import React from 'react';
+import ListItem from './ListItem';
 
 class ExploreList extends React.Component {
   render() {
-    return (
-      <h1>ExploreList</h1>
-    );
+    if (this.props.listings.length === 0) {
+      return (
+        <React.Fragment>
+          <div className="container">
+            <div className="row">
+              <div className="col-1 col-md-2"></div>
+              <div className="col-10 col-md-8">
+                <h3>0 Results Found</h3>
+              </div>
+            </div>
+          </div>
+        </React.Fragment>
+      );
+    } else {
+      const results = this.props.listings.map((item, index) => {
+        return <ListItem key={index} imageUrl={item.storagePicturePath} title={item.title} price={item.pricePerDay} height={item.height} width={item.width} depth={item.depth} />;
+      });
+
+      return (
+        <React.Fragment>
+          <div className="container">
+            <div className="row">
+              <div className="col-1 col-md-2"></div>
+              <div className="col-10 col-md-8">
+                <h3>
+                  {this.props.listings.length} listings found
+                </h3>
+
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-1 col-md-2"></div>
+              <div className="col-10 col-md-8">
+                {results}
+              </div>
+              <div className="col-1 col-md-2"></div>
+            </div>
+          </div>
+        </React.Fragment>
+      );
+
+    }
   }
 }
 
