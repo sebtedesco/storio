@@ -18,18 +18,39 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       message: null,
-      isLoading: true
+      isLoading: true,
+      currentUser: 'guest'
     };
     this.listingSearch = this.listingSearch.bind(this);
     this.postListing = this.postListing.bind(this);
+    this.tryLogIn = this.tryLogIn.bind(this);
   }
 
   componentDidMount() {
-    fetch('/api/health-check')
-      .then(res => res.json())
-      .then(data => this.setState({ message: data.message || data.error }))
-      .catch(err => this.setState({ message: err.message }))
-      .finally(() => this.setState({ isLoading: false }));
+    // fetch('/api/health-check')
+    //   .then(res => res.json())
+    //   .then(data => this.setState({ message: data.message || data.error }))
+    //   .catch(err => this.setState({ message: err.message }))
+    //   .finally(() => this.setState({ isLoading: false }));
+    this.tryLogIn();
+  }
+
+  tryLogIn(userObject) {
+    // will be passed into log-in page as 'props'
+    // userObject will contain 'userName' and 'password'
+    // will do fetch request with 'userName' and 'password'
+    // upon success, will receive user data object
+    const loggedInUser = {
+      loggedInUserId: 1,
+      email: 'hello-universe@gmail.com',
+      aboutMe: 'Johnny English REBORN!!!! - Mr. Bean -',
+      profilePicturePath: './images/users/johnny-english-face-resized.jpg',
+      firstName: 'Johnny',
+      lastName: 'English'
+    };
+    this.setState({
+      currentUser: loggedInUser
+    });
   }
 
   allLinks() {
@@ -61,52 +82,53 @@ export default class App extends React.Component {
   }
 
   render() {
-    const loggedInUserId = 1;
     const correspondentId = 2;
+    const currentUser = this.state.currentUser;
     return (
       <Router>
         <Route exact={true} path='/'>
           <LandingPage listingSearch={this.listingSearch} />
+          {this.allLinks()}
         </Route>
         <Route exact={true} path='/conversations'>
           <Conversations />
-          <NavigationBar />
+          <NavigationBar user={currentUser}/>
         </Route>
         <Route exact={true} path='/create-account'>
           <CreateAccount />
+          {this.allLinks()}
         </Route>
         <Route exact={true} path='/explore-list'>
           <ExploreList />
-          <NavigationBar />
+          <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/explore-map'>
           <ExploreMap />
-          <NavigationBar />
+          <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/host-listings'>
           <HostListings />
-          <NavigationBar />
+          <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/listing-detail'>
-          <ListingDetail loggedInUserId={loggedInUserId}/>
-          <NavigationBar />
+          <ListingDetail user={currentUser} />
+          <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/log-in'>
           <LogInPage />
+          {this.allLinks()}
         </Route>
         <Route exact={true} path='/message' >
-          <Message loggedInUserId={loggedInUserId} correspondentId={correspondentId}/>
-          <NavigationBar />
+          <Message user={currentUser} correspondentId={correspondentId}/>
+          <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/search'>
           <Search searchLocation={this.searchLocation}/>
+          {this.allLinks()}
         </Route>
         <Route exact={true} path='/host-new-listing'>
           <HostNewListing postListing={this.postListing} />
-          <NavigationBar />
-        </Route>
-        <Route path='/' >
-          {this.allLinks}
+          <NavigationBar user={currentUser} />
         </Route>
       </Router>
 

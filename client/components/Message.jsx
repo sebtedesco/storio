@@ -20,7 +20,7 @@ class Message extends React.Component {
       console.log('Cannot send empty string');
       return;
     }
-    messageObject.signedInUserId = this.props.loggedInUserId;
+    messageObject.signedInUserId = this.props.user.loggedInUserId;
     messageObject.correspondentUserId = this.props.correspondentId;
     const headersToSend = {
       method: 'POST',
@@ -50,7 +50,7 @@ class Message extends React.Component {
   }
 
   getMessages() {
-    fetch(`/api/messages/${this.props.loggedInUserId}/${this.props.correspondentId}`)
+    fetch(`/api/messages/${this.props.user.loggedInUserId}/${this.props.correspondentId}`)
       .then(result => result.json())
       .then(jsonData => {
         this.setState({
@@ -76,7 +76,11 @@ class Message extends React.Component {
       )
       : this.state.messages.map(messageObject => {
         return (
-          <SingleMessage message={messageObject.message} key={messageObject.messageId} fromId={messageObject.fromId} loggedInUserId={this.props.loggedInUserId}/>
+          <SingleMessage
+            message={messageObject.message}
+            key={messageObject.messageId}
+            fromId={messageObject.fromId}
+            loggedInUserId={this.props.user.loggedInUserId}/>
         );
       });
 
