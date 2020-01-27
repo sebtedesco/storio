@@ -116,7 +116,7 @@ CREATE TABLE public.messages (
     "fromId" integer NOT NULL,
     "toId" integer NOT NULL,
     message text NOT NULL,
-    "messagedAt" timestamp without time zone DEFAULT '2020-01-22 22:45:31.059072'::timestamp without time zone NOT NULL
+    "messagedAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -267,6 +267,9 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 8	3	1	I like your storio!	2020-01-22 22:45:31.059072
 9	3	2	Hi, I'd like to check out your storio	2020-01-22 22:45:31.059072
 10	4	3	Excuse me, I need more space for my toys	2020-01-22 22:45:31.059072
+11	1	2	hey dog, this is a test again!	2020-01-22 22:45:31.059072
+12	1	2	hey dog, this is a test yet again!	2020-01-27 12:06:07.296427
+13	1	3	hey dog, this is a test yet again!	2020-01-27 12:06:33.208087
 \.
 
 
@@ -306,7 +309,7 @@ SELECT pg_catalog.setval('public."addresses_addressId_seq"', 4, true);
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 10, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 13, true);
 
 
 --
