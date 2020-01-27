@@ -116,7 +116,7 @@ CREATE TABLE public.messages (
     "fromId" integer NOT NULL,
     "toId" integer NOT NULL,
     message text NOT NULL,
-    "messagedAt" timestamp without time zone DEFAULT '2020-01-22 22:45:31.059072'::timestamp without time zone NOT NULL
+    "messagedAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -251,6 +251,8 @@ ALTER TABLE ONLY public.users ALTER COLUMN "userId" SET DEFAULT nextval('public.
 COPY public.addresses ("addressId", street1, street2, city, state, zip, longitude, latitude) FROM stdin;
 1	2424 Mapleton Ave	\N	Boulder	CO	80304	-105.264590999999996	40.0239449999999977
 2	2324 19th St	\N	Boulder	CO	80304	-105.271807999999993	40.0234909999999999
+3	141 Pineview	\N	Irvine	CA	92620	-117.757458999999997	33.7162089999999992
+4	14252 Culver Dr	#A-632	Irvine	CA	92604	-117.784261999999998	33.7072640000000021
 \.
 
 
@@ -259,6 +261,15 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 --
 
 COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM stdin;
+1	1	2	Como se llama?	2020-01-22 22:45:31.059072
+2	2	1	Me llamo Pedro :)	2020-01-22 22:45:31.059072
+3	1	2	Callate Pedro!	2020-01-22 22:45:31.059072
+8	3	1	I like your storio!	2020-01-22 22:45:31.059072
+9	3	2	Hi, I'd like to check out your storio	2020-01-22 22:45:31.059072
+10	4	3	Excuse me, I need more space for my toys	2020-01-22 22:45:31.059072
+11	1	2	hey dog, this is a test again!	2020-01-22 22:45:31.059072
+12	1	2	hey dog, this is a test yet again!	2020-01-27 12:06:07.296427
+13	1	3	hey dog, this is a test yet again!	2020-01-27 12:06:33.208087
 \.
 
 
@@ -269,7 +280,9 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable") FROM stdin;
 3	4	6	8	./images/storages/car-garage.jpg	300	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	1	1	t
 4	4	6	7	./images/storages/closet.jpg	200	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	2	2	t
-11	10	13	2	./images/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	2	2	t
+12	24	36	24	./images/storages/closet.jpg	25	5500	My storage space is bigger than yours	This storage is really big closet that can fit an entire thing!	4	3	t
+11	10	13	2	./images/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
+13	12	24	12	./images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
 \.
 
 
@@ -280,6 +293,8 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 COPY public.users ("userId", "userName", password, "firstName", "lastName", email, "aboutMe", "profilePicturePath") FROM stdin;
 1	psmith	abbie123	Patrick	Smith	psmith@gmail.com	This is the about me section for Patrick Smith. Patrick Smith has a dog named Abbie and lives in Boulder, CO. He is 29 years olf	./images/users/patrick-smith.jpg
 2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	./images/users/brian-wilson.jpg
+4	kimchTheMinch	chris	Kimchee	Ward	cjrs@gam.com	I have to many toys	./images/users/kimch.jpg
+3	wardOfCode	beepbeep	Chris	Ward	cjrs@gam.com	sup dudes	./images/users/chris.jpg
 \.
 
 
@@ -287,28 +302,28 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 2, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 4, true);
 
 
 --
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 1, false);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 13, true);
 
 
 --
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 11, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 13, true);
 
 
 --
 -- Name: users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."users_userId_seq"', 2, true);
+SELECT pg_catalog.setval('public."users_userId_seq"', 4, true);
 
 
 --

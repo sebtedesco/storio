@@ -86,6 +86,30 @@ app.get('/api/storage-details/:storageId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/storages-user/signInUserId/:signedInUserId', (req, res, next) => {
+  const signedInUserId = req.params.signedInUserId;
+  if (isNaN(signedInUserId)) {
+    throw (new ClientError('User IDs must be numbers', 400));
+  }
+  const sql = `
+    select
+      "storageId",
+      "storagePicturePath",
+      "title",
+      "addressId",
+      "hostId",
+      "isAvailable"
+    from storages
+      where "hostId" = $1
+  `;
+  const values = [signedInUserId];
+  db.query(sql, values)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/messages/:signedInUserId/:correspondentUserId', (req, res, next) => {
   const signedInUserId = req.params.signedInUserId;
   const correspondentUserId = req.params.correspondentUserId;
