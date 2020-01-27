@@ -22,21 +22,37 @@ class Search extends React.Component {
     this.setState({ state: e.target.value });
   }
 
+  formatCity(cityName) {
+    cityName = cityName.toLowerCase();
+    const cityNameArr = cityName.split('');
+    for (let i = 0; i < cityNameArr.length; i++) {
+      if (i === 0 || cityNameArr[i - 1] === ' ') {
+        cityNameArr[i] = cityNameArr[i].toUpperCase();
+      }
+    }
+    const result = cityNameArr.join('');
+    return result;
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    const searchParams = {
-      city: this.state.city,
-      state: this.state.state
-    };
-    if (!searchParams.city && !searchParams.state) {
+    let state = this.state.state;
+    let city = this.state.city;
+    if (!city && !state) {
       this.setState({ cityError: 'City required', stateError: 'State required' });
-    } else if (!searchParams.city) {
+    } else if (!city) {
       this.setState({ cityError: 'City required', stateError: '' });
-    } else if (!searchParams.state) {
+    } else if (!state) {
       this.setState({ cityError: '', stateError: 'State required' });
     } else {
+      city = this.formatCity(city);
+      state = state.toUpperCase();
+      const searchParams = {
+        city: city,
+        state: state
+      };
       this.props.listingSearch(searchParams);
-      this.setState({ cityError: '', stateError: '' });
+      this.setState({ cityError: '', stateError: '', city: '', state: '' });
     }
   }
 

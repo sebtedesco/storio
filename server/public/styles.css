@@ -110,10 +110,6 @@
   font-weight: bold;
 }
 
-small {
-  text-align: left;
-}
-
 .new-listing-heading {
   text-align: center;
 }
@@ -173,4 +169,12 @@ small {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+}
+
+.list-item-image {
+  max-width: 200px;
+}
+
+.card-title {
+  font-weight: bold;
 }
