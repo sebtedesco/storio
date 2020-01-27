@@ -11,6 +11,7 @@ import LogInPage from './LogInPage';
 import Message from './Message';
 import Search from './Search';
 import HostNewListing from './HostNewListing';
+import NavigationBar from './NavigationBar';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -69,33 +70,40 @@ export default class App extends React.Component {
         </Route>
         <Route exact={true} path='/conversations'>
           <Conversations />
+          <NavigationBar />
         </Route>
         <Route exact={true} path='/create-account'>
           <CreateAccount />
         </Route>
         <Route exact={true} path='/explore-list'>
           <ExploreList />
+          <NavigationBar />
         </Route>
         <Route exact={true} path='/explore-map'>
           <ExploreMap />
+          <NavigationBar />
         </Route>
         <Route exact={true} path='/host-listings'>
           <HostListings />
+          <NavigationBar />
         </Route>
         <Route exact={true} path='/listing-detail'>
           <ListingDetail loggedInUserId={loggedInUserId}/>
+          <NavigationBar />
         </Route>
         <Route exact={true} path='/log-in'>
           <LogInPage />
         </Route>
         <Route exact={true} path='/message' >
           <Message loggedInUserId={loggedInUserId} correspondentId={correspondentId}/>
+          <NavigationBar />
         </Route>
         <Route exact={true} path='/search'>
           <Search searchLocation={this.searchLocation}/>
         </Route>
         <Route exact={true} path='/host-new-listing'>
           <HostNewListing postListing={this.postListing} />
+          <NavigationBar />
         </Route>
         <Route path='/' >
           {this.allLinks}

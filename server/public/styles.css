@@ -174,3 +174,21 @@ small {
   flex-flow: row nowrap;
   justify-content: center;
 }
+
+.sync-button {
+  display: flex;
+  justify-content: center;
+  color: #DDAB36;
+  font-size: 30px;
+}
+
+.navigation-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row nowrap;
+  height: 10vh;
+  color: #DDAB36;
+  font-size: 30px;
+  border-top: 2px solid darkgrey;
+}
