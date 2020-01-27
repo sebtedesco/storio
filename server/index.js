@@ -170,27 +170,6 @@ app.post('/api/listing/', (req, res, next) => {
     .catch(err => next(err));
 });
 
-//   address = req.body;
-//   const sql = `
-//         insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
-//         values (default, $1, $2, $3, $4, $5, $6, $7)`
-//   const values = [address.street1, address.street2, address.city, address.state, address.zip, address.longitude, address.latitude];
-//   db.query(sql, values)
-//     .then(response => {
-//       console.log('response.rows: ', response.rows)
-//       const newListing = req.body;
-//       const sql = `
-//       insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
-//       values (default, $1, $2, $3, $4, $5, $6, $7, $8, default, $9, $10)`;
-//       const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, newListing.longDescription, newListing.hostId, true];
-//       db.query(sql, values)
-//     })
-//   .then(response => {
-//     res.status(202).json(response);
-//       })
-//     .catch(err => next(err))
-// });
-
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
