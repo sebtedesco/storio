@@ -1,5 +1,5 @@
 import React from 'react';
-import AutoGrowTextarea from './AutoGrowTextarea';
+
 class Message extends React.Component {
   constructor(props) {
     super(props);
@@ -100,7 +100,7 @@ class Message extends React.Component {
 
         }
         <form onSubmit={this.handleSubmit} className="col-12 message-form">
-          {/* <textarea
+          <textarea
             type="text"
             placeholder="Type message here"
             value={this.state.messageToSend}
@@ -108,9 +108,7 @@ class Message extends React.Component {
             className='col-10 mr-4 message-textarea'
             cols="32"
           >
-          </textarea> */
-            <AutoGrowTextarea />
-          }
+          </textarea>
           <div onClick={this.handleSubmit}><i className="fas fa-arrow-alt-circle-right send-message-button"></i></div>
         </form>
       </>
