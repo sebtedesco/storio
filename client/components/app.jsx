@@ -81,6 +81,7 @@ export default class App extends React.Component {
         </Route>
         <Route exact={true} path='/explore-list/:city/:state'>
           <ExploreList listings={this.state.searchResults} selectOneListing={this.selectOneListing} />
+          <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/explore-map/:city/:state'>
           <ExploreMap />
