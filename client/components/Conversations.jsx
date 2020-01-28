@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class Conversations extends React.Component {
   constructor(props) {
@@ -17,22 +17,24 @@ class Conversations extends React.Component {
   }
 
   render() {
-    const cards = this.state.correspondents.map(otherPerson => {
+    const others = this.state.correspondents.map(otherPerson => {
       return (
-        <div key={otherPerson.userId} className='col-10 mx-auto my-5 conversation-list-single-user'>
-          <div className='conversation-list-profile-picture-container'>
-            <img
-              src={otherPerson.profilePicturePath}
-              alt={`Picture of userId=${otherPerson.userId} should be here`}
-              className='conversation-list-profile-picture'
-            />
+        <Link key={otherPerson.userId} to={`/message/${this.props.match.params.loggedInUserId}/${otherPerson.userId}`}>
+          <div className='col-10 mx-auto my-5 conversation-list-single-user'>
+            <div className='conversation-list-profile-picture-container'>
+              <img
+                src={otherPerson.profilePicturePath}
+                alt={`Picture of userId=${otherPerson.userId} should be here`}
+                className='conversation-list-profile-picture'
+              />
+            </div>
+            <div className='conversation-list-profile-name'>{`${otherPerson.firstName} ${otherPerson.lastName}`}</div>
           </div>
-          <div className='conversation-list-profile-name'>{`${otherPerson.firstName} ${otherPerson.lastName}`}</div>
-        </div>
+        </Link>
       );
     });
     return (
-      <div>{cards}</div>
+      <div>{others}</div>
     );
   }
 }

@@ -74,7 +74,7 @@ export default class App extends React.Component {
         <Link to='/host-listings'>To HostListings</Link>
         <Link to='/listing-detail'>To Listing Detail</Link>
         <Link to='/log-in'>To LogInPage</Link>
-        <Link to='/message'>To Message</Link>
+        {/* <Link to='/message'>To Message</Link> */}
         <Link to='/search'>To Search</Link>
         <Link to='/host-new-listing'>Host New Listing</Link>
       </div>
@@ -145,7 +145,7 @@ export default class App extends React.Component {
           <LogInPage />
           {this.allLinks()}
         </Route>
-        <Route exact={true} path='/message/:hostId/:loggedInUserId' >
+        <Route exact={true} path='/message/:loggedInUserId/:hostId' >
           <Message user={currentUser} correspondentId={correspondentId}/>
           <NavigationBar user={currentUser} />
         </Route>

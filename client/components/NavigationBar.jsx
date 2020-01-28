@@ -27,7 +27,7 @@ export default class ListingDetail extends React.Component {
         }/>
         <div className="navigation-bar">
           <div onClick={this.handleSearchIconClick} ><i className="fas fa-search" /></div>
-          <Link to='/conversations'>
+          <Link to={`/conversations/${this.props.user.userId}`}>
             <div><i className="fas fa-comment-alt navigation-bar-message"></i></div>
           </Link>
           <Link to='/log-in'>
