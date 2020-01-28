@@ -21,8 +21,15 @@ class Message extends React.Component {
       console.log('Cannot send empty string');
       return;
     }
-    messageObject.signedInUserId = this.props.user.userId;
-    messageObject.correspondentUserId = this.props.correspondentId;
+    const currentUserId = this.props.user.userId;
+    const hostId = parseInt(this.props.match.params.hostId, 10);
+    if (currentUserId === hostId) {
+      // eslint-disable-next-line no-console
+      console.log('Cannot send message to yourself!!');
+      return;
+    }
+    messageObject.signedInUserId = currentUserId;
+    messageObject.correspondentUserId = hostId;
     const headersToSend = {
       method: 'POST',
       headers: {
@@ -101,15 +108,14 @@ class Message extends React.Component {
 
         }
         <form onSubmit={this.handleSubmit} className="col-12 message-form">
-          <textarea
+          <input
             type="text"
             placeholder="Type message here"
             value={this.state.messageToSend}
             onChange={this.handleChange}
             className='col-10 mr-4 message-textarea'
             cols="32"
-          >
-          </textarea>
+          />
           <div onClick={this.handleSubmit}><i className="fas fa-arrow-alt-circle-right send-message-button"></i></div>
         </form>
       </>
