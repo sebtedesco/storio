@@ -48,13 +48,8 @@ class Search extends React.Component {
     } else {
       city = this.formatCity(city);
       state = state.toUpperCase();
-      const searchParams = {
-        city: city,
-        state: state
-      };
-      this.props.listingSearch(searchParams);
       this.setState({ cityError: '', stateError: '', city: '', state: '' });
-      this.props.history.push('/explore-list');
+      this.props.history.push(`/explore-list/${city}/${state}`);
 
     }
   }

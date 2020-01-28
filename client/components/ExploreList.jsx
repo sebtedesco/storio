@@ -1,10 +1,35 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import ListItem from './ListItem';
 
 class ExploreList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchResults: []
+    };
+  }
+
+  componentDidMount() {
+    const searchParams = {
+      city: this.props.match.params.city,
+      state: this.props.match.params.state
+    };
+    fetch(`/api/storages-list/city/${searchParams.city}/state/${searchParams.state}`)
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        this.setState({ searchResults: data });
+      })
+      .catch(err => {
+        return err;
+      });
+  }
 
   render() {
-    if (this.props.listings.length === 0) {
+    const searchResults = this.state.searchResults;
+    if (searchResults.length === 0) {
       return (
         <React.Fragment>
           <div className="container">
@@ -18,7 +43,7 @@ class ExploreList extends React.Component {
         </React.Fragment>
       );
     } else {
-      const results = this.props.listings.map(item => {
+      const results = searchResults.map(item => {
         return <ListItem key={item.storageId} imageUrl={item.storagePicturePath} title={item.title} price={item.pricePerDay} height={item.height} width={item.width} depth={item.depth} storageId={item.storageId} />;
       });
 
@@ -29,7 +54,7 @@ class ExploreList extends React.Component {
               <div className="col-1 col-md-2"></div>
               <div className="col-10 col-md-8">
                 <h3>
-                  {this.props.listings.length} listings found
+                  {this.state.searchResults.length} listings found
                 </h3>
 
               </div>
@@ -49,4 +74,4 @@ class ExploreList extends React.Component {
   }
 }
 
-export default ExploreList;
+export default withRouter(ExploreList);

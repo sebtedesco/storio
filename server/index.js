@@ -177,7 +177,7 @@ app.post('/api/messages/', (req, res, next) => {
     throw new ClientError('sender ID, receiver ID, and message required', 400);
   } else if (isNaN(signedInUserId) || isNaN(correspondentUserId)) {
     throw new ClientError('ID must be an integer', 400);
-  } else if (signedInUserId === correspondentUserId) {
+  } else if (signedInUserId === parseInt(correspondentUserId, 10)) {
     throw new ClientError('sender ID and receiver ID must be different', 400);
   }
   const sql = `

@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class ExploreMap extends React.Component {
   constructor(props) {
@@ -84,4 +85,4 @@ class ExploreMap extends React.Component {
   }
 }
 
-export default ExploreMap;
+export default withRouter(ExploreMap);

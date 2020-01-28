@@ -253,10 +253,10 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 2	2324 19th St	\N	Boulder	CO	80304	-105.271807999999993	40.0234909999999999
 3	141 Pineview	\N	Irvine	CA	92620	-117.757458999999997	33.7162089999999992
 4	14252 Culver Dr	#A-632	Irvine	CA	92604	-117.784261999999998	33.7072640000000021
-5	2244 Bob Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
-6	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
-7	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
-8	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
+5	2244 Bob Moses Ave	null	Carpinteria	CA	92244	-119.520120000000006	34.4020620000000008
+6	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.525936999999999	34.3936399999999978
+7	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.501232000000002	34.3859429999999975
+8	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.485247999999999	34.3850649999999973
 \.
 
 
@@ -275,6 +275,11 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 12	1	2	hey dog, this is a test yet again!	2020-01-27 12:06:07.296427
 13	1	3	hey dog, this is a test yet again!	2020-01-27 12:06:33.208087
 14	1	2	checking time!	2020-01-27 12:45:37.369767
+19	2	5	testtest!	2020-01-28 11:23:45.699175
+20	2	5	oifailejdila	2020-01-28 11:34:07.504723
+21	2	5	edadeaf	2020-01-28 11:34:41.265091
+22	2	5	test~	2020-01-28 11:47:10.948031
+23	2	2	adeadae	2020-01-28 12:01:14.978998
 \.
 
 
@@ -300,6 +305,7 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	/images/users/brian-wilson.jpg
 3	wardOfCode	beepbeep	Chris	Ward	cjrs@gam.com	sup dudes	/images/users/chris.jpg
 4	kimchTheMinch	chris	Kimchee	Ward	cjrs@gam.com	I have to many toys	/images/users/kimch.jpg
+5	peterpan	icanfly	Peter	Han	peterpan@dream.land	I believe in fairy!!!	/images/users/peter-pan.jpg
 \.
 
 
@@ -314,7 +320,7 @@ SELECT pg_catalog.setval('public."addresses_addressId_seq"', 8, true);
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 14, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 23, true);
 
 
 --
@@ -328,7 +334,7 @@ SELECT pg_catalog.setval('public."storages_storageId_seq"', 13, true);
 -- Name: users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."users_userId_seq"', 4, true);
+SELECT pg_catalog.setval('public."users_userId_seq"', 5, true);
 
 
 --

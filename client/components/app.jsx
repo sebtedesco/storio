@@ -23,10 +23,8 @@ export default class App extends React.Component {
       searchResults: []
 
     };
-    this.listingSearch = this.listingSearch.bind(this);
     // this.postListing = this.postListing.bind(this);
     this.tryLogIn = this.tryLogIn.bind(this);
-    this.getListingDetails = this.getListingDetails.bind(this);
     // this.selectOneListing = this.selectOneListing.bind(this);
   }
 
@@ -44,17 +42,7 @@ export default class App extends React.Component {
     // userObject will contain 'userName' and 'password'
     // will do fetch request with 'userName' and 'password'
     // upon success, will receive user data object
-    // const loggedInUser = {
-    //   loggedInUserId: 1,
-    //   email: 'hello-universe@gmail.com',
-    //   aboutMe: 'Johnny English REBORN!!!! - Mr. Bean -',
-    //   profilePicturePath: './images/users/johnny-english-face-resized.jpg',
-    //   firstName: 'Johnny',
-    //   lastName: 'English'
-    // };
-    // this.setState({
-    //   currentUser: loggedInUser
-    // });
+
     fetch('/api/users/2')
       .then(response => response.json())
       .then(jsonData => {
@@ -63,54 +51,19 @@ export default class App extends React.Component {
   }
 
   allLinks() {
-    const loggedInUserId = 2;
     return (
       <div className='d-flex flex-column col-11 mx-2 align-items-center'>
         <Link to='/'>To Home Page</Link>
-        <Link to={`/conversations/${loggedInUserId}`}>To Conversations</Link>
         <Link to='/create-account'>To CreateAccount</Link>
-        <Link to='/explore-list'>To ExploreList</Link>
-        <Link to='/explore-map'>To ExploreMap</Link>
         <Link to='/host-listings'>To HostListings</Link>
-        <Link to='/listing-detail'>To Listing Detail</Link>
         <Link to='/log-in'>To LogInPage</Link>
-        {/* <Link to='/message'>To Message</Link> */}
         <Link to='/search'>To Search</Link>
         <Link to='/host-new-listing'>Host New Listing</Link>
       </div>
     );
   }
 
-  listingSearch(searchParams) {
-    fetch(`/api/storages-list/city/${searchParams.city}/state/${searchParams.state}`)
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        this.setState({ searchResults: data });
-      })
-      .catch(err => {
-        return err;
-      });
-  }
-
-  // postListing(formFields) {
-  //   // eslint-disable-next-line no-console
-  //   console.log('postListing called: ', formFields);
-  // }
-
-  getListingDetails(listingId) {
-    fetch(`/api/storage-details/${listingId}`)
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        return data;
-      });
-  }
-
   render() {
-    const correspondentId = 5;
     const currentUser = this.state.currentUser;
     return (
       <Router>
@@ -126,10 +79,10 @@ export default class App extends React.Component {
           <CreateAccount />
           {this.allLinks()}
         </Route>
-        <Route exact={true} path='/explore-list'>
+        <Route exact={true} path='/explore-list/:city/:state'>
           <ExploreList listings={this.state.searchResults} selectOneListing={this.selectOneListing} />
         </Route>
-        <Route exact={true} path='/explore-map'>
+        <Route exact={true} path='/explore-map/:city/:state'>
           <ExploreMap />
           <NavigationBar user={currentUser} />
         </Route>
@@ -138,7 +91,7 @@ export default class App extends React.Component {
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/listing-detail/:storageId'>
-          <ListingDetail user={currentUser} getDetails={this.getListingDetails}/>
+          <ListingDetail user={currentUser} />
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/log-in'>
@@ -146,7 +99,7 @@ export default class App extends React.Component {
           {this.allLinks()}
         </Route>
         <Route exact={true} path='/message/:loggedInUserId/:hostId' >
-          <Message user={currentUser} correspondentId={correspondentId}/>
+          <Message user={currentUser}/>
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/search'>
