@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class Search extends React.Component {
   constructor(props) {
@@ -54,6 +54,7 @@ class Search extends React.Component {
       };
       this.props.listingSearch(searchParams);
       this.setState({ cityError: '', stateError: '', city: '', state: '' });
+      this.props.history.push('/explore-list');
 
     }
   }
@@ -85,9 +86,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
-
-// function SearchButton(props) {
-//   const history = useHistory();
-//   history.push('/explore-list');
-// }
+export default withRouter(Search);
