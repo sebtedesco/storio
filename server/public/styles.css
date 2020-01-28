@@ -192,6 +192,9 @@
   color: #DDAB36;
   font-size: 30px;
   border-top: 2px solid darkgrey;
+  position: absolute;
+  top: 90vh;
+  width: 100%;
 }
 
 .navigation-bar-message {
@@ -272,4 +275,18 @@
 
 .conversation-list-profile-name {
   font-weight: bold;
+}
+
+.detail-button-row {
+  margin-top: 15px
+}
+
+.back-link > a, .list-item{
+  color: black;
+  cursor: pointer;
+}
+
+.explore-list {
+  height: 90vh;
+  overflow: scroll;
 }

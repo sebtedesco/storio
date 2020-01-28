@@ -7,7 +7,7 @@ class ExploreList extends React.Component {
     if (this.props.listings.length === 0) {
       return (
         <React.Fragment>
-          <div className="container">
+          <div className="container explore-list">
             <div className="row">
               <div className="col-1 col-md-2"></div>
               <div className="col-10 col-md-8">
@@ -24,7 +24,7 @@ class ExploreList extends React.Component {
 
       return (
         <React.Fragment>
-          <div className="container">
+          <div className="container explore-list">
             <div className="row">
               <div className="col-1 col-md-2"></div>
               <div className="col-10 col-md-8">

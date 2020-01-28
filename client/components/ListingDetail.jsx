@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class ListingDetail extends React.Component {
   constructor(props) {
@@ -32,6 +32,7 @@ class ListingDetail extends React.Component {
     }
     return (
       <div className='col-12 list-detail my-auto'>
+        <div className="col-12 back-link"><Link to="/explore-list"> &lt; Back to listing </Link></div>
         <div className='col-12 storage-image-container'>
           <img
             className='list-detail-storage-image'
@@ -65,7 +66,7 @@ class ListingDetail extends React.Component {
             <div>{`$${(data.pricePerDay * 7 / 100).toFixed(2)}/wk, $${(data.pricePerDay * 30 / 100).toFixed(2)}/month`}</div>
           </div>
         </div>
-        <div className="form-row">
+        <div className="form-row col-12 d-flex justify-content-center detail-button-row">
           <Link to={`/message/${data.hostId}/${this.props.user.userId}`}><button className="btn listing-button">Message Host</button></Link>
         </div>
       </div>
