@@ -44,7 +44,17 @@ class ExploreList extends React.Component {
       );
     } else {
       const results = searchResults.map(item => {
-        return <ListItem key={item.storageId} imageUrl={item.storagePicturePath} title={item.title} price={item.pricePerDay} height={item.height} width={item.width} depth={item.depth} storageId={item.storageId} />;
+        return (
+          <ListItem
+            key={item.storageId}
+            imageUrl={item.storagePicturePath}
+            title={item.title}
+            price={item.pricePerDay}
+            height={item.height}
+            width={item.width}
+            depth={item.depth}
+            storageId={item.storageId} />
+        );
       });
 
       return (
