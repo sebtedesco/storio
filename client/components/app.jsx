@@ -63,17 +63,18 @@ export default class App extends React.Component {
   }
 
   allLinks() {
+    const loggedInUserId = 2;
     return (
       <div className='d-flex flex-column col-11 mx-2 align-items-center'>
         <Link to='/'>To Home Page</Link>
-        <Link to='/conversations'>To Conversations</Link>
+        <Link to={`/conversations/${loggedInUserId}`}>To Conversations</Link>
         <Link to='/create-account'>To CreateAccount</Link>
         <Link to='/explore-list'>To ExploreList</Link>
         <Link to='/explore-map'>To ExploreMap</Link>
         <Link to='/host-listings'>To HostListings</Link>
         <Link to='/listing-detail'>To Listing Detail</Link>
         <Link to='/log-in'>To LogInPage</Link>
-        <Link to='/message'>To Message</Link>
+        {/* <Link to='/message'>To Message</Link> */}
         <Link to='/search'>To Search</Link>
         <Link to='/host-new-listing'>Host New Listing</Link>
       </div>
@@ -117,7 +118,7 @@ export default class App extends React.Component {
           <LandingPage listingSearch={this.listingSearch} />
           {this.allLinks()}
         </Route>
-        <Route exact={true} path='/conversations'>
+        <Route exact={true} path='/conversations/:loggedInUserId'>
           <Conversations />
           <NavigationBar user={currentUser}/>
         </Route>
@@ -144,7 +145,7 @@ export default class App extends React.Component {
           <LogInPage />
           {this.allLinks()}
         </Route>
-        <Route exact={true} path='/message/:hostId/:loggedInUserId' >
+        <Route exact={true} path='/message/:loggedInUserId/:hostId' >
           <Message user={currentUser} correspondentId={correspondentId}/>
           <NavigationBar user={currentUser} />
         </Route>

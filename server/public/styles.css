@@ -16,8 +16,7 @@
 }
 
 .list-detail-storage-image {
-  max-width: 100%;
-  height: 100%;
+  max-height: 100%;
   object-fit: contain;
   border: 1px solid black;
   border-radius: 5px;
@@ -212,6 +211,10 @@
   overflow: hidden;
   object-fit: contain;
 }
+.navigation-bar-user-profile-picture {
+  max-width: 100%;
+  object-fit: contain;
+}
 
 .navigation-bar-user-icon {
   font-size: 30px;
@@ -239,5 +242,34 @@
 }
 
 .card-title {
+  font-weight: bold;
+}
+
+.conversation-list-single-user {
+  height: 20vh;
+  border: 1px solid #DDAB36;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  color: #DDAB36;
+}
+
+.conversation-list-profile-picture-container {
+  justify-content: center;
+  align-items: center;
+  height: 12vh;
+  width: 12vh;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.conversation-list-profile-picture {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.conversation-list-profile-name {
   font-weight: bold;
 }

@@ -27,14 +27,18 @@ export default class ListingDetail extends React.Component {
         }/>
         <div className="navigation-bar">
           <div onClick={this.handleSearchIconClick} ><i className="fas fa-search" /></div>
-          <Link to='/conversations'>
+          <Link to={`/conversations/${this.props.user.userId}`}>
             <div><i className="fas fa-comment-alt navigation-bar-message"></i></div>
           </Link>
           <Link to='/log-in'>
             <div className='navigation-bar-user-profile' >
               {
                 this.props.user !== 'guest'
-                  ? <img src={this.props.user.profilePicturePath} alt={`${this.props.user.firstName} ${this.props.user.lastName} picture should be here`}/>
+                  ? <img
+                    src={this.props.user.profilePicturePath}
+                    alt={`${this.props.user.firstName} ${this.props.user.lastName} picture should be here`}
+                    className='navigation-bar-user-profile-picture'
+                  />
                   : <i className="fas fa-user navigation-bar-user-icon"></i>
               }
             </div>
