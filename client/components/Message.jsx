@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class Message extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Message extends React.Component {
       console.log('Cannot send empty string');
       return;
     }
-    messageObject.signedInUserId = this.props.user.loggedInUserId;
+    messageObject.signedInUserId = this.props.user.userId;
     messageObject.correspondentUserId = this.props.correspondentId;
     const headersToSend = {
       method: 'POST',
@@ -50,7 +51,7 @@ class Message extends React.Component {
   }
 
   getMessages() {
-    fetch(`/api/messages/${this.props.user.loggedInUserId}/${this.props.correspondentId}`)
+    fetch(`/api/messages/${this.props.match.params.loggedInUserId}/${this.props.match.params.hostId}`)
       .then(result => result.json())
       .then(jsonData => {
         this.setState({
@@ -80,7 +81,7 @@ class Message extends React.Component {
             message={messageObject.message}
             key={messageObject.messageId}
             fromId={messageObject.fromId}
-            loggedInUserId={this.props.user.loggedInUserId}/>
+            loggedInUserId={this.props.user.userId}/>
         );
       });
 
@@ -126,4 +127,4 @@ function SingleMessage(props) {
     </div>
   );
 }
-export default Message;
+export default withRouter(Message);

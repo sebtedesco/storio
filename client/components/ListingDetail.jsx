@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Link } from 'react-router-dom';
 
 export default class ListingDetail extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class ListingDetail extends React.Component {
 
   componentDidMount() {
     const hardCodedData01 = {
+      hostId: 5,
       userId: this.props.loggedInUserId,
       firstName: 'Brian',
       lastName: 'Wilson',
@@ -66,6 +68,9 @@ export default class ListingDetail extends React.Component {
             <div className='list-detail-price'>Price:</div>
             <div>{`$${(data.pricePerDay * 7 / 100).toFixed(2)}/wk, $${(data.pricePerDay * 30 / 100).toFixed(2)}/month`}</div>
           </div>
+        </div>
+        <div className="form-row">
+          <Link to={`/message/${data.hostId}/${this.props.user.userId}`}><button className="btn listing-button">Message Host</button></Link>
         </div>
       </div>
     );

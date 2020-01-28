@@ -41,17 +41,22 @@ export default class App extends React.Component {
     // userObject will contain 'userName' and 'password'
     // will do fetch request with 'userName' and 'password'
     // upon success, will receive user data object
-    const loggedInUser = {
-      loggedInUserId: 1,
-      email: 'hello-universe@gmail.com',
-      aboutMe: 'Johnny English REBORN!!!! - Mr. Bean -',
-      profilePicturePath: './images/users/johnny-english-face-resized.jpg',
-      firstName: 'Johnny',
-      lastName: 'English'
-    };
-    this.setState({
-      currentUser: loggedInUser
-    });
+    // const loggedInUser = {
+    //   loggedInUserId: 1,
+    //   email: 'hello-universe@gmail.com',
+    //   aboutMe: 'Johnny English REBORN!!!! - Mr. Bean -',
+    //   profilePicturePath: './images/users/johnny-english-face-resized.jpg',
+    //   firstName: 'Johnny',
+    //   lastName: 'English'
+    // };
+    // this.setState({
+    //   currentUser: loggedInUser
+    // });
+    fetch('/api/users/2')
+      .then(response => response.json())
+      .then(jsonData => {
+        this.setState({ currentUser: jsonData });
+      });
   }
 
   allLinks() {
@@ -91,7 +96,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const correspondentId = 2;
+    const correspondentId = 5;
     const currentUser = this.state.currentUser;
     return (
       <Router>
@@ -126,7 +131,7 @@ export default class App extends React.Component {
           <LogInPage />
           {this.allLinks()}
         </Route>
-        <Route exact={true} path='/message' >
+        <Route exact={true} path='/message/:hostId/:loggedInUserId' >
           <Message user={currentUser} correspondentId={correspondentId}/>
           <NavigationBar user={currentUser} />
         </Route>
