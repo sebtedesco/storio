@@ -63,10 +63,11 @@ export default class App extends React.Component {
   }
 
   allLinks() {
+    const loggedInUserId = 2;
     return (
       <div className='d-flex flex-column col-11 mx-2 align-items-center'>
         <Link to='/'>To Home Page</Link>
-        <Link to='/conversations'>To Conversations</Link>
+        <Link to={`/conversations/${loggedInUserId}`}>To Conversations</Link>
         <Link to='/create-account'>To CreateAccount</Link>
         <Link to='/explore-list'>To ExploreList</Link>
         <Link to='/explore-map'>To ExploreMap</Link>
@@ -117,7 +118,7 @@ export default class App extends React.Component {
           <LandingPage listingSearch={this.listingSearch} />
           {this.allLinks()}
         </Route>
-        <Route exact={true} path='/conversations'>
+        <Route exact={true} path='/conversations/:loggedInUserId'>
           <Conversations />
           <NavigationBar user={currentUser}/>
         </Route>

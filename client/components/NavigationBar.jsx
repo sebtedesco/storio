@@ -34,7 +34,11 @@ export default class ListingDetail extends React.Component {
             <div className='navigation-bar-user-profile' >
               {
                 this.props.user !== 'guest'
-                  ? <img src={this.props.user.profilePicturePath} alt={`${this.props.user.firstName} ${this.props.user.lastName} picture should be here`}/>
+                  ? <img
+                    src={this.props.user.profilePicturePath}
+                    alt={`${this.props.user.firstName} ${this.props.user.lastName} picture should be here`}
+                    className='navigation-bar-user-profile-picture'
+                  />
                   : <i className="fas fa-user navigation-bar-user-icon"></i>
               }
             </div>
