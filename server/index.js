@@ -195,6 +195,7 @@ app.post('/api/messages/', (req, res, next) => {
 });
 
 app.post('/api/listing/', (req, res, next) => {
+  // console.log(req.body.address);
   const address = req.body.address;
   const latitude = address.latitude;
   const longitude = address.longitude;
@@ -210,7 +211,8 @@ app.post('/api/listing/', (req, res, next) => {
         insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
         values (default, $1, $2, $3, $4, $5, $6, $7)
         returning "addressId"`;
-  const values = [address.street1, address.street2, address.city, address.state, zip, longitude, latitude];
+  const values = [
+    address.street1, address.street2, address.city, address.state, zip, longitude, latitude];
   db.query(addressSql, values)
     .then(response => {
       const addressId = response.rows[0].addressId;
