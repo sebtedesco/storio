@@ -283,11 +283,11 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 --
 
 COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable") FROM stdin;
-3	4	6	8	./images/storages/car-garage.jpg	300	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	1	1	t
-4	4	6	7	./images/storages/closet.jpg	200	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	2	2	t
-12	24	36	24	./images/storages/closet.jpg	25	5500	My storage space is bigger than yours	This storage is really big closet that can fit an entire thing!	4	3	t
-11	10	13	2	./images/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
-13	12	24	12	./images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
+3	4	6	8	/images/storages/car-garage.jpg	300	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	1	1	t
+4	4	6	7	/images/storages/closet.jpg	200	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	2	2	t
+12	24	36	24	/images/storages/closet.jpg	25	5500	My storage space is bigger than yours	This storage is really big closet that can fit an entire thing!	4	3	t
+11	10	13	2	/images/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
+13	12	24	12	/images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
 \.
 
 
@@ -296,10 +296,10 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 --
 
 COPY public.users ("userId", "userName", password, "firstName", "lastName", email, "aboutMe", "profilePicturePath") FROM stdin;
-1	psmith	abbie123	Patrick	Smith	psmith@gmail.com	This is the about me section for Patrick Smith. Patrick Smith has a dog named Abbie and lives in Boulder, CO. He is 29 years olf	./images/users/patrick-smith.jpg
-2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	./images/users/brian-wilson.jpg
-4	kimchTheMinch	chris	Kimchee	Ward	cjrs@gam.com	I have to many toys	./images/users/kimch.jpg
-3	wardOfCode	beepbeep	Chris	Ward	cjrs@gam.com	sup dudes	./images/users/chris.jpg
+1	psmith	abbie123	Patrick	Smith	psmith@gmail.com	This is the about me section for Patrick Smith. Patrick Smith has a dog named Abbie and lives in Boulder, CO. He is 29 years olf	/images/users/patrick-smith.jpg
+2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	/images/users/brian-wilson.jpg
+3	wardOfCode	beepbeep	Chris	Ward	cjrs@gam.com	sup dudes	/images/users/chris.jpg
+4	kimchTheMinch	chris	Kimchee	Ward	cjrs@gam.com	I have to many toys	/images/users/kimch.jpg
 \.
 
 
