@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Link, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Link, withRouter } from 'react-router-dom';
 
 class ListingDetail extends React.Component {
   constructor(props) {
