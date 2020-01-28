@@ -13,6 +13,14 @@ app.use(sessionMiddleware);
 
 app.use(express.json());
 
+app.get('/api/users/:userId', (req, res, next) => {
+  db.query(`
+  select * from users where "userId" = $1
+  `, [req.params.userId])
+    .then(result => res.json(result.rows[0]))
+    .catch(err => next(err));
+});
+
 app.get('/api/health-check', (req, res, next) => {
   db.query('select \'successfully connected\' as "message"')
     .then(result => res.json(result.rows[0]))
@@ -69,11 +77,12 @@ app.get('/api/storage-details/:storageId', (req, res, next) => {
   if (isNaN(storageId)) {
     throw new ClientError('Please enter a valid storageId', 400);
   }
+  // first name, last name, profile picture path, city state, longDescription;
   const sql = `
-  SELECT "storagePicturePath", title, "pricePerDay", width, height, depth, "maxValue"
+  SELECT "storageId", "hostId", "storagePicturePath", title, "pricePerDay", width, height, depth, "maxValue", "firstName", "lastName", "profilePicturePath", city, state, "longDescription"
   FROM storages AS "s"
-  JOIN users AS "u"
-  ON s."hostId" = u."userId"
+  JOIN users AS "u" ON s."hostId" = u."userId"
+  JOIN addresses AS "a" ON a."addressId" = s."addressId"
   WHERE s."storageId" = $1`;
   const values = [storageId];
   db.query(sql, values)

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { BrowserRouter as Link, withRouter } from 'react-router-dom';
 
 class ListingDetail extends React.Component {
   constructor(props) {
@@ -21,7 +21,6 @@ class ListingDetail extends React.Component {
       .catch(err => {
         return err;
       });
-
   }
 
   render() {
@@ -65,6 +64,9 @@ class ListingDetail extends React.Component {
             <div className='list-detail-price'>Price:</div>
             <div>{`$${(data.pricePerDay * 7 / 100).toFixed(2)}/wk, $${(data.pricePerDay * 30 / 100).toFixed(2)}/month`}</div>
           </div>
+        </div>
+        <div className="form-row">
+          <Link to={`/message/${data.hostId}/${this.props.user.userId}`}><button className="btn listing-button">Message Host</button></Link>
         </div>
       </div>
     );
