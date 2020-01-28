@@ -1,11 +1,11 @@
 
 .list-detail {
-  height: 85vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-flow: row wrap;
-  /* overflow: scroll; */
+  overflow: scroll;
 
 }
 .storage-image-container {
@@ -232,10 +232,6 @@
 .google-map-container {
   height: 90vh;
   background-color: #c4c4c4;
-}
-
-.message-textarea {
-  overflow:  ;
 }
 
 .list-item-image {
