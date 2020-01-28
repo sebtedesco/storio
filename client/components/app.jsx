@@ -24,10 +24,10 @@ export default class App extends React.Component {
 
     };
     this.listingSearch = this.listingSearch.bind(this);
-    this.postListing = this.postListing.bind(this);
+    // this.postListing = this.postListing.bind(this);
     this.tryLogIn = this.tryLogIn.bind(this);
     this.getListingDetails = this.getListingDetails.bind(this);
-    this.selectOneListing = this.selectOneListing.bind(this);
+    // this.selectOneListing = this.selectOneListing.bind(this);
   }
 
   componentDidMount() {
