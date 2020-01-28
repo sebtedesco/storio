@@ -251,12 +251,12 @@ ALTER TABLE ONLY public.users ALTER COLUMN "userId" SET DEFAULT nextval('public.
 COPY public.addresses ("addressId", street1, street2, city, state, zip, longitude, latitude) FROM stdin;
 1	2424 Mapleton Ave	\N	Boulder	CO	80304	-105.264590999999996	40.0239449999999977
 2	2324 19th St	\N	Boulder	CO	80304	-105.271807999999993	40.0234909999999999
-5	2244 Bob Moses Ave	null	Carpinteria	California	92244	111234234	44444444
-6	13444 Henry Moses Ave	null	Carpinteria	California	92244	111234234	44444444
-7	13444 Henry Moses Ave	null	Carpinteria	California	92244	111234234	44444444
-8	13444 Henry Moses Ave	null	Carpinteria	California	92244	111234234	44444444
 3	141 Pineview	\N	Irvine	CA	92620	-117.757458999999997	33.7162089999999992
 4	14252 Culver Dr	#A-632	Irvine	CA	92604	-117.784261999999998	33.7072640000000021
+5	2244 Bob Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
+6	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
+7	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
+8	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
 \.
 
 
@@ -274,6 +274,7 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 11	1	2	hey dog, this is a test again!	2020-01-22 22:45:31.059072
 12	1	2	hey dog, this is a test yet again!	2020-01-27 12:06:07.296427
 13	1	3	hey dog, this is a test yet again!	2020-01-27 12:06:33.208087
+14	1	2	checking time!	2020-01-27 12:45:37.369767
 \.
 
 
@@ -313,7 +314,7 @@ SELECT pg_catalog.setval('public."addresses_addressId_seq"', 8, true);
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 13, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 14, true);
 
 
 --
