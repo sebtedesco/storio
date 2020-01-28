@@ -21,10 +21,13 @@ export default class App extends React.Component {
       isLoading: true,
       currentUser: 'guest',
       searchResults: []
+
     };
     this.listingSearch = this.listingSearch.bind(this);
     this.postListing = this.postListing.bind(this);
     this.tryLogIn = this.tryLogIn.bind(this);
+    this.getListingDetails = this.getListingDetails.bind(this);
+    this.selectOneListing = this.selectOneListing.bind(this);
   }
 
   componentDidMount() {
@@ -85,9 +88,19 @@ export default class App extends React.Component {
       });
   }
 
-  postListing(formFields) {
-    // eslint-disable-next-line no-console
-    console.log('postListing called: ', formFields);
+  // postListing(formFields) {
+  //   // eslint-disable-next-line no-console
+  //   console.log('postListing called: ', formFields);
+  // }
+
+  getListingDetails(listingId) {
+    fetch(`/api/storage-details/${listingId}`)
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        return data;
+      });
   }
 
   render() {
@@ -108,7 +121,7 @@ export default class App extends React.Component {
           {this.allLinks()}
         </Route>
         <Route exact={true} path='/explore-list'>
-          <ExploreList listings={this.state.searchResults}/>
+          <ExploreList listings={this.state.searchResults} selectOneListing={this.selectOneListing} />
         </Route>
         <Route exact={true} path='/explore-map'>
           <ExploreMap />
@@ -118,8 +131,8 @@ export default class App extends React.Component {
           <HostListings />
           <NavigationBar user={currentUser} />
         </Route>
-        <Route exact={true} path='/listing-detail'>
-          <ListingDetail user={currentUser} />
+        <Route exact={true} path='/listing-detail/:storageId'>
+          <ListingDetail user={currentUser} getDetails={this.getListingDetails}/>
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/log-in'>
