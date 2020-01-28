@@ -32,12 +32,11 @@ class ExploreMap extends React.Component {
   }
 
   getSearchResult() {
-    const searchParam = {
+    const searchParams = {
       city: 'Boulder',
       state: 'CO'
     };
-
-    fetch(`/api/storages-map/city/${searchParam.city}/state/${searchParam.state}`)
+    fetch(`/api/storages-map/city/${searchParams.city}/state/${searchParams.state}`)
       .then(response => response.json())
       .then(jsonData => {
         var infoWindows = jsonData.map(storage => {

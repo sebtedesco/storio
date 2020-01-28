@@ -59,7 +59,7 @@ class Search extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container">
+        <div className={`container${this.props.extraClass}`}>
 
           <form className="row m-2" onSubmit={this.handleSubmit}>
             <div className="col-6 form-group pl-1">
