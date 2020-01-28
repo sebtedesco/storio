@@ -18,7 +18,7 @@ class ExploreMap extends React.Component {
   }
 
   startGoogleMap() {
-    this.setState(previousState => {
+    this.setState(() => {
       // eslint-disable-next-line no-undef
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
@@ -39,21 +39,39 @@ class ExploreMap extends React.Component {
     fetch(`/api/storages-map/city/${searchParams.city}/state/${searchParams.state}`)
       .then(response => response.json())
       .then(jsonData => {
-        var infoWindows = jsonData.map(storage => {
+        var map = this.state.map;
+        var markers = jsonData.map(storage => {
           // eslint-disable-next-line no-undef
-          var infoWindow = new google.maps.InfoWindow({
-            content: `$${storage.pricePerDay / 100}`,
+          var marker = new google.maps.Marker({
             position: {
               lat: storage.latitude,
               lng: storage.longitude
-            }
+            },
+            map: map
           });
-          infoWindow.open(this.state.map);
-          return infoWindow;
+          // eslint-disable-next-line no-undef
+          var infowindow = new google.maps.InfoWindow({
+            content: `$${storage.pricePerDay / 100}`
+          });
+          // map.event.addListener(marker, 'click', function () {
+          //   infowindow.open(map, marker);
+          // });
+          marker.addListener('mouseover', function () {
+            infowindow.open(map, marker);
+          });
+          marker.addListener('mouseout', function () {
+            infowindow.close(map, marker);
+            marker.setMap(map);
+          });
+          // marker.addListener('click', function () {
+          //   infowindow.setContent('Hello');
+          // });
+          marker.setMap(map);
+          return marker;
         });
         this.setState({
           searchedResult: jsonData,
-          infoWindows: infoWindows
+          infoWindows: markers
         });
       })
       .catch(err => console.error(err));
