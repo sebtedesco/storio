@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useHistory } from 'react-router-dom';
 
 class Search extends React.Component {
   constructor(props) {
@@ -53,13 +54,14 @@ class Search extends React.Component {
       };
       this.props.listingSearch(searchParams);
       this.setState({ cityError: '', stateError: '', city: '', state: '' });
+
     }
   }
 
   render() {
     return (
       <React.Fragment>
-        <div className="container">
+        <div className={`container${this.props.extraClass}`}>
 
           <form className="row m-2" onSubmit={this.handleSubmit}>
             <div className="col-6 form-group pl-1">
@@ -84,3 +86,8 @@ class Search extends React.Component {
 }
 
 export default Search;
+
+// function SearchButton(props) {
+//   const history = useHistory();
+//   history.push('/explore-list');
+// }

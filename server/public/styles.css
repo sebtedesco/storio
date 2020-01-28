@@ -121,6 +121,7 @@
 
 .validation-error-message {
   color: red;
+  font-weight: bold;
 }
 
 .listing-button {
@@ -194,7 +195,12 @@
   border-top: 2px solid darkgrey;
 }
 
+.navigation-bar-message {
+  color: #DDAB36;
+}
+
 .navigation-bar-user-profile {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -211,8 +217,20 @@
   font-size: 30px;
 }
 
+.show-navigation-search {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 10vh;
+  height: 12vh;
+  background-color: #DDAB36;
+}
+
+.hide-navigation-search {
+  display: none;
+}
 .google-map-container {
-  height: 80vh;
+  height: 90vh;
   background-color: #c4c4c4;
 }
 

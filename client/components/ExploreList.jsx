@@ -2,6 +2,7 @@ import React from 'react';
 import ListItem from './ListItem';
 
 class ExploreList extends React.Component {
+
   render() {
     if (this.props.listings.length === 0) {
       return (
@@ -17,8 +18,8 @@ class ExploreList extends React.Component {
         </React.Fragment>
       );
     } else {
-      const results = this.props.listings.map((item, index) => {
-        return <ListItem key={index} imageUrl={item.storagePicturePath} title={item.title} price={item.pricePerDay} height={item.height} width={item.width} depth={item.depth} />;
+      const results = this.props.listings.map(item => {
+        return <ListItem key={item.storageId} imageUrl={item.storagePicturePath} title={item.title} price={item.pricePerDay} height={item.height} width={item.width} depth={item.depth} storageId={item.storageId} />;
       });
 
       return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Link } from 'react-router-dom';
+import { BrowserRouter as Link, withRouter } from 'react-router-dom';
 
-export default class ListingDetail extends React.Component {
+class ListingDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,21 +10,17 @@ export default class ListingDetail extends React.Component {
   }
 
   componentDidMount() {
-    const hardCodedData01 = {
-      hostId: 5,
-      userId: this.props.loggedInUserId,
-      firstName: 'Brian',
-      lastName: 'Wilson',
-      profilePicturePath: './images/users/brian-wilson.jpg',
-      storagePicturePath: './images/storages/car-garage.jpg',
-      city: 'Laguna Beach',
-      state: 'CA',
-      title: 'Clean space in lodge of garage',
-      longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.',
-      maxValue: 1000000,
-      pricePerDay: 300
-    };
-    this.setState({ storageDetail: hardCodedData01 });
+    const currentStorageId = this.props.match.params.storageId;
+    fetch(`/api/storage-details/${currentStorageId}`)
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        this.setState({ storageDetail: data });
+      })
+      .catch(err => {
+        return err;
+      });
   }
 
   render() {
@@ -76,3 +72,5 @@ export default class ListingDetail extends React.Component {
     );
   }
 }
+
+export default withRouter(ListingDetail);
