@@ -27,14 +27,8 @@ class ListingDetail extends React.Component {
         }/>
         <div className="navigation-bar">
           <div onClick={this.handleSearchIconClick} ><i className="fas fa-search" /></div>
-          <Link to={`/explore-list/${this.props.match.params.city}/${this.props.match.params.state}`}>
+          <Link to={'/host-listings/'}>
             <div><i className="fas fa-list-alt navigation-bar-font-color"></i></div>
-          </Link>
-          <Link to={`/explore-map/${this.props.match.params.city}/${this.props.match.params.state}`}>
-            <div><i className="fas fa-map-marked-alt navigation-bar-font-color"></i></div>
-          </Link>
-          <Link to={`/conversations/${this.props.user.userId}`}>
-            <div><i className="fas fa-comment-alt navigation-bar-font-color"></i></div>
           </Link>
           <div className='navigation-bar-user-profile' >
             {
@@ -47,6 +41,12 @@ class ListingDetail extends React.Component {
                 : <i className="fas fa-user navigation-bar-user-icon"></i>
             }
           </div>
+          <Link to={`/conversations/${this.props.user.userId}`}>
+            <div><i className="fas fa-comment-alt navigation-bar-font-color"></i></div>
+          </Link>
+          <Link to={'/'}>
+            <div><i className="fas fa-warehouse navigation-bar-font-color"></i></div>
+          </Link>
         </div>
       </>
     );
