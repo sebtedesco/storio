@@ -9,7 +9,6 @@ import LandingPage from './LandingPage';
 import ListingDetail from './ListingDetail';
 import LogInPage from './LogInPage';
 import Message from './Message';
-import Search from './Search';
 import HostNewListing from './HostNewListing';
 import NavigationBar from './NavigationBar';
 
@@ -57,7 +56,6 @@ export default class App extends React.Component {
         <Link to='/create-account'>To CreateAccount</Link>
         <Link to='/host-listings'>To HostListings</Link>
         <Link to='/log-in'>To LogInPage</Link>
-        <Link to='/search'>To Search</Link>
         <Link to='/host-new-listing'>Host New Listing</Link>
       </div>
     );
@@ -102,9 +100,6 @@ export default class App extends React.Component {
         <Route exact={true} path='/message/:loggedInUserId/:hostId' >
           <Message user={currentUser}/>
           <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/search'>
-          <Search listingSearch={this.listingSearch}/>
         </Route>
         <Route exact={true} path='/host-new-listing'>
           <HostNewListing postListing={this.postListing} />

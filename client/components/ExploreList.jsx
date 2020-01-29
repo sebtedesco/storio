@@ -6,8 +6,39 @@ class ExploreList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: []
+      searchResults: [],
+      city: null,
+      state: null
     };
+    this.getStorages = this.getStorages.bind(this);
+  }
+
+  getStorages(searchParams) {
+    fetch(`/api/storages-list/city/${searchParams.city}/state/${searchParams.state}`)
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        this.setState({
+          searchResults: data,
+          city: searchParams.city,
+          state: searchParams.state
+        });
+      })
+      .catch(err => {
+        return err;
+      });
+  }
+
+  componentDidUpdate() {
+    if (this.state.city === this.props.match.params.city && this.state.state === this.props.match.params.state) {
+      return;
+    }
+    const searchParams = {
+      city: this.props.match.params.city,
+      state: this.props.match.params.state
+    };
+    this.getStorages(searchParams);
   }
 
   componentDidMount() {
@@ -15,16 +46,7 @@ class ExploreList extends React.Component {
       city: this.props.match.params.city,
       state: this.props.match.params.state
     };
-    fetch(`/api/storages-list/city/${searchParams.city}/state/${searchParams.state}`)
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        this.setState({ searchResults: data });
-      })
-      .catch(err => {
-        return err;
-      });
+    this.getStorages(searchParams);
   }
 
   render() {
