@@ -41,7 +41,6 @@ class ExploreMap extends React.Component {
       .then(response => response.json())
       .then(jsonData => {
         var map = this.state.map;
-        var markers = jsonData.map(storage => {
         var previousStorage = null;
         var previousMarker = null;
         var markers = jsonData.map(storage => {
@@ -58,24 +57,24 @@ class ExploreMap extends React.Component {
           var infowindow = new google.maps.InfoWindow({
             content: `$${storage.pricePerDay / 100}`
           });
-          
-          //infowindow.open(map, marker);
-          //infowindow.setOptions({
-           // content: `$${storage.pricePerDay / 100}`
-          //});
+
+          // infowindow.open(map, marker);
+          // infowindow.setOptions({
+          // content: `$${storage.pricePerDay / 100}`
+          // });
           // map.event.addListener(marker, 'click', function () {
 
           // });
           // marker.addListener('mouseover', function () {
           //   infowindow.open(map, marker);
           // });
-         // marker.addListener('click', function () {
-            // infowindow.setContent(<a href="'/listing-detail'">To Listing Detail</a>);
-            // put in link here in the infowindow
-           // infowindow.setOptions({
-             // content: `<a href="/listing-detail/${storage.storageId}">To Listing Detail</a>`
-            //});
-          //});
+          // marker.addListener('click', function () {
+          // infowindow.setContent(<a href="'/listing-detail'">To Listing Detail</a>);
+          // put in link here in the infowindow
+          // infowindow.setOptions({
+          // content: `<a href="/listing-detail/${storage.storageId}">To Listing Detail</a>`
+          // });
+          // });
           // marker.addListener('mouseout', function () {
           //   // infowindow.close(map, marker);
           //   // infowindow.setContent(`$${storage.pricePerDay / 100}`);
@@ -129,6 +128,7 @@ class ExploreMap extends React.Component {
         });
       })
       .catch(err => console.error(err));
+
   }
 
   render() {
