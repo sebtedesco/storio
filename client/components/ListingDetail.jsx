@@ -32,7 +32,9 @@ class ListingDetail extends React.Component {
     }
     return (
       <div className='col-12 list-detail my-auto'>
-        <div className="col-12 back-link"><Link to={`/explore-list/${data.city}/${data.state}`}> &lt; Back to listing </Link></div>
+        <div className="col-12 back-link" onClick={() => { this.props.history.goBack(); }}>
+             &lt; Back to listing
+        </div>
         <div className='col-12 storage-image-container'>
           <img
             className='list-detail-storage-image'
