@@ -250,6 +250,18 @@
   height: 90vh;
   background-color: #c4c4c4;
 }
+.map-anchor {
+  color: black;
+  font-weight: bold;
+}
+.map-infowindow-div {
+  font-size: 1.10rem;
+  object-fit: contain;
+}
+.map-infowindow-img {
+  width: 300px;
+  max-height: 300px;
+}
 
 .list-item-image {
   max-width: 200px;

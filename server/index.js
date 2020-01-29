@@ -34,7 +34,7 @@ app.get('/api/storages-map/city/:city/state/:state', (req, res, next) => {
     throw new ClientError('Missing city and/or state', 400);
   }
   const sql = `
-    SELECT "storageId", title, "pricePerDay", latitude, longitude
+    SELECT "storageId", title, "pricePerDay", "storagePicturePath", latitude, longitude
   FROM storages AS "s"
   JOIN addresses AS "a"
   ON s."addressId" = a."addressId"
