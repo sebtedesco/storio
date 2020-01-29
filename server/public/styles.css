@@ -301,7 +301,7 @@
   margin-top: 15px
 }
 
-.back-link > a, .list-item{
+.back-link > a, .list-item, .card-body > .card-title {
   color: black;
   cursor: pointer;
 }
@@ -354,4 +354,20 @@ button > h4 {
   background-color: #c4c4c4;
   color: #FFFFFF;
   font-weight: bold;
+}
+
+.host-listings > h3 {
+  text-align: center;
+}
+
+.host-list-image {
+  /* max-width: 200px; */
+  max-height: 100px;
+  float: left;
+  margin-right: 15px;
+}
+
+.host-list-item {
+  margin-top: 10px;
+  max-width: 540px;
 }
