@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import ToggleMapList from './ToggleMapList';
 
 class ExploreMap extends React.Component {
   constructor(props) {
@@ -26,7 +27,8 @@ class ExploreMap extends React.Component {
         center: {
           lat: 40.015501,
           lng: -105.257719
-        }
+        },
+        disableDefaultUI: true
       });
       return { map: map };
     });
@@ -133,7 +135,10 @@ class ExploreMap extends React.Component {
 
   render() {
     return (
-      <div id="map" className='google-map-container col-12'></div>
+      <div>
+        <ToggleMapList />
+        <div id="map" className='google-map-container col-12'></div>
+      </div>
     );
   }
 }

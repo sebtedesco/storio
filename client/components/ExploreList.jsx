@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ListItem from './ListItem';
+import ToggleMapList from './ToggleMapList';
 
 class ExploreList extends React.Component {
   constructor(props) {
@@ -81,6 +82,7 @@ class ExploreList extends React.Component {
 
       return (
         <React.Fragment>
+          <ToggleMapList />
           <div className="container explore-list">
             <div className="row">
               <div className="col-1 col-md-2"></div>

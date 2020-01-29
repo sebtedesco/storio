@@ -101,7 +101,7 @@ class Message extends React.Component {
               <>
                 <div>{allMessages}</div>
                 <div onClick={this.getMessages} className='sync-button'>
-                  <i className="fas fa-poo my-3 sync-button-icon"></i>
+                  <i className="fas fa-sync my-3 sync-button-icon cursor-pointer"></i>
                 </div>
               </>
             )
@@ -113,10 +113,10 @@ class Message extends React.Component {
             placeholder="Type message here"
             value={this.state.messageToSend}
             onChange={this.handleChange}
-            className='col-10 mr-4 message-textarea'
+            className='col-10 mx-2 mt-2 message-input'
             cols="32"
           />
-          <div onClick={this.handleSubmit}><i className="fas fa-arrow-alt-circle-right send-message-button"></i></div>
+          <div onClick={this.handleSubmit}><i className="mt-2 fas fa-arrow-alt-circle-right send-message-button"></i></div>
         </form>
       </>
     );
