@@ -291,8 +291,8 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 3	4	6	8	/images/storages/car-garage.jpg	300	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	1	1	t
 4	4	6	7	/images/storages/closet.jpg	200	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	2	2	t
 12	24	36	24	/images/storages/closet.jpg	25	5500	My storage space is bigger than yours	This storage is really big closet that can fit an entire thing!	4	3	t
-11	10	13	2	/images/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
 13	12	24	12	/images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
+11	10	13	2	/images/storages/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
 \.
 
 
