@@ -224,11 +224,11 @@ app.post('/api/listing/', (req, res, next) => {
       insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
       values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       returning *`;
-      const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, addressId, newListing.longDescription, newListing.hostId, true];
+      const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, newListing.longDescription, addressId, newListing.hostId, true];
       return db.query(storageSql, values);
     })
     .then(response => {
-      res.status(201).json(response);
+      res.status(201).json(response.rows[0]);
     })
     .catch(err => next(err));
 });
@@ -252,3 +252,5 @@ app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log('Listening on port', process.env.PORT);
 });
+
+// http -v post: 3000/api/listing address:='{"street1": "123 apples", "city": "Boulder", "state": "CO", "zip": 80304, "longitude": 33333.333, "latitude": "44444.444"}' newListing:='{"width": 4, "depth": 2 "height": 6, "storagePicturePath": "picpath", "pricePerDay": 3000, "maxValue": 10000000, "title": "Great storage downtown", "longDescription": "LONGGG description", "hostId": 3}'

@@ -104,14 +104,25 @@
   color: #fff;
   font-family: 'Nunito';
   text-align: center;
+  height: 100vh;
 }
 
 .storio-logo {
   height: 100px;
+  margin-top: 50px;
 }
 
 .storio-heading {
   font-weight: bold;
+  font-size: 3.5rem;
+}
+
+.landing > p {
+  font-size: 1.5rem;
+}
+
+.landing > h3 {
+  margin-top: 15%;
 }
 
 .new-listing-heading {
@@ -289,4 +300,15 @@
 .explore-list {
   height: 90vh;
   overflow: scroll;
+}
+
+button > h4 {
+  padding-left: 70px;
+  padding-right: 70px;
+  margin-top: 10px;
+}
+
+.list-it-button {
+  border-radius: 10px;
+  border-width: 3px;
 }
