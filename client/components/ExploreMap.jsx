@@ -32,82 +32,95 @@ class ExploreMap extends React.Component {
     });
   }
 
-  // getSearchResult() {
-  //   const searchParams = {
-  //     city: 'Boulder',
-  //     state: 'CO'
-  //   };
-  //   fetch(`/api/storages-map/city/${searchParams.city}/state/${searchParams.state}`)
-  //     .then(response => response.json())
-  //     .then(jsonData => {
-  //       var map = this.state.map;
-  //       var previousStorage = null;
-  //       var markers = jsonData.map(storage => {
-  //         previousStorage = storage;
-  //         var image = {
-  //           url: '../../server/images/storages/closet.jpg',
-  //           // This marker is 20 pixels wide by 32 pixels high.
-  //           // eslint-disable-next-line no-undef
-  //           size: new google.maps.Size(20, 32),
-  //           // The origin for this image is (0, 0).
-  //           // eslint-disable-next-line no-undef
-  //           origin: new google.maps.Point(0, 0),
-  //           // The anchor for this image is the base of the flagpole at (0, 32).
-  //           // eslint-disable-next-line no-undef
-  //           anchor: new google.maps.Point(0, 32)
-  //         };
-  //         // eslint-disable-next-line no-undef
-  //         var marker = new google.maps.Marker({
-  //           position: {
-  //             lat: storage.latitude,
-  //             lng: storage.longitude
-  //           },
-  //           map: map
-  //           // icon: image
-  //         });
-  //         // console.log(storage);
-  //         // if (storage.addressId === previousStorage.addressId) {
-  //         //   marker.markerOptions({
-  //         //     anchorPoint: 2
-  //         //   });
-  //         // }
-  //         // eslint-disable-next-line no-undef
-  //         var infowindow = new google.maps.InfoWindow({
-  //           content: `$${storage.pricePerDay / 100}`
-  //         });
+  getSearchResult() {
+    const searchParams = {
+      city: 'Boulder',
+      state: 'CO'
+    };
+    fetch(`/api/storages-map/city/${searchParams.city}/state/${searchParams.state}`)
+      .then(response => response.json())
+      .then(jsonData => {
+        var map = this.state.map;
+        var previousStorage = null;
+        var previousMarker = null;
+        var markers = jsonData.map(storage => {
 
-  //         infowindow.open(map, marker);
-  //         infowindow.setOptions({
-  //           content: `$${storage.pricePerDay / 100}`
-  //         });
-  //         // map.event.addListener(marker, 'click', function () {
+          // var image = {
+          //   url: storage.storagePicturePath,
+          //   // This marker is 20 pixels wide by 32 pixels high.
+          //   // eslint-disable-next-line no-undef
+          //   size: new google.maps.Size(20, 32),
+          //   // The origin for this image is (0, 0).
+          //   // eslint-disable-next-line no-undef
+          //   origin: new google.maps.Point(0, 0),
+          //   // The anchor for this image is the base of the flagpole at (0, 32).
+          //   // eslint-disable-next-line no-undef
+          //   anchor: new google.maps.Point(0, 32)
+          // };
+          // eslint-disable-next-line no-undef
+          var marker = new google.maps.Marker({
+            position: {
+              lat: storage.latitude,
+              lng: storage.longitude
+            },
+            map: map
+            // icon: image
+          });
+          // console.log(storage);
 
-  //         // });
-  //         // marker.addListener('mouseover', function () {
-  //         //   infowindow.open(map, marker);
-  //         // });
-  //         marker.addListener('click', function () {
-  //           // infowindow.setContent(<a href="'/listing-detail'">To Listing Detail</a>);
-  //           // put in link here in the infowindow
-  //           infowindow.setOptions({
-  //             content: '<a href="/listing-detail/3">To Listing Detail</a>'
-  //           });
-  //         });
-  //         // marker.addListener('mouseout', function () {
-  //         //   // infowindow.close(map, marker);
-  //         //   // infowindow.setContent(`$${storage.pricePerDay / 100}`);
-  //         // });
+          // eslint-disable-next-line no-undef
+          var infowindow = new google.maps.InfoWindow({
+            content: `$${storage.pricePerDay / 100}`
+          });
+          // var movedLatLong = {lat: storage.latitude+0.01, l}
+          infowindow.open(map, marker);
+          if (previousStorage !== null && storage.latitude === previousStorage.latitude) {
+            // console.log('check passed');
+            // eslint-disable-next-line no-undef
+            marker.setPosition({
+              lat: (storage.latitude + 0.001),
+              lng: (storage.longitude + 0.001)
+            });
+            // console.log(infowindow.getZIndex());
 
-  //         marker.setMap(map);
-  //         return marker;
-  //       });
-  //       this.setState({
-  //         searchedResult: jsonData,
-  //         infoWindows: markers
-  //       });
-  //     })
-  //     .catch(err => console.error(err));
-  // }
+          }
+
+          previousStorage = storage;
+          // map.event.addListener(marker, 'click', function () {
+
+          // });
+          marker.addListener('mouseover', function () {
+            if (previousMarker !== null && marker.getZIndex === previousMarker.getZIndex) {
+              infowindow.setZIndex(1);
+              marker.setZIndex(1);
+              previousMarker.setZIndex(0);
+            }
+          });
+          marker.addListener('click', function () {
+            // infowindow.setContent(<a href="/listing-detail">To Listing Detail</a>);
+            // put in link here in the infowindow
+            infowindow.setOptions({
+              content: `<a href="/listing-detail/${storage.storageId}">To Listing Detail</a>`
+            });
+          });
+
+          previousMarker = marker;
+          // marker.addListener('mouseout', function () {
+          //   infowindow.close(map, marker);
+          //   infowindow.setContent(`$${storage.pricePerDay / 100}`);
+          //   infowindow.open(map, marker);
+          // });
+
+          marker.setMap(map);
+          return marker;
+        });
+        this.setState({
+          searchedResult: jsonData,
+          infoWindows: markers
+        });
+      })
+      .catch(err => console.error(err));
+  }
 
   render() {
     return (
