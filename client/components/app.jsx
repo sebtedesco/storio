@@ -86,7 +86,7 @@ export default class App extends React.Component {
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/host-listings'>
-          <HostListings />
+          <HostListings user={currentUser} />
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/listing-detail/:storageId'>
