@@ -65,7 +65,6 @@ class ExploreMap extends React.Component {
             infowindow.open(map, marker);
             infowindow.setContent(`$${storage.pricePerDay / 100}/day`);
           });
-          var latLong = { lat: storage.latitude, lng: storage.longitude };
           infowindow.open(map, marker);
           if (previousStorage !== null && storage.latitude === previousStorage.latitude) {
             // eslint-disable-next-line no-undef
@@ -80,17 +79,18 @@ class ExploreMap extends React.Component {
             infowindow.setZIndex(1);
             marker.setZIndex(1);
           });
+          var latLongCenter = { lat: storage.latitude + 0.005, lng: storage.longitude };
           marker.addListener('click', function () {
             infowindow.setOptions({
               content: `<a class="map-anchor" href="/listing-detail/${storage.storageId}">` +
-                '<div class="d-flex flex-column map-infowindow-div align-items-center text-align-center">' +
+                '<div class="d-flex flex-column map-infowindow-div align-items-center">' +
                 `<span>${storage.title}</span>` +
                 `$${storage.pricePerDay / 100}/day` +
                 `<img src='${storage.storagePicturePath}' class="map-infowindow-img"/></div></a>`
             });
             infowindow.setZIndex(++zIndex);
             marker.setZIndex(++zIndex);
-            map.setCenter(latLong);
+            map.setCenter(latLongCenter);
           });
           marker.setMap(map);
           return marker;
