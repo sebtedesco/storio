@@ -18,35 +18,37 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      currentUser: 'guest',
-      searchResults: []
-
+      currentUser: 'guest'
     };
-    // this.postListing = this.postListing.bind(this);
     this.tryLogIn = this.tryLogIn.bind(this);
-    // this.selectOneListing = this.selectOneListing.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   componentDidMount() {
-    // fetch('/api/health-check')
-    //   .then(res => res.json())
-    //   .then(data => this.setState({ message: data.message || data.error }))
-    //   .catch(err => this.setState({ message: err.message }))
-    //   .finally(() => this.setState({ isLoading: false }));
-    this.tryLogIn();
+    fetch('/api/health-check')
+      .then(res => res.json())
+      .then(data => this.setState({ message: data.message || data.error }))
+      .catch(err => this.setState({ message: err.message }))
+      .finally(() => this.setState({ isLoading: false }));
+    // this.tryLogIn();
   }
 
-  tryLogIn(userObject) {
+  tryLogIn(userName) {
     // will be passed into log-in page as 'props'
     // userObject will contain 'userName' and 'password'
     // will do fetch request with 'userName' and 'password'
     // upon success, will receive user data object
 
-    fetch('/api/users/2')
+    // const userName = 'peterpan';
+    fetch(`/api/users/${userName}`)
       .then(response => response.json())
       .then(jsonData => {
         this.setState({ currentUser: jsonData });
       });
+  }
+
+  signOut() {
+    this.setState({ currentUser: 'guest' });
   }
 
   allLinks() {
@@ -66,7 +68,7 @@ export default class App extends React.Component {
     return (
       <Router>
         <Route exact={true} path='/'>
-          <LandingPage listingSearch={this.listingSearch} />
+          <LandingPage tryLogIn={this.tryLogIn} user={currentUser} signOut={this.signOut} />
           {this.allLinks()}
         </Route>
         <Route exact={true} path='/conversations/:loggedInUserId'>
@@ -78,7 +80,7 @@ export default class App extends React.Component {
           {this.allLinks()}
         </Route>
         <Route exact={true} path='/explore-list/:city/:state'>
-          <ExploreList listings={this.state.searchResults} selectOneListing={this.selectOneListing} />
+          <ExploreList />
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/explore-map/:city/:state'>
@@ -102,7 +104,7 @@ export default class App extends React.Component {
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/host-new-listing'>
-          <HostNewListing postListing={this.postListing} user={currentUser} />
+          <HostNewListing user={currentUser} />
           <NavigationBar user={currentUser} />
         </Route>
       </Router>
