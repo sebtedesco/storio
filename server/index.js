@@ -195,11 +195,13 @@ app.post('/api/messages/', (req, res, next) => {
 });
 
 app.post('/api/listing/', (req, res, next) => {
-  // console.log(req.body.address);
+  // console.log("top of post: ", req.body.address);
+  // console.log(req.body.newListing);
   const address = req.body.address;
   const latitude = address.latitude;
   const longitude = address.longitude;
   const zip = address.zip;
+  const newListing = req.body.newListing;
   if (!req.body.address.street1 || !req.body.address.city || !req.body.address.state || !zip || !latitude || !longitude) {
     throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
   } else if (isNaN(parseInt(zip))) {
@@ -208,26 +210,28 @@ app.post('/api/listing/', (req, res, next) => {
     throw new ClientError('You must enter an addressId', 400);
   }
   const addressSql = `
-        insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
-        values (default, $1, $2, $3, $4, $5, $6, $7)
-        returning "addressId"`;
+  insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
+  values (default, $1, $2, $3, $4, $5, $6, $7)
+  returning "addressId"`;
   const values = [
     address.street1, address.street2, address.city, address.state, zip, longitude, latitude];
   db.query(addressSql, values)
     .then(response => {
+      // console.log(response.rows[0]);
       const addressId = response.rows[0].addressId;
-      const newListing = req.body.newListing;
-      if (isNaN(parseInt(newListing.width)) || isNaN(parseInt(newListing.depth)) || isNaN(parseInt(newListing.height)) || isNaN(parseInt(newListing.pricePerDay)) || isNaN(parseInt(newListing.maxValue))) {
-        throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
-      }
+      // if (isNaN(parseInt(newListing.width)) || isNaN(parseInt(newListing.depth)) || isNaN(parseInt(newListing.height)) || isNaN(parseInt(newListing.pricePerDay)) || isNaN(parseInt(newListing.maxValue))) {
+      //   throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
+      // }
       const storageSql = `
       insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
       values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       returning *`;
       const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, newListing.longDescription, addressId, newListing.hostId, true];
+      // console.log(values);
       return db.query(storageSql, values);
     })
     .then(response => {
+      // console.log('response: ', response);
       res.status(201).json(response.rows[0]);
     })
     .catch(err => next(err));
