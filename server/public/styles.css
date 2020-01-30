@@ -267,8 +267,7 @@
   font-size: 1.0rem;
 }
 .map-infowindow-img {
-  width: 350px;
-  max-height: 300px;
+  height: 25vh;
 }
 
 .list-item-image {

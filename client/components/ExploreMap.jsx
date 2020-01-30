@@ -23,7 +23,6 @@ class ExploreMap extends React.Component {
     this.setState(() => {
       // eslint-disable-next-line no-undef
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
         center: {
           lat: 40.015501,
           lng: -105.257719
@@ -45,6 +44,9 @@ class ExploreMap extends React.Component {
         var map = this.state.map;
         var previousStorage = null;
         let zIndex = 1;
+        var latlng = [];
+        // eslint-disable-next-line no-undef
+        var latlngbounds = new google.maps.LatLngBounds();
         var markers = jsonData.map(storage => {
           // eslint-disable-next-line no-undef
           var marker = new google.maps.Marker({
@@ -54,6 +56,10 @@ class ExploreMap extends React.Component {
             },
             map: map
           });
+          latlng.push(
+            // eslint-disable-next-line no-undef
+            new google.maps.LatLng(storage.latitude, storage.longitude)
+          );
           // eslint-disable-next-line no-undef
           var infowindow = new google.maps.InfoWindow({
             content: `$${storage.pricePerDay / 100}/day`
@@ -79,6 +85,7 @@ class ExploreMap extends React.Component {
             infowindow.setZIndex(1);
             marker.setZIndex(1);
           });
+          // (0.5 * (map.getBounds()))
           var latLongCenter = { lat: storage.latitude + 0.005, lng: storage.longitude };
           marker.addListener('click', function () {
             infowindow.setOptions({
@@ -95,6 +102,10 @@ class ExploreMap extends React.Component {
           marker.setMap(map);
           return marker;
         });
+        for (var i = 0; i < latlng.length; i++) {
+          latlngbounds.extend(latlng[i]);
+        }
+        map.fitBounds(latlngbounds);
         this.setState({
           searchedResult: jsonData,
           infoWindows: markers
