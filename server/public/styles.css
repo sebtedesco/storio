@@ -261,13 +261,13 @@
 .map-anchor {
   color: black;
   font-weight: bold;
+  text-align: center;
 }
 .map-infowindow-div {
-  font-size: 1.10rem;
-  object-fit: contain;
+  font-size: 1.0rem;
 }
 .map-infowindow-img {
-  width: 300px;
+  width: 350px;
   max-height: 300px;
 }
 
