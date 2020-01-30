@@ -115,53 +115,58 @@ class HostNewListing extends React.Component {
     this.setState({ newListing });
   }
 
-  // getLocationData() {
-  //   let addressArr = this.state.address.street1;
-  //   let splitAddress = addressArr.split(' ');
-  //   let googleAddress = splitAddress.join('+');
-  //   let cityArr = this.state.address.city;
-  //   let splitCity = cityArr.split(' ');
-  //   let googleCity = splitCity.join('+');
-  //   const req = {
-  //     method: 'GET',
-  //     // headers: {
-  //     //   'content-type': 'application/JSON'
-  //     // }
-  //   }
-  //   fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${googleAddress},+${googleCity},+${this.state.state}&key=AIzaSyB1rBDw06dBxepi3tdQ63BSgjNxo3pcmyo`, req)
-  //     .then((result) => {
-  //       result.json();
-  //     })
-  //     .then(result => {
-  //       console.log(result);
-  //     })
-  //     .catch(err => console.error(err))
-  // };
-
   handleFormSubmit(e) {
-    //  this.getLocationData();
     e.preventDefault();
-    const dataToPost = this.state;
-    // get lat and lng using goole api || uss random generator to make some fake lat and lng
-    dataToPost.address.latitude = 11.111;
-    dataToPost.address.longitude = 11.111;
-    // created an new input field to receive maximum coverage value. Also require new maxValue input filed changeing.
-    dataToPost.newListing.maxValue = 100000;
+    var dataToPost = this.state;
     dataToPost.newListing.hostId = this.props.user.userId;
-    // console.log(dataToPost);
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/JSON'
-      },
-      body: JSON.stringify(dataToPost)
-    };
-    fetch('/api/listing/', req)
-      .then(result => result.json())
+    // get lat and lng using goole api || uss random generator to make some fake lat and lng
+    var streetQuery = dataToPost.address.street1.split(' ').join('+');
+    var cityQuery = dataToPost.address.city.split(' ').join('+');
+    var stateQuery = dataToPost.address.state;
+    var uploadingPicture = new FormData();
+
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${streetQuery},+${cityQuery},+${stateQuery}&key=AIzaSyBfiGC1OW1s6FcMkcgqDRRTjN2uYHxmXRs`)
+      .then(responseFromGoogleGeocode => responseFromGoogleGeocode.json())
+      .then(jsonGeoResult => {
+        // console.log(jsonGeoResult[0]);
+        dataToPost.address.latitude = jsonGeoResult.results[0].geometry.location.lat;
+        dataToPost.address.longitude = jsonGeoResult.results[0].geometry.location.lng;
+        // console.log(dataToPost);
+        var pictureInput = document.querySelector('#selected-storage-image');
+        uploadingPicture.append('storage-picture', pictureInput.files[0]);
+        var reqPictureBody = {
+          method: 'POST',
+          body: uploadingPicture
+        };
+        fetch('/api/upload-storage-image', reqPictureBody)
+          .then(responseFromUploading => responseFromUploading.json())
+          .then(storagePicturePath => {
+            // console.log(storagePicturePath);
+            dataToPost.newListing.storagePicturePath = storagePicturePath;
+
+            var req = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/JSON'
+              },
+              body: JSON.stringify(dataToPost)
+            };
+
+            fetch('/api/listing/', req)
+              .then(result => result.json())
+              .then(jsonData => {
+                if (jsonData.storageId) {
+                  this.clearFormValues();
+                  return true;
+                }
+              })
+              .catch(err => console.error(err));
+          })
+          .catch(err => console.error(err));
+      })
       .catch(err => console.error(err));
+
   }
-  // const formValues = this.state;
-  // this.props.postListing(formValues);
 
   clearFormValues(e) {
     e.preventDefault();
@@ -254,9 +259,10 @@ class HostNewListing extends React.Component {
               <div className="col-4">
                 <input type="text" className="form-control" onChange={this.onMaxValueChange} value={this.state.newListing.maxValue} />
               </div>
-              {/* <div className="col">
-                <input type="file" className="form-control-file" id="uploadPhoto" onChange={this.onPhotoUpload} />
-              </div> */}
+            </div>
+            <div className='my-3'>
+              <div>Upload Storage Picture</div>
+              <input type="file" name="storage-picture" id="selected-storage-image" className='col-12'/>
             </div>
             <div className="form-row">
               <div className="col">

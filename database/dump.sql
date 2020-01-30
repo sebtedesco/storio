@@ -257,6 +257,8 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 6	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.525936999999999	34.3936399999999978
 7	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.501232000000002	34.3859429999999975
 8	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.485247999999999	34.3850649999999973
+9	apples and oranges and avocados ave	\N	Irvine	CA	98763	11.1110000000000007	11.1110000000000007
+10	1319 N Lincoln Ave	\N	Fullerton	CA	92831	-117.911054800000002	33.8839418000000023
 \.
 
 
@@ -293,6 +295,8 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 12	24	36	24	/images/storages/closet.jpg	25	5500	My storage space is bigger than yours	This storage is really big closet that can fit an entire thing!	4	3	t
 13	12	24	12	/images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
 11	10	13	2	/images/storages/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
+14	2	3	1		3	100000	Fruits are good!	fruity place	9	2	t
+15	2	3	1	/images/storages/small-niche-1580375527100.jpeg	124123	12341	Test title	Solid!	10	2	t
 \.
 
 
@@ -313,7 +317,7 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 8, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 10, true);
 
 
 --
@@ -327,7 +331,7 @@ SELECT pg_catalog.setval('public."messages_messageId_seq"', 23, true);
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 13, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 15, true);
 
 
 --
