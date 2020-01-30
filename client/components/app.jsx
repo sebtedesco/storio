@@ -40,7 +40,6 @@ export default class App extends React.Component {
     // will do fetch request with 'userName' and 'password'
     // upon success, will receive user data object
 
-    // const userName = 'peterpan';
     fetch(`/api/users/${userName}`)
       .then(response => response.json())
       .then(jsonData => {
@@ -81,11 +80,11 @@ export default class App extends React.Component {
           {/* {this.allLinks()} */}
         </Route>
         <Route exact={true} path='/explore-list/:city/:state'>
-          <ExploreList />
+          <ExploreList user={currentUser} />
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/explore-map/:city/:state'>
-          <ExploreMap />
+          <ExploreMap user={currentUser} />
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/host-listings'>
