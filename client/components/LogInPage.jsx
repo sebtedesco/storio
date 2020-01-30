@@ -19,13 +19,14 @@ class LogInPage extends React.Component {
       this.props.user === 'guest'
         ? (
           <div className='mt-5'>
-            <div className='mb-3'>You are {`${this.props.user}`}. Would you like to log in?</div>
+            <div className='mb-3'>You are logged in as{`${this.props.user}`}. Would you like to log in?</div>
             <form
               onSubmit={event => {
                 event.preventDefault();
+                this.setState({ userName: '' });
                 this.props.tryLogIn(this.state.userName);
               }}
-              className='d-flex flex-column col-4 mx-auto'
+              className='d-flex flex-column mx-auto col-12 align-items-center'
             >
               <input
                 type="text"
@@ -35,18 +36,28 @@ class LogInPage extends React.Component {
                 // placeholder='Enter your user name'
                 placeholder='Enter your email address'
                 onChange={this.handleChange}
-                className='form-control'
+                className='form-control col-6'
               />
               <button
                 onClick={() => { this.props.tryLogIn(this.state.userName); }}
-                className='btn btn-large btn-outline-light list-it-button mt-3'
+                className='btn btn-large btn-outline-light list-it-button mt-3 col-4'
               >
                 Log In!
               </button>
             </form>
           </div>
         )
-        : <h3>Welcome Back ! {`${this.props.user.userName}`}</h3>
+        : (
+          <>
+            <h3>Welcome Back ! {`${this.props.user.userName}`}</h3>
+            <button
+              onClick={() => { this.props.signOut(); }}
+              className='btn btn-large btn-outline-light list-it-button mt-3 col-4'
+            >
+              Good Bye~
+            </button>
+          </>
+        )
     );
   }
 }

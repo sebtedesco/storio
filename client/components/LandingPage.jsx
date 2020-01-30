@@ -14,7 +14,7 @@ class LandingPage extends React.Component {
           <Search listingSearch={this.props.listingSearch} />
           <h3>Extra storage space?</h3>
           <button className="btn btn-large btn-outline-light list-it-button" onClick={() => this.props.history.push('/host-new-listing')}><h4>List It!</h4></button>
-          <LogInPage user={this.props.user} tryLogIn={this.props.tryLogIn} />
+          <LogInPage user={this.props.user} tryLogIn={this.props.tryLogIn} signOut={this.props.signOut}/>
         </div>
       </React.Fragment>
     );

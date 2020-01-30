@@ -21,6 +21,7 @@ export default class App extends React.Component {
       currentUser: 'guest'
     };
     this.tryLogIn = this.tryLogIn.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +47,10 @@ export default class App extends React.Component {
       });
   }
 
+  signOut() {
+    this.setState({ currentUser: 'guest' });
+  }
+
   allLinks() {
     return (
       <div className='d-flex flex-column col-11 mx-2 align-items-center'>
@@ -63,7 +68,7 @@ export default class App extends React.Component {
     return (
       <Router>
         <Route exact={true} path='/'>
-          <LandingPage tryLogIn={this.tryLogIn} user={currentUser} />
+          <LandingPage tryLogIn={this.tryLogIn} user={currentUser} signOut={this.signOut} />
           {this.allLinks()}
         </Route>
         <Route exact={true} path='/conversations/:loggedInUserId'>
