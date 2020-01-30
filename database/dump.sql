@@ -259,6 +259,7 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 8	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.485247999999999	34.3850649999999973
 9	apples and oranges and avocados ave	\N	Irvine	CA	98763	11.1110000000000007	11.1110000000000007
 10	1319 N Lincoln Ave	\N	Fullerton	CA	92831	-117.911054800000002	33.8839418000000023
+11	936 Paloma Pl.	\N	Fullerton	CA	92835	-117.939957300000003	33.8985632999999993
 \.
 
 
@@ -282,6 +283,7 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 21	2	5	edadeaf	2020-01-28 11:34:41.265091
 22	2	5	test~	2020-01-28 11:47:10.948031
 23	2	2	adeadae	2020-01-28 12:01:14.978998
+24	5	2	hey~	2020-01-30 01:50:50.587877
 \.
 
 
@@ -297,6 +299,7 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 11	10	13	2	/images/storages/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
 14	2	3	1		3	100000	Fruits are good!	fruity place	9	2	t
 15	2	3	1	/images/storages/small-niche-1580375527100.jpeg	124123	12341	Test title	Solid!	10	2	t
+16	2	1	3	/images/storages/storage-0001-1580404899047.jpg	1	10	Test title	some space	11	1	t
 \.
 
 
@@ -317,21 +320,21 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 10, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 11, true);
 
 
 --
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 23, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 24, true);
 
 
 --
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 15, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 16, true);
 
 
 --
