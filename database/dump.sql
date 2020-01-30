@@ -253,13 +253,14 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 2	2324 19th St	\N	Boulder	CO	80304	-105.271807999999993	40.0234909999999999
 3	141 Pineview	\N	Irvine	CA	92620	-117.757458999999997	33.7162089999999992
 4	14252 Culver Dr	#A-632	Irvine	CA	92604	-117.784261999999998	33.7072640000000021
-5	2244 Bob Moses Ave	null	Carpinteria	CA	92244	-119.520120000000006	34.4020620000000008
-6	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.525936999999999	34.3936399999999978
-7	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.501232000000002	34.3859429999999975
-8	13444 Henry Moses Ave	null	Carpinteria	CA	92244	-119.485247999999999	34.3850649999999973
-9	apples and oranges and avocados ave	\N	Irvine	CA	98763	11.1110000000000007	11.1110000000000007
-10	1319 N Lincoln Ave	\N	Fullerton	CA	92831	-117.911054800000002	33.8839418000000023
-11	936 Paloma Pl.	\N	Fullerton	CA	92835	-117.939957300000003	33.8985632999999993
+5	2244 Bob Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
+6	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
+7	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
+8	13444 Henry Moses Ave	null	Carpinteria	CA	92244	111234234	44444444
+9	100 S Main Street	\N	Las Vegas	NV	89101	11.1110000000000007	11.1110000000000007
+10	100 S Main Street	\N	Las Vegas	NV	89101	11.1110000000000007	11.1110000000000007
+11	100 S Main Street	\N	Las Vegas	NV	89101	11.1110000000000007	11.1110000000000007
+12	20 Lake Road	\N	Irvine	CA	92604	-117.802688700000004	33.6760366000000033
 \.
 
 
@@ -278,12 +279,10 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 12	1	2	hey dog, this is a test yet again!	2020-01-27 12:06:07.296427
 13	1	3	hey dog, this is a test yet again!	2020-01-27 12:06:33.208087
 14	1	2	checking time!	2020-01-27 12:45:37.369767
-19	2	5	testtest!	2020-01-28 11:23:45.699175
-20	2	5	oifailejdila	2020-01-28 11:34:07.504723
-21	2	5	edadeaf	2020-01-28 11:34:41.265091
-22	2	5	test~	2020-01-28 11:47:10.948031
-23	2	2	adeadae	2020-01-28 12:01:14.978998
-24	5	2	hey~	2020-01-30 01:50:50.587877
+16	2	1	Hello me	2020-01-28 23:06:54.900214
+17	2	1	I like cheese	2020-01-30 00:25:45.910338
+18	2	3	Which one are you interested in?	2020-01-30 00:27:01.905048
+19	5	3	can I store my stolen cars in your storio?	2020-01-30 20:44:27.759441
 \.
 
 
@@ -295,11 +294,12 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 3	4	6	8	/images/storages/car-garage.jpg	300	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	1	1	t
 4	4	6	7	/images/storages/closet.jpg	200	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	2	2	t
 12	24	36	24	/images/storages/closet.jpg	25	5500	My storage space is bigger than yours	This storage is really big closet that can fit an entire thing!	4	3	t
+11	10	13	2	/images/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
 13	12	24	12	/images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
-11	10	13	2	/images/storages/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
-14	2	3	1		3	100000	Fruits are good!	fruity place	9	2	t
-15	2	3	1	/images/storages/small-niche-1580375527100.jpeg	124123	12341	Test title	Solid!	10	2	t
-16	2	1	3	/images/storages/storage-0001-1580404899047.jpg	1	10	Test title	some space	11	1	t
+14	6	3	6		5	100000	Space in back alley	It's a dirty alley with rats	9	2	t
+15	6	3	6		5	100000	Space in back alley	It's a dirty alley with rats	10	2	t
+16	6	3	6		5	100000	Space in back alley	It's a dirty alley with rats	11	2	t
+17	60	60	12	/images/storages/pee-wees-playhouse-1580417496850.jpg	1000	1	Totally rad storage space	This listing is lit!	12	5	t
 \.
 
 
@@ -312,7 +312,7 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	/images/users/brian-wilson.jpg
 3	wardOfCode	beepbeep	Chris	Ward	cjrs@gam.com	sup dudes	/images/users/chris.jpg
 4	kimchTheMinch	chris	Kimchee	Ward	cjrs@gam.com	I have to many toys	/images/users/kimch.jpg
-5	peterpan	icanfly	Peter	Han	peterpan@dream.land	I believe in fairy!!!	/images/users/peter-pan.jpg
+5	anaBanana	pass123	Anastasia	Canlas	ana@acanlas.dev	I like the tin man	/images/users/weirdouserpic.jpg
 \.
 
 
@@ -320,21 +320,21 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 11, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 12, true);
 
 
 --
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 24, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 19, true);
 
 
 --
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 16, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 17, true);
 
 
 --
