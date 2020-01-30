@@ -79,7 +79,7 @@ class ListingDetail extends React.Component {
           </div>
         </div>
         <div className="form-row col-12 d-flex justify-content-center detail-button-row">
-          <Link to={`/message/${data.hostId}/${this.props.user.userId}`}>
+          <Link to={`/message/${this.props.user.userId}/${data.hostId}`}>
             <button
               className={`btn listing-button ${this.state.isMessageButtonVisible === true ? '' : 'd-none'}`}
             >
