@@ -23,7 +23,7 @@ class ExploreMap extends React.Component {
     this.setState(() => {
       // eslint-disable-next-line no-undef
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 14,
+        zoom: 15,
         center: {
           lat: 40.015501,
           lng: -105.257719
@@ -44,7 +44,7 @@ class ExploreMap extends React.Component {
       .then(jsonData => {
         var map = this.state.map;
         var previousStorage = null;
-        var previousMarker = null;
+        let zIndex = 1;
         var markers = jsonData.map(storage => {
           // eslint-disable-next-line no-undef
           var marker = new google.maps.Marker({
@@ -53,74 +53,45 @@ class ExploreMap extends React.Component {
               lng: storage.longitude
             },
             map: map
-            // icon: image
           });
           // eslint-disable-next-line no-undef
           var infowindow = new google.maps.InfoWindow({
-            content: `$${storage.pricePerDay / 100}`
+            content: `$${storage.pricePerDay / 100}/day`
           });
-
-          // infowindow.open(map, marker);
-          // infowindow.setOptions({
-          // content: `$${storage.pricePerDay / 100}`
-          // });
-          // map.event.addListener(marker, 'click', function () {
-
-          // });
-          // marker.addListener('mouseover', function () {
-          //   infowindow.open(map, marker);
-          // });
-          // marker.addListener('click', function () {
-          // infowindow.setContent(<a href="'/listing-detail'">To Listing Detail</a>);
-          // put in link here in the infowindow
-          // infowindow.setOptions({
-          // content: `<a href="/listing-detail/${storage.storageId}">To Listing Detail</a>`
-          // });
-          // });
-          // marker.addListener('mouseout', function () {
-          //   // infowindow.close(map, marker);
-          //   // infowindow.setContent(`$${storage.pricePerDay / 100}`);
-          // });
-
-          // var movedLatLong = {lat: storage.latitude+0.01, l}
+          infowindow.setZIndex(zIndex);
+          infowindow.open(map, marker);
+          // eslint-disable-next-line no-undef
+          google.maps.event.addListener(infowindow, 'closeclick', function () {
+            infowindow.open(map, marker);
+            infowindow.setContent(`$${storage.pricePerDay / 100}/day`);
+          });
+          var latLong = { lat: storage.latitude, lng: storage.longitude };
           infowindow.open(map, marker);
           if (previousStorage !== null && storage.latitude === previousStorage.latitude) {
-            // console.log('check passed');
             // eslint-disable-next-line no-undef
             marker.setPosition({
               lat: (storage.latitude + 0.001),
               lng: (storage.longitude + 0.001)
             });
-            // console.log(infowindow.getZIndex());
-
           }
-
           previousStorage = storage;
-          // map.event.addListener(marker, 'click', function () {
-
-          // });
-          marker.addListener('mouseover', function () {
-            if (previousMarker !== null && marker.getZIndex === previousMarker.getZIndex) {
-              infowindow.setZIndex(1);
-              marker.setZIndex(1);
-              previousMarker.setZIndex(0);
-            }
+          // eslint-disable-next-line no-undef
+          google.maps.event.addListener(infowindow, 'closeclick', function () {
+            infowindow.setZIndex(1);
+            marker.setZIndex(1);
           });
           marker.addListener('click', function () {
-            // infowindow.setContent(<a href="/listing-detail">To Listing Detail</a>);
-            // put in link here in the infowindow
             infowindow.setOptions({
-              content: `<a href="/listing-detail/${storage.storageId}">To Listing Detail</a>`
+              content: `<a class="map-anchor" href="/listing-detail/${storage.storageId}">` +
+                '<div class="d-flex flex-column map-infowindow-div align-items-center text-align-center">' +
+                `<span>${storage.title}</span>` +
+                `$${storage.pricePerDay / 100}/day` +
+                `<img src='${storage.storagePicturePath}' class="map-infowindow-img"/></div></a>`
             });
+            infowindow.setZIndex(++zIndex);
+            marker.setZIndex(++zIndex);
+            map.setCenter(latLong);
           });
-
-          previousMarker = marker;
-          // marker.addListener('mouseout', function () {
-          //   infowindow.close(map, marker);
-          //   infowindow.setContent(`$${storage.pricePerDay / 100}`);
-          //   infowindow.open(map, marker);
-          // });
-
           marker.setMap(map);
           return marker;
         });
@@ -130,7 +101,6 @@ class ExploreMap extends React.Component {
         });
       })
       .catch(err => console.error(err));
-
   }
 
   render() {
