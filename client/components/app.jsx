@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import Conversations from './Conversations';
 import CreateAccount from './CreateAccount';
 import ExploreList from './ExploreList';
@@ -51,17 +52,17 @@ export default class App extends React.Component {
     this.setState({ currentUser: 'guest' });
   }
 
-  allLinks() {
-    return (
-      <div className='d-flex flex-column col-11 mx-2 align-items-center'>
-        <Link to='/'>To Home Page</Link>
-        <Link to='/create-account'>To CreateAccount</Link>
-        <Link to='/host-listings'>To HostListings</Link>
-        <Link to='/log-in'>To LogInPage</Link>
-        <Link to='/host-new-listing'>Host New Listing</Link>
-      </div>
-    );
-  }
+  // allLinks() {
+  //   return (
+  //     <div className='d-flex flex-column col-11 mx-2 align-items-center'>
+  //       <Link to='/'>To Home Page</Link>
+  //       <Link to='/create-account'>To CreateAccount</Link>
+  //       <Link to='/host-listings'>To HostListings</Link>
+  //       <Link to='/log-in'>To LogInPage</Link>
+  //       <Link to='/host-new-listing'>Host New Listing</Link>
+  //     </div>
+  //   );
+  // }
 
   render() {
     const currentUser = this.state.currentUser;
@@ -69,7 +70,7 @@ export default class App extends React.Component {
       <Router>
         <Route exact={true} path='/'>
           <LandingPage tryLogIn={this.tryLogIn} user={currentUser} signOut={this.signOut} />
-          {this.allLinks()}
+          {/* {this.allLinks()} */}
         </Route>
         <Route exact={true} path='/conversations/:loggedInUserId'>
           <Conversations />
@@ -77,7 +78,7 @@ export default class App extends React.Component {
         </Route>
         <Route exact={true} path='/create-account'>
           <CreateAccount />
-          {this.allLinks()}
+          {/* {this.allLinks()} */}
         </Route>
         <Route exact={true} path='/explore-list/:city/:state'>
           <ExploreList />
@@ -97,7 +98,7 @@ export default class App extends React.Component {
         </Route>
         <Route exact={true} path='/log-in'>
           <LogInPage />
-          {this.allLinks()}
+          {/* {this.allLinks()} */}
         </Route>
         <Route exact={true} path='/message/:loggedInUserId/:hostId' >
           <Message user={currentUser}/>

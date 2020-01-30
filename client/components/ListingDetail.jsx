@@ -32,8 +32,8 @@ class ListingDetail extends React.Component {
     }
     return (
       <div className='col-12 list-detail my-auto'>
-        <div className="col-12 back-link" onClick={() => { this.props.history.goBack(); }}>
-             &lt; Back to listing
+        <div className="col-12 text-muted" onClick={() => { this.props.history.goBack(); }}>
+             &lt; Back
         </div>
         <div className='col-12 storage-image-container'>
           <img
@@ -69,7 +69,7 @@ class ListingDetail extends React.Component {
           </div>
         </div>
         <div className="form-row col-12 d-flex justify-content-center detail-button-row">
-          <Link to={`/message/${data.hostId}/${this.props.user.userId}`}><button className="btn listing-button">Message Host</button></Link>
+          <Link to={`/message/${this.props.user.userId}/${data.hostId}`}><button className="btn listing-button">Message Host</button></Link>
         </div>
       </div>
     );
