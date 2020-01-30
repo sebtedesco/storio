@@ -76,9 +76,10 @@ class Message extends React.Component {
     const allMessages = !this.state.messages
       ? (
         <div>
+          <p className="text-muted" onClick={() => this.props.history.goBack()}>&lt; Back</p>
           <div>No messages to display</div>
           <div onClick={this.getMessages} className='sync-button'>
-            <i className="fas fa-poo my-3 sync-button-icon"></i>
+            <i className="fas fa-sync my-3 sync-button-icon"></i>
           </div>
         </div>
       )
@@ -99,6 +100,7 @@ class Message extends React.Component {
             ? allMessages
             : (
               <>
+                <p className="text-muted" onClick={() => this.props.history.goBack()}>&lt; Back</p>
                 <div>{allMessages}</div>
                 <div onClick={this.getMessages} className='sync-button'>
                   <i className="fas fa-sync my-3 sync-button-icon cursor-pointer"></i>

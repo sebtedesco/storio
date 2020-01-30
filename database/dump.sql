@@ -261,6 +261,7 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 10	1319 N Lincoln Ave	\N	Fullerton	CA	92831	-117.911054800000002	33.8839418000000023
 11	936 Paloma Pl.	\N	Fullerton	CA	92835	-117.939957300000003	33.8985632999999993
 12	2555 Main Street	\N	Irvine	CA	92614	-117.841442599999993	33.6829402999999985
+13	20 Lake Road	\N	Irvine	CA	92604	-117.802688700000004	33.6760366000000033
 \.
 
 
@@ -279,7 +280,10 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 12	1	2	hey dog, this is a test yet again!	2020-01-27 12:06:07.296427
 13	1	3	hey dog, this is a test yet again!	2020-01-27 12:06:33.208087
 14	1	2	checking time!	2020-01-27 12:45:37.369767
-19	2	5	testtest!	2020-01-28 11:23:45.699175
+16	2	1	Hello me	2020-01-28 23:06:54.900214
+17	2	1	I like cheese	2020-01-30 00:25:45.910338
+18	2	3	Which one are you interested in?	2020-01-30 00:27:01.905048
+19	5	3	can I store my stolen cars in your storio?	2020-01-30 20:44:27.759441
 20	2	5	oifailejdila	2020-01-28 11:34:07.504723
 21	2	5	edadeaf	2020-01-28 11:34:41.265091
 22	2	5	test~	2020-01-28 11:47:10.948031
@@ -297,8 +301,9 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 3	4	6	8	/images/storages/car-garage.jpg	300	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	1	1	t
 4	4	6	7	/images/storages/closet.jpg	200	1000000	Clean Car Garage Lodge near Downtown	Car garage longDescription Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo est, quis posuere lorem ultricies vitae. Sed ut turpis posuere, laoreet diam id, lacinia nisl. Curabitur nec est a metus blandit lobortis.	2	2	t
 12	24	36	24	/images/storages/closet.jpg	25	5500	My storage space is bigger than yours	This storage is really big closet that can fit an entire thing!	4	3	t
-13	12	24	12	/images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
 11	10	13	2	/images/storages/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
+13	12	24	12	/images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
+18	60	60	12	/images/storages/pee-wees-playhouse-1580417496850.jpg	1000	1	Totally rad storage space	This listing is lit!	12	5	t
 15	2	3	1	/images/storages/small-niche-1580375527100.jpeg	124123	12341	Test title	Solid!	10	2	t
 16	2	1	3	/images/storages/storage-0001-1580404899047.jpg	1	10	Test title	some space	11	1	t
 17	2	3	1	/images/storages/message-icon-1580416391003.png	1	10	Peter's storage	Message!	12	5	t
@@ -314,7 +319,8 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 1	psmith	abbie123	Patrick	Smith	psmith@gmail.com	This is the about me section for Patrick Smith. Patrick Smith has a dog named Abbie and lives in Boulder, CO. He is 29 years olf	/images/users/patrick-smith.jpg
 2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	/images/users/brian-wilson.jpg
 3	wardOfCode	beepbeep	Chris	Ward	cjrs@gam.com	sup dudes	/images/users/chris.jpg
-5	peterpan	icanfly	Peter	Han	peterpan@dream.land	I believe in fairy!!!	/images/users/peter-pan.jpg
+5	anaBanana	pass123	Anastasia	Canlas	ana@acanlas.dev	I like the tin man	/images/users/weirdouserpic.jpg
+6	peterpan	icanfly	Peter	Han	peterpan@dream.land	I believe in fairy!!!	/images/users/peter-pan.jpg
 4	kimchTheMinch	chris	Kimchee	Ward	cjrs2@gam.com	I have to many toys	/images/users/kimch.jpg
 \.
 
@@ -323,7 +329,7 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 12, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 13, true);
 
 
 --
@@ -332,19 +338,18 @@ SELECT pg_catalog.setval('public."addresses_addressId_seq"', 12, true);
 
 SELECT pg_catalog.setval('public."messages_messageId_seq"', 25, true);
 
-
 --
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 17, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 18, true);
 
 
 --
 -- Name: users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."users_userId_seq"', 5, true);
+SELECT pg_catalog.setval('public."users_userId_seq"', 6, true);
 
 
 --
