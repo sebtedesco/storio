@@ -4,14 +4,14 @@ class LogInPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: ''
+      email: ''
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    const userName = event.target.value;
-    this.setState({ userName: userName });
+    const email = event.target.value;
+    this.setState({ email: email });
   }
 
   render() {
@@ -23,8 +23,8 @@ class LogInPage extends React.Component {
             <form
               onSubmit={event => {
                 event.preventDefault();
-                this.setState({ userName: '' });
-                this.props.tryLogIn(this.state.userName);
+                this.setState({ email: '' });
+                this.props.tryLogIn(this.state.email);
               }}
               className='d-flex flex-column mx-auto col-12 align-items-center'
             >
@@ -32,14 +32,13 @@ class LogInPage extends React.Component {
                 type="text"
                 name='user-name'
                 id='user-name'
-                value={this.state.userName}
-                // placeholder='Enter your user name'
+                value={this.state.email}
                 placeholder='Enter your email address'
                 onChange={this.handleChange}
                 className='form-control col-6'
               />
               <button
-                onClick={() => { this.props.tryLogIn(this.state.userName); }}
+                onClick={() => { this.props.tryLogIn(this.state.email); }}
                 className='btn btn-large btn-outline-light list-it-button mt-3 col-4'
               >
                 Log In!
@@ -48,15 +47,15 @@ class LogInPage extends React.Component {
           </div>
         )
         : (
-          <>
-            <h3>Welcome Back ! {`${this.props.user.userName}`}</h3>
+          <div>
+            <h3 className='mt-5'>Welcome Back ! {`${this.props.user.userName}`}</h3>
             <button
               onClick={() => { this.props.signOut(); }}
               className='btn btn-large btn-outline-light list-it-button mt-3 col-4'
             >
               Good Bye~
             </button>
-          </>
+          </div>
         )
     );
   }

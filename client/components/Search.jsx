@@ -57,8 +57,7 @@ class Search extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className={`container${this.props.extraClass}`}>
-
+        <div className={`container ${this.props.extraClass ? this.props.extraClass : ''}`}>
           <form className="row m-2" onSubmit={this.handleSubmit}>
             <div className="col-6 form-group pl-1">
               <label className="sr-only">City</label>
@@ -74,7 +73,6 @@ class Search extends React.Component {
               <button className="btn btn-outline-light"><i className="fas fa-search" /></button>
             </div>
           </form>
-
         </div>
       </React.Fragment>
     );

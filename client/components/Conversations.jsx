@@ -34,7 +34,10 @@ class Conversations extends React.Component {
       );
     });
     return (
-      <div>{others}</div>
+      <>
+        <p className="text-muted" onClick={() => this.props.history.goBack()}>&lt; Back</p>
+        <div>{others}</div>
+      </>
     );
   }
 }

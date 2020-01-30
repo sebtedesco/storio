@@ -35,14 +35,10 @@ class ListingDetail extends React.Component {
       );
     }
     return (
-      <div className="col-12 list-detail my-auto">
-        <div
-          className="col-12 back-link"
-          onClick={() => {
-            this.props.history.goBack();
-          }}
-        >
-          &lt; Back to listing
+
+      <div className='col-12 list-detail my-auto'>
+        <div className="col-12 text-muted" onClick={() => { this.props.history.goBack(); }}>
+             &lt; Back
         </div>
         <div className="col-12 storage-image-container">
           <img
