@@ -22,8 +22,6 @@ class ListingDetail extends React.Component {
         }
         this.setState({ storageDetail: data });
       })
-      .then(data => {
-      })
       .catch(err => {
         return err;
       });
