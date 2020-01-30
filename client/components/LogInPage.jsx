@@ -32,7 +32,8 @@ class LogInPage extends React.Component {
                 name='user-name'
                 id='user-name'
                 value={this.state.userName}
-                placeholder='Enter your user name'
+                // placeholder='Enter your user name'
+                placeholder='Enter your email address'
                 onChange={this.handleChange}
                 className='form-control'
               />
@@ -45,7 +46,7 @@ class LogInPage extends React.Component {
             </form>
           </div>
         )
-        : <h3>Welcome Back ! {`${this.props.user.firstName} ${this.props.user.lastName}`}</h3>
+        : <h3>Welcome Back ! {`${this.props.user.userName}`}</h3>
     );
   }
 }
