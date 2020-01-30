@@ -102,7 +102,7 @@ export default class App extends React.Component {
           <NavigationBar user={currentUser} />
         </Route>
         <Route exact={true} path='/host-new-listing'>
-          <HostNewListing postListing={this.postListing} />
+          <HostNewListing postListing={this.postListing} user={currentUser} />
           <NavigationBar user={currentUser} />
         </Route>
       </Router>
