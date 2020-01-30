@@ -260,6 +260,7 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 9	apples and oranges and avocados ave	\N	Irvine	CA	98763	11.1110000000000007	11.1110000000000007
 10	1319 N Lincoln Ave	\N	Fullerton	CA	92831	-117.911054800000002	33.8839418000000023
 11	936 Paloma Pl.	\N	Fullerton	CA	92835	-117.939957300000003	33.8985632999999993
+12	2555 Main Street	\N	Irvine	CA	92614	-117.841442599999993	33.6829402999999985
 \.
 
 
@@ -284,6 +285,7 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 22	2	5	test~	2020-01-28 11:47:10.948031
 23	2	2	adeadae	2020-01-28 12:01:14.978998
 24	5	2	hey~	2020-01-30 01:50:50.587877
+25	4	5	wassa	2020-01-30 12:42:27.618103
 \.
 
 
@@ -297,9 +299,10 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 12	24	36	24	/images/storages/closet.jpg	25	5500	My storage space is bigger than yours	This storage is really big closet that can fit an entire thing!	4	3	t
 13	12	24	12	/images/storages/place.jpg	10	500	Additional space behind garage	Smells great!	2	2	t
 11	10	13	2	/images/storages/bob-the-builder.jpg	4	100000	Great storage unit downtown Aspen	longDescription here	3	2	t
-14	2	3	1		3	100000	Fruits are good!	fruity place	9	2	t
 15	2	3	1	/images/storages/small-niche-1580375527100.jpeg	124123	12341	Test title	Solid!	10	2	t
 16	2	1	3	/images/storages/storage-0001-1580404899047.jpg	1	10	Test title	some space	11	1	t
+17	2	3	1	/images/storages/message-icon-1580416391003.png	1	10	Peter's storage	Message!	12	5	t
+14	2	3	1	/images/storages/fruits.jpg	3	100000	Fruits are good!	fruity place	9	2	t
 \.
 
 
@@ -311,8 +314,8 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 1	psmith	abbie123	Patrick	Smith	psmith@gmail.com	This is the about me section for Patrick Smith. Patrick Smith has a dog named Abbie and lives in Boulder, CO. He is 29 years olf	/images/users/patrick-smith.jpg
 2	bwilson	gaucho123	Brian	Wilson	bwilson@gmail.com	This is the about me section for Brian Wilson. Brian has a dog named Gaucho and lives in Boulder, CO. He is 34 years olf	/images/users/brian-wilson.jpg
 3	wardOfCode	beepbeep	Chris	Ward	cjrs@gam.com	sup dudes	/images/users/chris.jpg
-4	kimchTheMinch	chris	Kimchee	Ward	cjrs@gam.com	I have to many toys	/images/users/kimch.jpg
 5	peterpan	icanfly	Peter	Han	peterpan@dream.land	I believe in fairy!!!	/images/users/peter-pan.jpg
+4	kimchTheMinch	chris	Kimchee	Ward	cjrs2@gam.com	I have to many toys	/images/users/kimch.jpg
 \.
 
 
@@ -320,21 +323,21 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 11, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 12, true);
 
 
 --
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 24, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 25, true);
 
 
 --
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 16, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 17, true);
 
 
 --
