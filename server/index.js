@@ -1,5 +1,7 @@
 require('dotenv/config');
 const express = require('express');
+const path = require('path');
+const multer = require('multer');
 
 const db = require('./database');
 const ClientError = require('./client-error');
@@ -7,11 +9,32 @@ const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
 
 const app = express();
+const imagesStorages = multer.diskStorage({
+  destination: './server/public/images/storages/',
+  filename: function (req, file, cb) {
+    cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+const uploadStoragePicture = multer({
+  storage: imagesStorages
+}).single('storage-picture');
 
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
 
 app.use(express.json());
+
+app.post('/api/upload-storage-image', (req, res, next) => {
+  uploadStoragePicture(req, res, err => {
+    if (err) {
+      next(err);
+      return false;
+    } else {
+      res.json(`/images/storages/${req.file.filename}`);
+      return true;
+    }
+  });
+});
 
 app.get('/api/users/:userId', (req, res, next) => {
   db.query(`
