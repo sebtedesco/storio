@@ -69,7 +69,7 @@ class ListingDetail extends React.Component {
           </div>
         </div>
         <div className="form-row col-12 d-flex justify-content-center detail-button-row">
-          <Link to={`/message/${data.hostId}/${this.props.user.userId}`}><button className="btn listing-button">Message Host</button></Link>
+          <Link to={`/message/${this.props.user.userId}/${data.hostId}`}><button className="btn listing-button">Message Host</button></Link>
         </div>
       </div>
     );
