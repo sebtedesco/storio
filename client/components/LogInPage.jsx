@@ -19,7 +19,7 @@ class LogInPage extends React.Component {
       this.props.user === 'guest'
         ? (
           <div className='mt-5'>
-            <div className='mb-3'>You are logged in as{`${this.props.user}`}. Would you like to log in?</div>
+            <div className='mb-3'>You are logged in as a {`${this.props.user}`}. Would you like to log in?</div>
             <form
               onSubmit={event => {
                 event.preventDefault();
