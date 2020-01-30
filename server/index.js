@@ -36,10 +36,10 @@ app.post('/api/upload-storage-image', (req, res, next) => {
   });
 });
 
-app.get('/api/users/:userId', (req, res, next) => {
+app.get('/api/users/:userName', (req, res, next) => {
   db.query(`
-  select * from users where "userId" = $1
-  `, [req.params.userId])
+  select * from users where "userName" = $1
+  `, [req.params.userName])
     .then(result => res.json(result.rows[0]))
     .catch(err => next(err));
 });
