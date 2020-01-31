@@ -204,6 +204,7 @@
   flex-flow: row nowrap;
   height: 8vh;
   color: #DDAB36;
+  background-color: #FFF;
   font-size: 30px;
   border-top: 2px solid darkgrey;
   position: absolute;
