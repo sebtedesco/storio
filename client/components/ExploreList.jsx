@@ -86,7 +86,7 @@ class ExploreList extends React.Component {
           <div className="container explore-list">
             <div className="row">
               <div className="col-1 col-md-2"></div>
-              <div className="col-10 col-md-8">
+              <div className="col-10 col-md-8 text-center mt-2">
                 <h3>
                   {this.state.searchResults.length} listings found
                 </h3>

@@ -57,7 +57,7 @@ class LogInPage extends React.Component {
               onClick={() => { this.props.signOut(); }}
               className='btn btn-large btn-outline-light list-it-button mt-3 col-4'
             >
-              Good Bye~
+              Log Out
             </button>
           </div>
         )

@@ -58,18 +58,18 @@ class Search extends React.Component {
     return (
       <React.Fragment>
         <div className={`container ${this.props.extraClass ? this.props.extraClass : ''}`}>
-          <form className="row m-2" onSubmit={this.handleSubmit}>
-            <div className="col-6 form-group pl-1">
+          <form className="row m-2 d-flex align-items-center" onSubmit={this.handleSubmit}>
+            <div className="col-6 form-group pl-1 m-0">
               <label className="sr-only">City</label>
               <input className="form-control" onChange={this.handleCityChange} type="text" value={this.state.city} placeholder="City Name" />
               <small className="validation-error-message">{this.state.cityError}</small>
             </div>
-            <div className="col-4 form-group p-0">
+            <div className="col-4 form-group p-0 m-0">
               <label className="sr-only">State</label>
               <input className="form-control" onChange={this.handleStateChange} type="text" placeholder="State" maxLength="2" value={this.state.state} />
               <small className="validation-error-message">{this.state.stateError}</small>
             </div>
-            <div className="col-2 form-group">
+            <div className="col-2 form-group m-0">
               <button className="btn btn-outline-light"><i className="fas fa-search" /></button>
             </div>
           </form>

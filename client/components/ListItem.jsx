@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function ListItem(props) {
   return (
     <Link to={`/listing-detail/${props.storageId}`}>
-      <div className="card list-item">
+      <div className="card list-item my-3">
         <img src={props.imageUrl} className="card-img-top list-item-image" alt="photo for listing" />
         <div className="card-body">
           <p className="card-text">{props.title}</p>

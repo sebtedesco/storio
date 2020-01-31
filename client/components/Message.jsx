@@ -75,8 +75,8 @@ class Message extends React.Component {
   render() {
     const allMessages = !this.state.messages
       ? (
-        <div>
-          <div className="col-12">
+        <div className="message-container">
+          <div className="col-12 mt-2">
             <i
               className="far fa-arrow-alt-circle-left col-12 back-arrow pl-0 ml-0 mb-2"
               onClick={() => {
@@ -106,7 +106,7 @@ class Message extends React.Component {
           allMessages
         ) : (
           <>
-            <div className="col-12 mt-12">
+            <div className="col-12 mt-2">
               <i
                 className="far fa-arrow-alt-circle-left col-12 back-arrow pl-0 ml-0 mb-2"
                 onClick={() => {
@@ -114,7 +114,7 @@ class Message extends React.Component {
                 }}
               ></i>
             </div>
-            <div>{allMessages}</div>
+            <div className="message-container">{allMessages}</div>
             <div onClick={this.getMessages} className="sync-button">
               <i className="fas fa-sync my-3 sync-button-icon cursor-pointer"></i>
             </div>

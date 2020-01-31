@@ -3,8 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 
 class ToggleMapList extends React.Component {
   render() {
-    var classForListButton = 'toggle-list-map-button';
-    var classForMapButton = 'toggle-list-map-button';
+    var classForListButton = 'toggle-list-map-button toggle-left';
+    var classForMapButton = 'toggle-list-map-button toggle-right';
     if (this.props.match.path.match(/list/)) {
       classForListButton += ' toggle-list-map-selected';
     } else {
