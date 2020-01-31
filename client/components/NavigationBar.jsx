@@ -27,9 +27,11 @@ class ListingDetail extends React.Component {
         }/>
         <div className="navigation-bar">
           <div onClick={this.handleSearchIconClick} ><i className="fas fa-search" /></div>
-          <Link to={'/host-listings/'}>
-            <div><i className="fas fa-list-alt navigation-bar-font-color"></i></div>
-          </Link>
+          <div onClick={() => {
+            this.props.user === 'guest'
+              ? this.props.history.push('/')
+              : this.props.history.push('/host-listings/');
+          }}><i className="fas fa-list-alt navigation-bar-font-color"></i></div>
           <div className='navigation-bar-user-profile' >
             {
               this.props.user !== 'guest'
