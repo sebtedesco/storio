@@ -1,8 +1,12 @@
-.list-detail {
+html {
+  margin-top: 12px;
+}
+
+.detail-container {
   height: 92vh;
+  margin-top: 12px;
   display: flex;
   justify-content: center;
-  align-content: center;
   flex-flow: row wrap;
   overflow: scroll;
 }
@@ -31,10 +35,10 @@
 }
 .list-detail-title {
   display: flex;
-  justify-content: center;
+  padding-left: 0;
   align-items: center;
   width: 100%;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .list-detail-host-profile {
@@ -45,8 +49,8 @@
 }
 .host-image-container {
   overflow: hidden;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -57,7 +61,7 @@
 }
 .list-detail-host-full-name {
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 18px;
 }
 .price-container,
 .max-coverage {
@@ -76,6 +80,7 @@
 
 .list-detail-address {
   color: grey;
+    font-size: 20px;
 }
 .max-coverage,
 .price-container {
@@ -88,10 +93,6 @@
 .list-detail-price {
   font-size: 21px;
   font-weight: bold;
-}
-
-.list-detail-address {
-  font-size: 20px;
 }
 
 .long-description {
@@ -207,8 +208,8 @@
   font-size: 30px;
   border-top: 2px solid darkgrey;
   position: absolute;
-  top: 90vh;
   width: 100%;
+  bottom: 0;
 }
 
 .navigation-bar-font-color {
@@ -380,8 +381,8 @@ button > h4 {
 
 .back-arrow {
   color: #ddab36;
-  height: 35px;
-  font-size: 1.5rem;
+  height: 25px;
+  font-size: 2rem;
 }
 
 .landing-user-name-font {
