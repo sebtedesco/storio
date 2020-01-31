@@ -1,4 +1,3 @@
-
 .list-detail {
   height: 92vh;
   display: flex;
@@ -121,10 +120,6 @@
   font-size: 1.5rem;
 }
 
-.landing > h3 {
-  margin-top: 15%;
-}
-
 .new-listing-heading {
   text-align: center;
 }
@@ -228,7 +223,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #DDAB36;
+  background-color:#FFF;
   font-size: 14px;
   overflow: hidden;
   object-fit: contain;
@@ -387,4 +382,8 @@ button > h4 {
   color: #ddab36;
   height: 35px;
   font-size: 1.5rem;
+}
+
+.landing-user-name-font {
+  font-size: 20px;
 }

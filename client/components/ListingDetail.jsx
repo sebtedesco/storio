@@ -17,7 +17,7 @@ class ListingDetail extends React.Component {
         return data.json();
       })
       .then(data => {
-        if (data.hostId === this.props.user.userId) {
+        if (this.props.user === 'guest' || data.hostId === this.props.user.userId) {
           this.setState({ isMessageButtonVisible: false });
         }
         this.setState({ storageDetail: data });

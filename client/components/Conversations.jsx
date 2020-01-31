@@ -36,7 +36,7 @@ class Conversations extends React.Component {
     return (
       <>
         <p className="text-muted" onClick={() => this.props.history.goBack()}>&lt; Back</p>
-        <div>{others}</div>
+        <div className="d-flex justify-content-center">{others.length === 0 ? <h3>No conversations to list</h3> : others}</div>
       </>
     );
   }

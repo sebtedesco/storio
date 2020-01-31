@@ -41,9 +41,14 @@ class ListingDetail extends React.Component {
                 : <i className="fas fa-user navigation-bar-user-icon"></i>
             }
           </div>
-          <Link to={`/conversations/${this.props.user.userId}`}>
-            <div><i className="fas fa-comment-alt navigation-bar-font-color"></i></div>
-          </Link>
+          <div
+            onClick={() => {
+              this.props.user === 'guest'
+                ? this.props.history.push('/')
+                : this.props.history.push(`/conversations/${this.props.user.userId}`);
+            }}
+          >
+            <i className="fas fa-comment-alt navigation-bar-font-color"></i></div>
           <Link to={'/'}>
             <div><i className="fas fa-warehouse navigation-bar-font-color"></i></div>
           </Link>

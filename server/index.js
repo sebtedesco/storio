@@ -100,7 +100,6 @@ app.get('/api/storage-details/:storageId', (req, res, next) => {
   if (isNaN(storageId)) {
     throw new ClientError('Please enter a valid storageId', 400);
   }
-  // first name, last name, profile picture path, city state, longDescription;
   const sql = `
   SELECT "storageId", "hostId", "storagePicturePath", title, "pricePerDay", width, height, depth, "maxValue", "firstName", "lastName", "profilePicturePath", city, state, "longDescription"
   FROM storages AS "s"
@@ -218,8 +217,7 @@ app.post('/api/messages/', (req, res, next) => {
 });
 
 app.post('/api/listing/', (req, res, next) => {
-  // console.log("top of post: ", req.body.address);
-  // console.log(req.body.newListing);
+
   const address = req.body.address;
   const latitude = address.latitude;
   const longitude = address.longitude;
@@ -240,7 +238,6 @@ app.post('/api/listing/', (req, res, next) => {
     address.street1, address.street2, address.city, address.state, zip, longitude, latitude];
   db.query(addressSql, values)
     .then(response => {
-      // console.log(response.rows[0]);
       const addressId = response.rows[0].addressId;
       // if (isNaN(parseInt(newListing.width)) || isNaN(parseInt(newListing.depth)) || isNaN(parseInt(newListing.height)) || isNaN(parseInt(newListing.pricePerDay)) || isNaN(parseInt(newListing.maxValue))) {
       //   throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
@@ -250,11 +247,9 @@ app.post('/api/listing/', (req, res, next) => {
       values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       returning *`;
       const values = [newListing.width, newListing.depth, newListing.height, newListing.storagePicturePath, newListing.pricePerDay, newListing.maxValue, newListing.title, newListing.longDescription, addressId, newListing.hostId, true];
-      // console.log(values);
       return db.query(storageSql, values);
     })
     .then(response => {
-      // console.log('response: ', response);
       res.status(201).json(response.rows[0]);
     })
     .catch(err => next(err));
@@ -279,5 +274,3 @@ app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log('Listening on port', process.env.PORT);
 });
-
-// http -v post: 3000/api/listing address:='{"street1": "123 apples", "city": "Boulder", "state": "CO", "zip": 80304, "longitude": 33333.333, "latitude": "44444.444"}' newListing:='{"width": 4, "depth": 2 "height": 6, "storagePicturePath": "picpath", "pricePerDay": 3000, "maxValue": 10000000, "title": "Great storage downtown", "longDescription": "LONGGG description", "hostId": 3}'
