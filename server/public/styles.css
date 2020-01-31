@@ -1,9 +1,5 @@
-html {
-  margin-top: 12px;
-}
-
 .detail-container {
-  height: 92vh;
+  height: 90vh;
   margin-top: 12px;
   display: flex;
   justify-content: center;
@@ -80,7 +76,7 @@ html {
 
 .list-detail-address {
   color: grey;
-    font-size: 20px;
+  font-size: 20px;
 }
 .max-coverage,
 .price-container {
@@ -177,13 +173,18 @@ html {
   bottom: 12%;
 }
 
+.message-container {
+  height: 78vh;
+  overflow: scroll;
+}
+
 .message-form {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 80vh;
+  bottom: 9vh;
   height: 10vh;
 }
 
@@ -243,8 +244,8 @@ html {
   position: absolute;
   display: flex;
   align-items: center;
-  bottom: 10vh;
-  height: 12vh;
+  bottom: 8vh;
+  height: 7vh;
   background-color: #DDAB36;
 }
 
@@ -252,7 +253,7 @@ html {
   display: none;
 }
 .google-map-container {
-  height: 90vh;
+  height: 92vh;
   background-color: #c4c4c4;
 }
 .map-anchor {
@@ -268,7 +269,8 @@ html {
 }
 
 .list-item-image {
-  max-width: 200px;
+  max-height: 250px;
+  object-fit: contain;
 }
 
 .card-title {
@@ -314,10 +316,14 @@ html {
   cursor: pointer;
 }
 
+.list-item {
+  border: 2px solid #858585;
+}
+
 .explore-list {
   position: absolute;
   top: 5vh;
-  height: 85vh;
+  height: 87vh;
   overflow: scroll;
 }
 
@@ -348,14 +354,22 @@ button > h4 {
 }
 
 .toggle-list-map-button {
-  color: #DDAB36;
+  background-color: #DDAB36;
+  color: #fff;
   width: 100px;
   height: 30px;
-  border: 1px solid black;
+  border: 1px solid #858585;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #FFFFFF;
+}
+
+.toggle-left {
+  border-right: 0;
+  border-radius: 7.5px 0 0 7.5px;
+}
+.toggle-right {
+ border-radius: 0 7.5px 7.5px 0;
 }
 
 .toggle-list-map-selected {
