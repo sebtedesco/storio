@@ -1,13 +1,13 @@
 
 .list-detail {
-  height: 90vh;
+  height: 92vh;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-flow: row wrap;
   overflow: scroll;
-
 }
+
 .storage-image-container {
   display: flex;
   justify-content: center;
@@ -162,9 +162,9 @@
 .right-arrow {
   width: 0;
   height: 0;
-  border-top: 5px solid transparent;
+  border-top: 17px solid transparent;
   border-left: 17px solid #DDAB36;
-  border-bottom: 5px solid transparent;
+  border-bottom: 17px solid transparent;
   position: absolute;
   right: 1%;
   bottom: 12%;
@@ -173,9 +173,9 @@
 .left-arrow {
   width: 0;
   height: 0;
-  border-top: 5px solid transparent;
+  border-top: 17px solid transparent;
   border-right: 17px solid #DDAB36;
-  border-bottom: 5px solid transparent;
+  border-bottom: 17px solid transparent;
   position: absolute;
   left: 1%;
   bottom: 12%;
@@ -207,7 +207,7 @@
   justify-content: space-around;
   align-items: center;
   flex-flow: row nowrap;
-  height: 10vh;
+  height: 8vh;
   color: #DDAB36;
   font-size: 30px;
   border-top: 2px solid darkgrey;
@@ -381,4 +381,10 @@ button > h4 {
 .host-list-item {
   margin-top: 10px;
   max-width: 540px;
+}
+
+.back-arrow {
+  color: #ddab36;
+  height: 35px;
+  font-size: 1.5rem;
 }
