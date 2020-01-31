@@ -121,10 +121,6 @@
   font-size: 1.5rem;
 }
 
-.landing > h3 {
-  margin-top: 15%;
-}
-
 .new-listing-heading {
   text-align: center;
 }
@@ -381,4 +377,8 @@ button > h4 {
 .host-list-item {
   margin-top: 10px;
   max-width: 540px;
+}
+
+.landing-user-name-font {
+  font-size: 20px;
 }
