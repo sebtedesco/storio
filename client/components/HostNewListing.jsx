@@ -6,7 +6,7 @@ class HostNewListing extends React.Component {
     super(props);
     this.state = {
       address: {
-        street1: 'apples and oranges and avocados ave',
+        street1: '',
         street2: null,
         city: '',
         state: '',
@@ -93,13 +93,13 @@ class HostNewListing extends React.Component {
 
   onPriceChange(e) {
     const newListing = { ...this.state.newListing };
-    newListing.pricePerDay = parseInt(e.target.value);
+    newListing.pricePerDay = parseFloat(e.target.value);
     this.setState({ newListing });
   }
 
   onMaxValueChange(e) {
     const newListing = { ...this.state.newListing };
-    newListing.maxValue = parseInt(e.target.value);
+    newListing.maxValue = parseFloat(e.target.value);
     this.setState({ newListing });
   }
 
@@ -119,7 +119,6 @@ class HostNewListing extends React.Component {
     e.preventDefault();
     var dataToPost = this.state;
     dataToPost.newListing.hostId = this.props.user.userId;
-    // get lat and lng using goole api || uss random generator to make some fake lat and lng
     var streetQuery = dataToPost.address.street1.split(' ').join('+');
     var cityQuery = dataToPost.address.city.split(' ').join('+');
     var stateQuery = dataToPost.address.state;
@@ -128,10 +127,8 @@ class HostNewListing extends React.Component {
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${streetQuery},+${cityQuery},+${stateQuery}&key=AIzaSyBfiGC1OW1s6FcMkcgqDRRTjN2uYHxmXRs`)
       .then(responseFromGoogleGeocode => responseFromGoogleGeocode.json())
       .then(jsonGeoResult => {
-        // console.log(jsonGeoResult[0]);
         dataToPost.address.latitude = jsonGeoResult.results[0].geometry.location.lat;
         dataToPost.address.longitude = jsonGeoResult.results[0].geometry.location.lng;
-        // console.log(dataToPost);
         var pictureInput = document.querySelector('#selected-storage-image');
         uploadingPicture.append('storage-picture', pictureInput.files[0]);
         var reqPictureBody = {
@@ -141,9 +138,9 @@ class HostNewListing extends React.Component {
         fetch('/api/upload-storage-image', reqPictureBody)
           .then(responseFromUploading => responseFromUploading.json())
           .then(storagePicturePath => {
-            // console.log(storagePicturePath);
             dataToPost.newListing.storagePicturePath = storagePicturePath;
-
+            dataToPost.newListing.pricePerDay = parseInt(dataToPost.newListing.pricePerDay * 100, 10);
+            dataToPost.newListing.maxValue = parseInt(dataToPost.newListing.maxValue * 100, 10);
             var req = {
               method: 'POST',
               headers: {
@@ -168,19 +165,24 @@ class HostNewListing extends React.Component {
 
   }
 
-  clearFormValues(e) {
-    e.preventDefault();
+  clearFormValues() {
     const newState = { ...this.state };
     newState.address.street1 = '';
     newState.address.city = '';
     newState.address.state = '';
     newState.address.zip = '';
+    newState.address.street = null;
+    newState.address.latitude = '';
+    newState.address.longitude = '';
     newState.newListing.height = '';
     newState.newListing.width = '';
     newState.newListing.depth = '';
-    newState.newListing.price = '';
+    newState.newListing.pricePerDay = '';
     newState.newListing.longDescription = '';
     newState.newListing.storagePicturePath = '';
+    newState.newListing.title = '';
+    newState.newListing.storagePicturePath = '';
+    newState.newListing.maxValue = '';
     this.setState({ newState });
   }
 
@@ -191,7 +193,7 @@ class HostNewListing extends React.Component {
           <h1 className="new-listing-heading">New Listing</h1>
         </div>
         <div className="row">
-          <form className='col m-1'>
+          <form className='col m-1 new-listing-container'>
             <div className="form-row m-1">
               <label htmlFor="listingTitle">Listing Title</label>
               <input className="form-control" id="listingTitle" type="text" maxLength="40" onChange={this.onListingTitleChange} value={this.state.newListing.title} />
@@ -246,23 +248,23 @@ class HostNewListing extends React.Component {
                 <p className="mt-2 mb-1">Price</p>
               </div>
               <div className="col-6 mb-0">
-                <p className="mt-2 mb-1">Max Value Allowed</p>
+                <p className="mt-2 mb-1 ml-4">Max Value Allowed</p>
               </div>
             </div>
             <div className="form-row align-items-center">
               <div className="col-1">$</div>
               <div className="col-4">
-                <input type="text" className="form-control" onChange={this.onPriceChange} value={this.state.newListing.pricePerDay} />
+                <input type="number" className="form-control" onChange={this.onPriceChange} value={this.state.newListing.pricePerDay} />
               </div>
               <div className="col-2">/Day</div>
-              <div className="col-1">$</div>
+              <div>$</div>
               <div className="col-4">
-                <input type="text" className="form-control" onChange={this.onMaxValueChange} value={this.state.newListing.maxValue} />
+                <input type="number" className="form-control" onChange={this.onMaxValueChange} value={this.state.newListing.maxValue} />
               </div>
             </div>
             <div className='my-3'>
               <div>Upload Storage Picture</div>
-              <input type="file" name="storage-picture" id="selected-storage-image" className='col-12'/>
+              <input type="file" name="storage-picture" id="selected-storage-image" className='col-12' onChange={this.onPhotoUpload}/>
             </div>
             <div className="form-row">
               <div className="col">

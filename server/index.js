@@ -36,11 +36,17 @@ app.post('/api/upload-storage-image', (req, res, next) => {
   });
 });
 
-app.get('/api/users/:userName', (req, res, next) => {
+app.get('/api/users/:email', (req, res, next) => {
   db.query(`
   select * from users where "email" = $1
-  `, [req.params.userName])
-    .then(result => res.json(result.rows[0]))
+  `, [req.params.email])
+    .then(result => {
+      if (result.rows.length === 0) {
+        res.json('DNE');
+        return false;
+      }
+      res.json(result.rows[0]);
+    })
     .catch(err => next(err));
 });
 
@@ -217,7 +223,6 @@ app.post('/api/messages/', (req, res, next) => {
 });
 
 app.post('/api/listing/', (req, res, next) => {
-
   const address = req.body.address;
   const latitude = address.latitude;
   const longitude = address.longitude;
@@ -234,14 +239,10 @@ app.post('/api/listing/', (req, res, next) => {
   insert into addresses ("addressId", "street1", "street2", city, state, zip, longitude, latitude)
   values (default, $1, $2, $3, $4, $5, $6, $7)
   returning "addressId"`;
-  const values = [
-    address.street1, address.street2, address.city, address.state, zip, longitude, latitude];
+  const values = [address.street1, address.street2, address.city, address.state, zip, longitude, latitude];
   db.query(addressSql, values)
     .then(response => {
       const addressId = response.rows[0].addressId;
-      // if (isNaN(parseInt(newListing.width)) || isNaN(parseInt(newListing.depth)) || isNaN(parseInt(newListing.height)) || isNaN(parseInt(newListing.pricePerDay)) || isNaN(parseInt(newListing.maxValue))) {
-      //   throw new ClientError('Street1, City, State, Latitude, and Longtitude fields must be filled', 400);
-      // }
       const storageSql = `
       insert into storages ("storageId", width, depth, height, "storagePicturePath", "pricePerDay", "maxValue", title, "longDescription", "addressId", "hostId", "isAvailable")
       values (default, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)

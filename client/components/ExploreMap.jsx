@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import ReactDOMServer from 'react-dom/server';
 import ToggleMapList from './ToggleMapList';
 
 class ExploreMap extends React.Component {
@@ -87,14 +88,26 @@ class ExploreMap extends React.Component {
           });
           // (0.5 * (map.getBounds()))
           var latLongCenter = { lat: storage.latitude + 0.005, lng: storage.longitude };
+          var reactLink = (
+            <div
+              className="d-flex flex-column map-infowindow-div align-items-center"
+              onClick={() => this.props.history.push(`/listing-detail/${storage.storageId}`)}
+            >
+              <span>{storage.title}</span>
+              {`$${storage.pricePerDay / 100}/day`}
+              <img src={`${storage.storagePicturePath}`} className="map-infowindow-img"/>
+            </div>
+          );
+          const stringifiedReactElement = ReactDOMServer.renderToString(reactLink);
           marker.addListener('click', function () {
-            infowindow.setOptions({
-              content: `<a class="map-anchor" href="/listing-detail/${storage.storageId}">` +
-                '<div class="d-flex flex-column map-infowindow-div align-items-center">' +
-                `<span>${storage.title}</span>` +
-                `$${storage.pricePerDay / 100}/day` +
-                `<img src='${storage.storagePicturePath}' class="map-infowindow-img"/></div></a>`
-            });
+            infowindow.setContent(stringifiedReactElement);
+            // infowindow.setOptions({
+            //   content: `<a class="map-anchor" href="/listing-detail/${storage.storageId}">` +
+            //     '<div class="d-flex flex-column map-infowindow-div align-items-center">' +
+            //     `<span>${storage.title}</span>` +
+            //     `$${storage.pricePerDay / 100}/day` +
+            //     `<img src='${storage.storagePicturePath}' class="map-infowindow-img"/></div></a>`
+            // });
             infowindow.setZIndex(++zIndex);
             marker.setZIndex(++zIndex);
             map.setCenter(latLongCenter);

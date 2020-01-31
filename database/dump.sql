@@ -262,6 +262,11 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 11	936 Paloma Pl.	\N	Fullerton	CA	92835	-117.939957300000003	33.8985632999999993
 12	2555 Main Street	\N	Irvine	CA	92614	-117.841442599999993	33.6829402999999985
 13	20 Lake Road	\N	Irvine	CA	92604	-117.802688700000004	33.6760366000000033
+14	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
+15	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
+16	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
+17	936 Paloma Pl.	\N	Fullerton	CA	92835	-117.939957300000003	33.8985632999999993
+18	9205 Irvine Center Drive	\N	Irvine	CA	92618	-117.735023699999999	33.6349955000000023
 \.
 
 
@@ -290,6 +295,9 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 23	2	2	adeadae	2020-01-28 12:01:14.978998
 24	5	2	hey~	2020-01-30 01:50:50.587877
 25	4	5	wassa	2020-01-30 12:42:27.618103
+26	1	2	decadcaece	2020-01-30 15:16:29.575521
+27	6	5	hey.... that's my place	2020-01-30 15:25:29.455101
+28	6	1	shut up and take my money!	2020-01-30 16:22:43.968074
 \.
 
 
@@ -308,6 +316,11 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 16	2	1	3	/images/storages/storage-0001-1580404899047.jpg	1	10	Test title	some space	11	1	t
 17	2	3	1	/images/storages/message-icon-1580416391003.png	1	10	Peter's storage	Message!	12	5	t
 14	2	3	1	/images/storages/fruits.jpg	3	100000	Fruits are good!	fruity place	9	2	t
+19	2	3	1	/images/storages/test-niche-1580433939117.jpg	32	32	plze~	why....	14	6	t
+20	3	1	2	/images/storages/user-icon-1580435345921.png	11	11	test2	dec	15	6	t
+21	5	1	3	/images/storages/map-icon-1580436024926.png	11	12	WOOOOOOW	hi~\nthis is the place	16	4	t
+22	2	1	3	/images/storages/user-icon-1580438438964.png	1	1	Dog house!	test	17	4	t
+23	2	1	3	/images/storages/test-niche-1580439140432.jpg	1	100	Dog house!	Oink! Oink!	18	4	t
 \.
 
 
@@ -329,20 +342,21 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 13, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 18, true);
 
 
 --
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 25, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 28, true);
+
 
 --
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 18, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 23, true);
 
 
 --
