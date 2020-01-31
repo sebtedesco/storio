@@ -265,6 +265,8 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 14	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
 15	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
 16	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
+17	936 Paloma Pl.	\N	Fullerton	CA	92835	-117.939957300000003	33.8985632999999993
+18	9205 Irvine Center Drive	\N	Irvine	CA	92618	-117.735023699999999	33.6349955000000023
 \.
 
 
@@ -317,6 +319,8 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 19	2	3	1	/images/storages/test-niche-1580433939117.jpg	32	32	plze~	why....	14	6	t
 20	3	1	2	/images/storages/user-icon-1580435345921.png	11	11	test2	dec	15	6	t
 21	5	1	3	/images/storages/map-icon-1580436024926.png	11	12	WOOOOOOW	hi~\nthis is the place	16	4	t
+22	2	1	3	/images/storages/user-icon-1580438438964.png	1	1	Dog house!	test	17	4	t
+23	2	1	3	/images/storages/test-niche-1580439140432.jpg	1	100	Dog house!	Oink! Oink!	18	4	t
 \.
 
 
@@ -338,7 +342,7 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 16, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 18, true);
 
 
 --
@@ -352,7 +356,7 @@ SELECT pg_catalog.setval('public."messages_messageId_seq"', 28, true);
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 21, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 23, true);
 
 
 --

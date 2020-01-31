@@ -36,11 +36,17 @@ app.post('/api/upload-storage-image', (req, res, next) => {
   });
 });
 
-app.get('/api/users/:userName', (req, res, next) => {
+app.get('/api/users/:email', (req, res, next) => {
   db.query(`
   select * from users where "email" = $1
-  `, [req.params.userName])
-    .then(result => res.json(result.rows[0]))
+  `, [req.params.email])
+    .then(result => {
+      if (result.rows.length === 0) {
+        res.json('DNE');
+        return false;
+      }
+      res.json(result.rows[0]);
+    })
     .catch(err => next(err));
 });
 

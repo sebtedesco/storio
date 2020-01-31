@@ -32,16 +32,12 @@ export default class App extends React.Component {
 
   tryLogIn(email) {
     if (email === '') {
-      // eslint-disable-next-line no-console
-      console.log('user email is empty!!!!!!!!');
       return false;
     }
     fetch(`/api/users/${email}`)
       .then(response => response.json())
       .then(jsonData => {
-        if (!jsonData) {
-          // eslint-disable-next-line
-          console.log(`there is no user with email address=${email}!!`);
+        if (jsonData === 'DNE') {
           return false;
         }
         this.setState({ currentUser: jsonData });

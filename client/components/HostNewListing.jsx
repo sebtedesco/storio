@@ -93,13 +93,13 @@ class HostNewListing extends React.Component {
 
   onPriceChange(e) {
     const newListing = { ...this.state.newListing };
-    newListing.pricePerDay = parseInt(e.target.value);
+    newListing.pricePerDay = parseFloat(e.target.value);
     this.setState({ newListing });
   }
 
   onMaxValueChange(e) {
     const newListing = { ...this.state.newListing };
-    newListing.maxValue = parseInt(e.target.value);
+    newListing.maxValue = parseFloat(e.target.value);
     this.setState({ newListing });
   }
 
@@ -139,7 +139,8 @@ class HostNewListing extends React.Component {
           .then(responseFromUploading => responseFromUploading.json())
           .then(storagePicturePath => {
             dataToPost.newListing.storagePicturePath = storagePicturePath;
-
+            dataToPost.newListing.pricePerDay = parseInt(dataToPost.newListing.pricePerDay * 100, 10);
+            dataToPost.newListing.maxValue = parseInt(dataToPost.newListing.maxValue * 100, 10);
             var req = {
               method: 'POST',
               headers: {
@@ -170,12 +171,18 @@ class HostNewListing extends React.Component {
     newState.address.city = '';
     newState.address.state = '';
     newState.address.zip = '';
+    newState.address.street = null;
+    newState.address.latitude = '';
+    newState.address.longitude = '';
     newState.newListing.height = '';
     newState.newListing.width = '';
     newState.newListing.depth = '';
-    newState.newListing.price = '';
+    newState.newListing.pricePerDay = '';
     newState.newListing.longDescription = '';
     newState.newListing.storagePicturePath = '';
+    newState.newListing.title = '';
+    newState.newListing.storagePicturePath = '';
+    newState.newListing.maxValue = '';
     this.setState({ newState });
   }
 
@@ -241,23 +248,23 @@ class HostNewListing extends React.Component {
                 <p className="mt-2 mb-1">Price</p>
               </div>
               <div className="col-6 mb-0">
-                <p className="mt-2 mb-1">Max Value Allowed</p>
+                <p className="mt-2 mb-1 ml-4">Max Value Allowed</p>
               </div>
             </div>
             <div className="form-row align-items-center">
               <div className="col-1">$</div>
               <div className="col-4">
-                <input type="text" className="form-control" onChange={this.onPriceChange} value={this.state.newListing.pricePerDay} />
+                <input type="number" className="form-control" onChange={this.onPriceChange} value={this.state.newListing.pricePerDay} />
               </div>
               <div className="col-2">/Day</div>
-              <div className="col-1">$</div>
+              <div>$</div>
               <div className="col-4">
-                <input type="text" className="form-control" onChange={this.onMaxValueChange} value={this.state.newListing.maxValue} />
+                <input type="number" className="form-control" onChange={this.onMaxValueChange} value={this.state.newListing.maxValue} />
               </div>
             </div>
             <div className='my-3'>
               <div>Upload Storage Picture</div>
-              <input type="file" name="storage-picture" id="selected-storage-image" className='col-12' />
+              <input type="file" name="storage-picture" id="selected-storage-image" className='col-12' onChange={this.onPhotoUpload}/>
             </div>
             <div className="form-row">
               <div className="col">
