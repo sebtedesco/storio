@@ -32,13 +32,13 @@ export default class App extends React.Component {
 
   tryLogIn(email) {
     if (email === '') {
-      return false;
+      return;
     }
     fetch(`/api/users/${email}`)
       .then(response => response.json())
       .then(jsonData => {
         if (jsonData === 'DNE') {
-          return false;
+          return;
         }
         this.setState({ currentUser: jsonData });
       })
