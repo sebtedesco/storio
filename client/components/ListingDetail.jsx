@@ -47,7 +47,7 @@ class ListingDetail extends React.Component {
         <div className="col-12 storage-image-container">
           <img
             className="list-detail-storage-image"
-            src={data.storagePicturePath}b
+            src={data.storagePicturePath}
             alt="storage-image should be here"
           />
         </div>
