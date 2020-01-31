@@ -6,7 +6,7 @@ class HostNewListing extends React.Component {
     super(props);
     this.state = {
       address: {
-        street1: 'apples and oranges and avocados ave',
+        street1: '',
         street2: null,
         city: '',
         state: '',
@@ -119,7 +119,6 @@ class HostNewListing extends React.Component {
     e.preventDefault();
     var dataToPost = this.state;
     dataToPost.newListing.hostId = this.props.user.userId;
-    // get lat and lng using goole api || uss random generator to make some fake lat and lng
     var streetQuery = dataToPost.address.street1.split(' ').join('+');
     var cityQuery = dataToPost.address.city.split(' ').join('+');
     var stateQuery = dataToPost.address.state;
@@ -128,10 +127,8 @@ class HostNewListing extends React.Component {
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${streetQuery},+${cityQuery},+${stateQuery}&key=AIzaSyBfiGC1OW1s6FcMkcgqDRRTjN2uYHxmXRs`)
       .then(responseFromGoogleGeocode => responseFromGoogleGeocode.json())
       .then(jsonGeoResult => {
-        // console.log(jsonGeoResult[0]);
         dataToPost.address.latitude = jsonGeoResult.results[0].geometry.location.lat;
         dataToPost.address.longitude = jsonGeoResult.results[0].geometry.location.lng;
-        // console.log(dataToPost);
         var pictureInput = document.querySelector('#selected-storage-image');
         uploadingPicture.append('storage-picture', pictureInput.files[0]);
         var reqPictureBody = {
@@ -141,7 +138,6 @@ class HostNewListing extends React.Component {
         fetch('/api/upload-storage-image', reqPictureBody)
           .then(responseFromUploading => responseFromUploading.json())
           .then(storagePicturePath => {
-            // console.log(storagePicturePath);
             dataToPost.newListing.storagePicturePath = storagePicturePath;
 
             var req = {
@@ -168,8 +164,7 @@ class HostNewListing extends React.Component {
 
   }
 
-  clearFormValues(e) {
-    e.preventDefault();
+  clearFormValues() {
     const newState = { ...this.state };
     newState.address.street1 = '';
     newState.address.city = '';
@@ -191,7 +186,7 @@ class HostNewListing extends React.Component {
           <h1 className="new-listing-heading">New Listing</h1>
         </div>
         <div className="row">
-          <form className='col m-1'>
+          <form className='col m-1 new-listing-container'>
             <div className="form-row m-1">
               <label htmlFor="listingTitle">Listing Title</label>
               <input className="form-control" id="listingTitle" type="text" maxLength="40" onChange={this.onListingTitleChange} value={this.state.newListing.title} />
@@ -262,7 +257,7 @@ class HostNewListing extends React.Component {
             </div>
             <div className='my-3'>
               <div>Upload Storage Picture</div>
-              <input type="file" name="storage-picture" id="selected-storage-image" className='col-12'/>
+              <input type="file" name="storage-picture" id="selected-storage-image" className='col-12' />
             </div>
             <div className="form-row">
               <div className="col">

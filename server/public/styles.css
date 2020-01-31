@@ -387,3 +387,8 @@ button > h4 {
 .landing-user-name-font {
   font-size: 20px;
 }
+
+.new-listing-container {
+  height: 80vh;
+  overflow: scroll;
+}
