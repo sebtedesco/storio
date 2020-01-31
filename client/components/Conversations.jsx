@@ -20,7 +20,7 @@ class Conversations extends React.Component {
     const others = this.state.correspondents.map(otherPerson => {
       return (
         <Link key={otherPerson.userId} to={`/message/${this.props.match.params.loggedInUserId}/${otherPerson.userId}`}>
-          <div className='col-10 mx-auto my-3 conversation-list-single-user'>
+          <div className='col-10 mx-auto my-1 conversation-list-single-user'>
             <div className='conversation-list-profile-picture-container'>
               <img
                 src={otherPerson.profilePicturePath}
@@ -36,7 +36,7 @@ class Conversations extends React.Component {
     return (
       <>
         <p className="text-muted" onClick={() => this.props.history.goBack()}>&lt; Back</p>
-        <div className="d-flex justify-content-center flex-column">{others.length === 0 ? <h3>No conversations to list</h3> : others}</div>
+        <div className="d-flex justify-content-center flex-column conv">{others.length === 0 ? <h3>No conversations to list</h3> : others}</div>
       </>
     );
   }

@@ -144,6 +144,7 @@
 .message {
   border-radius: 5px;
   background-color: #ddab36;
+  z-index: 1;
 }
 
 .send-message-button {
@@ -275,6 +276,11 @@
 
 .card-title {
   font-weight: bold;
+}
+
+.conv {
+  height: 85vh;
+  overflow: scroll;
 }
 
 .conversation-list-single-user {
