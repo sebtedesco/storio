@@ -76,7 +76,14 @@ class Message extends React.Component {
     const allMessages = !this.state.messages
       ? (
         <div>
-          <p className="text-muted" onClick={() => this.props.history.goBack()}>&lt; Back</p>
+          <div className="col-12">
+            <i
+              className="far fa-arrow-alt-circle-left col-12 back-arrow pl-0 ml-0 mb-2"
+              onClick={() => {
+                this.props.history.goBack();
+              }}
+            ></i>
+          </div>
           <div>No messages to display</div>
           <div onClick={this.getMessages} className='sync-button'>
             <i className="fas fa-sync my-3 sync-button-icon"></i>
@@ -95,30 +102,36 @@ class Message extends React.Component {
 
     return (
       <>
-        {
-          !allMessages
-            ? allMessages
-            : (
-              <>
-                <p className="text-muted" onClick={() => this.props.history.goBack()}>&lt; Back</p>
-                <div>{allMessages}</div>
-                <div onClick={this.getMessages} className='sync-button'>
-                  <i className="fas fa-sync my-3 sync-button-icon cursor-pointer"></i>
-                </div>
-              </>
-            )
-
-        }
+        {!allMessages ? (
+          allMessages
+        ) : (
+          <>
+            <div className="col-12 mt-12">
+              <i
+                className="far fa-arrow-alt-circle-left col-12 back-arrow pl-0 ml-0 mb-2"
+                onClick={() => {
+                  this.props.history.goBack();
+                }}
+              ></i>
+            </div>
+            <div>{allMessages}</div>
+            <div onClick={this.getMessages} className="sync-button">
+              <i className="fas fa-sync my-3 sync-button-icon cursor-pointer"></i>
+            </div>
+          </>
+        )}
         <form onSubmit={this.handleSubmit} className="col-12 message-form">
           <input
             type="text"
             placeholder="Type message here"
             value={this.state.messageToSend}
             onChange={this.handleChange}
-            className='col-10 mx-2 mt-2 message-input'
+            className="col-10 mx-2 mt-2 message-input"
             cols="32"
           />
-          <div onClick={this.handleSubmit}><i className="mt-2 fas fa-arrow-alt-circle-right send-message-button"></i></div>
+          <div onClick={this.handleSubmit}>
+            <i className="mt-2 fas fa-arrow-alt-circle-right send-message-button"></i>
+          </div>
         </form>
       </>
     );
