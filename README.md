@@ -1,6 +1,6 @@
-# storio
-Final Project
+# Storio
 
+## Description
 A mobile-first application that connects people who have extra storage space with people who need a place to storio their stuff.
 
 ## Technologies Used
