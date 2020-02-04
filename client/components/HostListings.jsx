@@ -42,7 +42,6 @@ class HostListings extends React.Component {
           <div>
             {this.state.hostListings.length === 0 ? <h5 className="col-12 text-muted">No listings yet...</h5> : listingItems }
           </div>
-
         </div>
       </React.Fragment>
     );
