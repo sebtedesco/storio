@@ -5,7 +5,7 @@ function HostListItem(props) {
   return (
     <div className="card host-list-item">
       <Link to={`/listing-detail/${props.storageId}`}>
-        <div className="row d-flex">
+        <div className="row d-flex align-items-center">
           <div className="col-4">
             <img src={props.imageUrl} className="card-img host-list-image" alt="host listing photo"/>
           </div>

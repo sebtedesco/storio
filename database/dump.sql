@@ -275,29 +275,12 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 --
 
 COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM stdin;
-1	1	2	Como se llama?	2020-01-22 22:45:31.059072
-2	2	1	Me llamo Pedro :)	2020-01-22 22:45:31.059072
-3	1	2	Callate Pedro!	2020-01-22 22:45:31.059072
 8	3	1	I like your storio!	2020-01-22 22:45:31.059072
-9	3	2	Hi, I'd like to check out your storio	2020-01-22 22:45:31.059072
 10	4	3	Excuse me, I need more space for my toys	2020-01-22 22:45:31.059072
-11	1	2	hey dog, this is a test again!	2020-01-22 22:45:31.059072
-12	1	2	hey dog, this is a test yet again!	2020-01-27 12:06:07.296427
-13	1	3	hey dog, this is a test yet again!	2020-01-27 12:06:33.208087
-14	1	2	checking time!	2020-01-27 12:45:37.369767
-16	2	1	Hello me	2020-01-28 23:06:54.900214
-17	2	1	I like cheese	2020-01-30 00:25:45.910338
-18	2	3	Which one are you interested in?	2020-01-30 00:27:01.905048
-19	5	3	can I store my stolen cars in your storio?	2020-01-30 20:44:27.759441
-20	2	5	oifailejdila	2020-01-28 11:34:07.504723
-21	2	5	edadeaf	2020-01-28 11:34:41.265091
-22	2	5	test~	2020-01-28 11:47:10.948031
-23	2	2	adeadae	2020-01-28 12:01:14.978998
-24	5	2	hey~	2020-01-30 01:50:50.587877
 25	4	5	wassa	2020-01-30 12:42:27.618103
-26	1	2	decadcaece	2020-01-30 15:16:29.575521
-27	6	5	hey.... that's my place	2020-01-30 15:25:29.455101
 28	6	1	shut up and take my money!	2020-01-30 16:22:43.968074
+34	3	2	Hi, I'd like to check out your storio	2020-02-04 12:03:40.738326
+35	2	3	Which location are you interested in?	2020-02-04 12:04:13.110692
 \.
 
 
@@ -349,7 +332,7 @@ SELECT pg_catalog.setval('public."addresses_addressId_seq"', 18, true);
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 28, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 35, true);
 
 
 --
