@@ -1,0 +1,416 @@
+.detail-container {
+  height: 90vh;
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  overflow: scroll;
+}
+
+.storage-image-container {
+  display: flex;
+  justify-content: center;
+  height: 25vh;
+  padding: 0;
+}
+
+.list-detail-storage-image {
+  max-height: 100%;
+  object-fit: contain;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.list-detail-title,
+.long-description-title,
+.list-detail-max-coverage-title,
+.list-detail-address,
+.list-detail-price,
+.list-detail-host-full-name {
+  font-weight: bold;
+}
+.list-detail-title {
+  display: flex;
+  padding-left: 0;
+  align-items: center;
+  width: 100%;
+  font-size: 20px;
+}
+
+.list-detail-host-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.host-image-container {
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+.list-detail-host-picture {
+  width: 100px;
+  object-fit: fill;
+}
+.list-detail-host-full-name {
+  margin-top: 10px;
+  font-size: 18px;
+}
+.price-container,
+.max-coverage {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.location-and-user-profile {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.list-detail-address {
+  color: grey;
+  font-size: 20px;
+}
+.max-coverage,
+.price-container {
+  font-size: 21px;
+  margin-top: 5px;
+}
+
+.long-description-title,
+.list-detail-max-coverage-title,
+.list-detail-price {
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.long-description {
+  margin-top: 5px;
+}
+
+.landing {
+  background-color: #DDAB36;
+  color: #fff;
+  font-family: 'Nunito';
+  text-align: center;
+  height: 100vh;
+}
+
+.storio-logo {
+  height: 100px;
+  margin-top: 50px;
+}
+
+.storio-heading {
+  font-weight: bold;
+  font-size: 3.5rem;
+}
+
+.landing > p {
+  font-size: 1.5rem;
+}
+
+.new-listing-heading {
+  text-align: center;
+}
+
+.validation-error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.listing-button {
+  background-color: #DDAB36;
+  color: white;
+}
+.message-by-logged-in-user,
+.message-by-other {
+  position: relative;
+  display: flex;
+}
+.message-by-logged-in-user{
+  justify-content: flex-end;
+}
+.message-by-other {
+  justify-content: flex-start;
+}
+.message {
+  border-radius: 5px;
+  background-color: #ddab36;
+  z-index: 1;
+}
+
+.send-message-button {
+  font-size: 35px;
+  color: #DDAB36;
+}
+
+.right-arrow {
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-left: 17px solid #DDAB36;
+  border-bottom: 17px solid transparent;
+  position: absolute;
+  right: 1%;
+  bottom: 12%;
+}
+
+.left-arrow {
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-right: 17px solid #DDAB36;
+  border-bottom: 17px solid transparent;
+  position: absolute;
+  left: 1%;
+  bottom: 12%;
+}
+
+.message-container {
+  height: 78vh;
+  overflow: scroll;
+}
+
+.message-form {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 9vh;
+  height: 10vh;
+}
+
+.sync-button {
+  position: absolute;
+  bottom: 20vh;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  color: #DDAB36;
+  font-size: 30px;
+  transform: translateX(-50%);
+}
+
+.navigation-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row nowrap;
+  height: 8vh;
+  color: #DDAB36;
+  background-color: #FFF;
+  font-size: 30px;
+  border-top: 2px solid darkgrey;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.navigation-bar-font-color {
+  color: #DDAB36;
+}
+
+.navigation-bar-user-profile {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color:#FFF;
+  font-size: 14px;
+  overflow: hidden;
+  object-fit: contain;
+}
+.navigation-bar-user-profile-picture {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.navigation-bar-user-icon {
+  font-size: 30px;
+}
+
+.show-navigation-search {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 8vh;
+  height: 7vh;
+  background-color: #DDAB36;
+}
+
+.hide-navigation-search {
+  display: none;
+}
+.google-map-container {
+  height: 92vh;
+  background-color: #c4c4c4;
+}
+.map-anchor {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}
+.map-infowindow-div {
+  font-size: 1.0rem;
+}
+.map-infowindow-img {
+  height: 25vh;
+}
+
+.list-item-image {
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.conv {
+  height: 85vh;
+  overflow: scroll;
+}
+
+.conversation-list-single-user {
+  height: 20vh;
+  border: 1px solid #DDAB36;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  color: #DDAB36;
+}
+
+.conversation-list-profile-picture-container {
+  justify-content: center;
+  align-items: center;
+  height: 12vh;
+  width: 12vh;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.conversation-list-profile-picture {
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+
+.conversation-list-profile-name {
+  font-weight: bold;
+}
+
+.detail-button-row {
+  margin-top: 15px
+}
+
+.back-link > a, .list-item, .card-body > .card-title {
+  color: black;
+  cursor: pointer;
+}
+
+.list-item {
+  border: 2px solid #858585;
+}
+
+.explore-list {
+  position: absolute;
+  top: 5vh;
+  height: 87vh;
+  overflow: scroll;
+}
+
+button > h4 {
+  padding-left: 70px;
+  padding-right: 70px;
+  margin-top: 10px;
+}
+
+.list-it-button {
+  border-radius: 10px;
+  border-width: 3px;
+}
+
+.message-input {
+  height: 38px;
+}
+
+.toggle-list-map {
+  position: absolute;
+  top: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  width: 100%;
+  height: 4vh;
+  z-index: 10;
+}
+
+.toggle-list-map-button {
+  background-color: #DDAB36;
+  color: #fff;
+  width: 100px;
+  height: 30px;
+  border: 1px solid #858585;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle-left {
+  border-right: 0;
+  border-radius: 7.5px 0 0 7.5px;
+}
+.toggle-right {
+ border-radius: 0 7.5px 7.5px 0;
+}
+
+.toggle-list-map-selected {
+  background-color: #c4c4c4;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.host-listings > h3 {
+  text-align: center;
+}
+
+.host-list-image {
+  /* max-width: 200px; */
+  max-height: 100px;
+  float: left;
+  margin-right: 15px;
+}
+
+.host-list-item {
+  margin-top: 10px;
+  max-width: 540px;
+}
+
+.back-arrow {
+  color: #ddab36;
+  height: 25px;
+  font-size: 2rem;
+}
+
+.landing-user-name-font {
+  font-size: 20px;
+}
+
+.new-listing-container {
+  height: 80vh;
+  overflow: scroll;
+}
