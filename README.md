@@ -26,7 +26,9 @@ A mobile-first application that connects people who have extra storage space wit
 - User can view list of their listings
 
 ## App Preview
+![Storio_List_Map_Feature](1_Search_List_Map_Feature.gif)
 
+![Storio_Sign_In_Messaging_Feature](2_Sign_In_Messaging_Feature.gif)
 ## Development
 
 ### System Requirements
