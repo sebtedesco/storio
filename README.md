@@ -33,4 +33,27 @@ A mobile-first application that connects people who have extra storage space wit
 
 ### System Requirements
 
-### Getting Started
+- Node.js 10 or higher
+- NPM 6 or higher
+- PostgreSQL 6 or higher
+
+#### Getting Started
+
+1. Clone the repository.
+
+```shell
+git clone https://github.com/sebtedesco/ec-sales.git
+```
+
+2. Install all dependencies with NPM.
+```shell
+npm install
+```
+
+3. Start the project.
+
+```shell
+npm run dev
+```
+
+4. Once started, you can view the application by opening [https://localhost:3000](https://localhost:3000)
