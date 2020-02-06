@@ -46,7 +46,7 @@ Experience Storio live at [https://www.storio-dev.sebtedesco.com](https://www.st
 1. Clone the repository.
 
 ```shell
-git clone https://github.com/sebtedesco/ec-sales.git
+git clone https://github.com/sebtedesco/storio.git
 ```
 
 2. Install all dependencies with NPM.
